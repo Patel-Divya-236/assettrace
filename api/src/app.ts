@@ -48,3 +48,6 @@ app.use("/api/dashboard", requireAuth, dashboardRouter);
 // Must be last: unknown routes, then errors.
 app.use(notFoundHandler);
 app.use(errorHandler);
+
+// Vercel picks src/app.ts as the Express entrypoint and runs its default export.
+export default app;

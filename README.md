@@ -4,7 +4,7 @@
 
 Built for the Pravi Research "Build for Billions" hackathon.
 
-🔗 Live app: `<vercel-url>` · API: `<render-url>` (health: `<render-url>/health`)
+🔗 Live app: https://assettrace-web.vercel.app · API: https://assettrace-api.vercel.app (health: https://assettrace-api.vercel.app/health)
 
 ---
 
@@ -72,7 +72,7 @@ npm install
 npm run dev                               # http://localhost:5173
 ```
 
-**Demo logins** (password `demo1234`): `admin@demo.in` · `officer@demo.in` · `viewer@demo.in`
+**Demo logins** (local password `demo1234`; the live site uses a strong password shared privately): `admin@demo.in` · `officer@demo.in` · `viewer@demo.in`
 **Public view:** open `/` or any `/a/<assetCode>` — no login.
 
 ## API overview

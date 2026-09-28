@@ -33,9 +33,9 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P2 Prisma schema, all models and enums
 - [x] P2 Indexes + GIN index on `attributes`
 - [x] P2 Seed users (admin / officer / viewer)
-- [ ] P3 API deployed on Render with Postgres
-- [ ] P3 Web deployed on Vercel with SPA rewrite
-- [ ] P3 CORS + env vars working in production
+- [x] P3 API deployed (changed to Vercel + Neon Postgres, D-39)
+- [x] P3 Web deployed on Vercel with SPA rewrite
+- [x] P3 CORS + env vars working in production
 
 ## Phase 2 · Backend core
 - [x] P4 Login + `/me`, JWT middleware, `requireRole`
@@ -77,7 +77,7 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [ ] P18 Gujarati / Hindi strings checked by a native reader
 - [ ] P19 API docs — **CUT at 13:12** (cut order #1); README lists endpoints, curl examples instead
 - [x] P20 100k-row EXPLAIN results in `docs/PERFORMANCE.md`
-- [ ] P21 Final deploy, 20k seed on production DB, QR works on live site
+- [x] P21 Final deploy, 20k seed on production DB, QR works on live site
 - [x] P22 README complete, architecture doc updated
 - [ ] Architecture diagram exported as PNG (mermaid.live) and added to README
 - [ ] Demo rehearsed twice on a real phone

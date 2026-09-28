@@ -66,7 +66,8 @@ export default function Login() {
             {busy ? t("common.loading") : t("login.submit")}
           </BigButton>
         </form>
-        <p className="mt-4 text-sm text-gray-600">{t("login.demo")}</p>
+        {/* Demo accounts use demo1234 only locally; production uses a strong password. */}
+        {import.meta.env.DEV && <p className="mt-4 text-sm text-gray-600">{t("login.demo")}</p>}
       </main>
     </div>
   );

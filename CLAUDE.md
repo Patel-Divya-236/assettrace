@@ -218,6 +218,9 @@ npm test               # vitest
 cd web
 npm run dev
 npm run build
+
+# deploy (Vercel CLI, logged in; run inside api/ or web/)
+vercel deploy --prod
 ```
 
 ## 10. Environment variables

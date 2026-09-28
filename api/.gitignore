@@ -1,0 +1,7 @@
+.vercel
+.env*
+!.env.example
+# local agent files added by the Vercel/Neon CLI
+.agents/
+.claude/
+skills-lock.json
