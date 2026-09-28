@@ -51,7 +51,7 @@ See [docs/PERFORMANCE.md](docs/PERFORMANCE.md) for the 100k-asset benchmark and 
 | Frontend | React, Vite, TypeScript, Tailwind, react-i18next, react-leaflet, Recharts |
 | Backend | Node.js, Express, TypeScript, zod, JWT, bcryptjs, multer, csv-parse, qrcode |
 | Database | PostgreSQL, Prisma (JSONB + GIN index) |
-| Deployment | Vercel (web), Render (API + Postgres) |
+| Deployment | Vercel (web + API as a Vercel Function), Neon Postgres via Vercel Storage |
 
 ## Run locally
 
@@ -106,7 +106,7 @@ Measured on 100,000 assets — see [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 - No interactive API docs (cut for time); endpoints are listed above and every error has the shape `{ error: { code, message, details? } }`.
 - CSV import runs synchronously (streamed, batches of 500); very large files keep one request open.
 
-- Free hosting: the API sleeps after inactivity (first request takes ~1 minute).
+- Free hosting: the Neon database pauses when idle (first request after a pause is slower); uploads are capped at 4.5 MB by Vercel (CSV import max 4 MB).
 - Photos are stored in the database (object storage in production).
 - Bulk imports run in-process (job queue in production).
 - One shared lifecycle for all asset types (per-type lifecycles are future scope).

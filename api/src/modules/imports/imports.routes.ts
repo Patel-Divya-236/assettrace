@@ -7,8 +7,9 @@ import { requireRole } from "../../middleware/requireRole";
 import { idParams, validate } from "../../middleware/validate";
 import { getImportJob, runImport } from "./imports.service";
 
-// Memory storage: never write uploads to Render's ephemeral disk.
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024, files: 1 } });
+// Memory storage: serverless disks are temporary. 4 MB because Vercel rejects
+// request bodies over 4.5 MB before they reach the function (~20k CSV rows).
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 4 * 1024 * 1024, files: 1 } });
 
 // Mounted at /api/imports behind requireAuth.
 export const importsRouter = Router();

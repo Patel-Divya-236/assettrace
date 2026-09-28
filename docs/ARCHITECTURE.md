@@ -11,7 +11,7 @@ flowchart TB
     P[Public screens<br/>QR scan · report · track]
   end
 
-  subgraph API["Express API — Node + TypeScript (Render, stateless)"]
+  subgraph API["Express API — Node + TypeScript (Vercel Function, stateless)"]
     direction TB
     AUTH[JWT auth + role check]
     PUB[Public routes<br/>rate-limited, safe fields only]
@@ -25,7 +25,7 @@ flowchart TB
     QR[QR codes]
   end
 
-  PG[(PostgreSQL — Render<br/>JSONB + GIN · insert-only history)]
+  PG[(PostgreSQL — Neon<br/>JSONB + GIN · insert-only history)]
 
   S --> AUTH
   P --> PUB
@@ -219,13 +219,13 @@ sequenceDiagram
 ```mermaid
 flowchart LR
   U[Users' browsers<br/>desktop + phones] -->|HTTPS| V[Vercel<br/>React static build]
-  U -->|HTTPS /api| R[Render web service<br/>Express API]
-  R --> PG[(Render PostgreSQL)]
+  U -->|HTTPS /api| R[Vercel Function<br/>Express API]
+  R --> PG[(Neon PostgreSQL<br/>via Vercel Storage)]
   GH[GitHub repo] -->|push = deploy| V
   GH -->|push = deploy| R
 ```
 
-Notes: HTTPS is required for phone GPS and camera. Free Render instances sleep after inactivity — wake the API before a demo. QR codes are generated from `FRONTEND_URL`, so they must point to the Vercel domain.
+Notes: HTTPS is required for phone GPS and camera. The API runs as one Vercel Function (zero-config Express); request bodies are capped at 4.5 MB by Vercel. Neon's free database may pause when idle; the first query after a pause takes a second or two. QR codes are generated from `FRONTEND_URL`, so they must point to the Vercel domain.
 
 ## 6. Scaling plan
 

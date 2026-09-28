@@ -64,7 +64,7 @@ PostgreSQL (Prisma ORM, JSONB attributes + GIN index, insert-only history tables
 
 **Infra**
 - Docker Compose for local Postgres
-- Deploy: API + Postgres on Render, frontend on Vercel
+- Deploy: everything on Vercel: web and API are two Vercel projects from the same repo (root directories `web` and `api`); Postgres is Neon, added from the API project's Vercel Storage tab (D-39)
 
 ## 5. Folder structure
 
@@ -161,7 +161,7 @@ Roles are enforced in the API with middleware. Hiding buttons in the UI is not s
   - UNDER_MAINTENANCE → `BEING_REPAIRED`
   - everything else → `NOT_IN_SERVICE`
 - Each report gets a unique 6-digit `trackingCode`.
-- Photos: optional, compressed in the browser to ~100 KB, max 2 MB on the server, stored in Postgres (`Bytes`). Never write uploads to the server filesystem (Render's filesystem is ephemeral).
+- Photos: optional, compressed in the browser to ~100 KB, max 2 MB on the server, stored in Postgres (`Bytes`). Never write uploads to the server filesystem (serverless filesystems are temporary).
 
 ### 6.4 Asset types and custom fields
 - Admin creates asset types with a `fields` JSON array: `[{ key, label, type: "text"|"number"|"date"|"select", required, options? }]`.
@@ -225,6 +225,7 @@ npm run build
 `api/.env` (see `api/.env.example`):
 ```
 DATABASE_URL=postgresql://assettrace:assettrace@localhost:5432/assettrace
+DATABASE_URL_UNPOOLED=postgresql://assettrace:assettrace@localhost:5432/assettrace
 JWT_SECRET=change-me
 JWT_EXPIRES_IN=8h
 FRONTEND_URL=http://localhost:5173
