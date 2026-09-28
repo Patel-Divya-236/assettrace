@@ -172,3 +172,9 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** Stored attributes depend on the field list. Removing a field or changing its type would leave existing assets with data that no longer validates; a new required field would make every old asset invalid the next time someone edits it. Asset codes already printed on plates use the prefix.
 **Alternatives considered:** Free editing with a data migration per change (powerful, far too much for 8 hours).
 **Trade-off / what we'd change at scale:** To really change a field, an admin creates a new type. At scale: versioned field definitions with a migration tool.
+
+## D-31 · Map endpoint returns six fields and says when it hit the cap
+**Decision:** `GET /api/assets/map` filters by bounding box, returns only id, code, type, status, lat, lng, and asks the database for 2,001 rows so it can return `capped: true` when there are more than 2,000.
+**Why:** The map only needs enough to draw a dot and open a popup. Fetching one extra row is the cheapest way to know whether to tell the user "zoom in to see all assets" without a separate count query.
+**Alternatives considered:** A `count(*)` for the same box (a second query on every pan); returning everything (crashes cheap phones).
+**Trade-off / what we'd change at scale:** Which 2,000 are shown in a dense area is arbitrary. At scale: server-side clustering or vector tiles (D-16).

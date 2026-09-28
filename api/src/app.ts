@@ -4,6 +4,7 @@ import helmet from "helmet";
 import { env } from "./config/env";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
 import { requireAuth } from "./middleware/auth";
+import { assetsRouter } from "./modules/assets/assets.routes";
 import { assetTypesRouter } from "./modules/assetTypes/assetTypes.routes";
 import { authRouter } from "./modules/auth/auth.routes";
 
@@ -25,6 +26,7 @@ app.use("/api/auth", authRouter);
 
 // Staff routes: every request needs a valid token; routers add role checks.
 app.use("/api/asset-types", requireAuth, assetTypesRouter);
+app.use("/api/assets", requireAuth, assetsRouter);
 
 // Must be last: unknown routes, then errors.
 app.use(notFoundHandler);

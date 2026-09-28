@@ -42,9 +42,9 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P4 zod `validate` middleware, `AppError`, audit helper
 - [x] P5 Asset types CRUD with field definition validation
 - [x] P5 `validateAttributes` + unit tests passing
-- [ ] P6 Asset code generator (transaction-safe)
-- [ ] P6 Assets create / list (filters, search, pagination) / get / update
-- [ ] P6 Map bbox endpoint
+- [x] P6 Asset code generator (transaction-safe)
+- [x] P6 Assets create / list (filters, search, pagination) / get / update
+- [x] P6 Map bbox endpoint
 - [ ] P7 Lifecycle rules (pure functions) + unit tests passing
 - [ ] P7 Transition service (one transaction: status + event + audit + ticket)
 - [ ] P7 Timeline endpoint, `allowedTransitions` on asset detail
@@ -109,3 +109,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:25 | P3 (prep) | render.yaml Blueprint (API + free Postgres 16, JWT_SECRET generated, NODE_VERSION 22), web/vercel.json SPA rewrite; Render build + start commands simulated locally, /health ok | — | Waiting on user: Render + Vercel dashboard clicks. P3 boxes stay unticked until the live URLs work |
 | 13:28 | P4 | Login + /me (JWT sub+role), requireAuth, requireRole (+3 vitest), validate middleware with field-level details, AppError, writeAudit(tx), error handler maps AppError / Zod / Prisma P2002 + P2025 | — | Tested all 3 logins, wrong password, invalid body, missing + bad token with curl |
 | 13:31 | P5 | Asset types CRUD (list paginated, get, ADMIN create/patch), field definition validation (snake_case keys, unique, select needs options), field-lock rule when assets exist, validateAttributes + 8 vitest cases, audit rows | — | Tested via curl: create Water Pump, viewer 403, field errors, duplicate name 409, patch adds optional field |
+| 13:33 | P6 | Transaction-safe asset codes (atomic nextSeq increment), POST/GET/PATCH assets with attribute validation + initial LifecycleEvent + audit before/after, list filters (type, status, ward, q, overdue) paginated, bbox map endpoint capped at 2000 | — | Parallel creates got SL-000001/000002; PATCH with status returns USE_TRANSITION_ENDPOINT; field lock verified |
