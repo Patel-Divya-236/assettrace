@@ -2,7 +2,7 @@
 
 Claude Code ticks items here after each step and adds a line to the Log. Keep this honest: it becomes the record of how the project was built.
 
-**Hackathon start:** __:__  **Deadline:** __:__
+**Hackathon start:** 11:00  **Deadline:** 18:00 (6:00 PM)
 
 ## Time plan (8 hours)
 
