@@ -51,20 +51,39 @@ async function serviceableAsset(db: Db, assetId: string) {
   return asset;
 }
 
-export async function createTicket(data: CreateTicketBody, userId: string) {
+/**
+ * Repairs are done by field officers, so tickets can only be assigned to them.
+ * Admins may assign anyone (who is a field officer); a field officer may only take a ticket themselves.
+ */
+async function checkAssignee(db: Db, assignedToId: string | null | undefined, actor: AuthUser) {
+  if (!assignedToId) return;
+  if (actor.role === "FIELD_OFFICER" && assignedToId !== actor.id) {
+    throw new AppError(403, "FORBIDDEN", "Field officers can only assign tickets to themselves. Ask an admin to assign someone else.");
+  }
+  const user = await db.user.findUnique({ where: { id: assignedToId }, select: { role: true } });
+  if (!user || user.role !== "FIELD_OFFICER") {
+    throw new AppError(400, "INVALID_ASSIGNEE", "Repairs can only be assigned to a field officer.");
+  }
+}
+
+export async function createTicket(data: CreateTicketBody, actor: AuthUser) {
+  const userId = actor.id;
   return prisma.$transaction(async (tx) => {
     await serviceableAsset(tx, data.assetId);
+    await checkAssignee(tx, data.assignedToId, actor);
     const ticket = await tx.maintenanceTicket.create({ data: { ...data, createdById: userId } });
     await writeAudit(tx, { entity: "MaintenanceTicket", entityId: ticket.id, action: "CREATE", userId, changes: { after: data } });
     return ticket;
   });
 }
 
-export async function updateTicket(id: string, data: UpdateTicketBody, userId: string) {
+export async function updateTicket(id: string, data: UpdateTicketBody, actor: AuthUser) {
+  const userId = actor.id;
   return prisma.$transaction(async (tx) => {
     const before = await tx.maintenanceTicket.findUnique({ where: { id } });
     if (!before) throw notFound("Ticket");
     if (before.status === "CLOSED") throw new AppError(409, "TICKET_CLOSED", "This ticket is already closed.");
+    await checkAssignee(tx, data.assignedToId, actor);
     const after = await tx.maintenanceTicket.update({ where: { id }, data, include: ticketInclude });
     await writeAudit(tx, {
       entity: "MaintenanceTicket",
@@ -138,7 +157,13 @@ export async function logService(data: LogServiceBody, user: AuthUser) {
   return prisma.$transaction(async (tx) => {
     await serviceableAsset(tx, data.assetId);
     const ticket = await tx.maintenanceTicket.create({
-      data: { assetId: data.assetId, kind: "PREVENTIVE", description: "Routine service", createdById: user.id, assignedToId: user.id },
+      data: {
+        assetId: data.assetId,
+        kind: "PREVENTIVE",
+        description: "Routine service",
+        createdById: user.id,
+        assignedToId: user.role === "FIELD_OFFICER" ? user.id : null, // admins record, officers do the work
+      },
     });
     return closeTicket(ticket.id, { resolutionNote: data.resolutionNote, cost: data.cost }, user, tx);
   });

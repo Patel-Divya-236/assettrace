@@ -143,8 +143,8 @@ Side effects:
 ### 6.2 Roles
 | Role | Can do |
 |---|---|
-| ADMIN | everything: asset types, assets, all transitions, import, reports, tickets |
-| FIELD_OFFICER | view assets; IN_OPERATION ⇄ UNDER_MAINTENANCE; manage tickets; confirm/reject public reports |
+| ADMIN | everything: asset types, assets, all transitions, import, reports, tickets; assigns repairs to field officers |
+| FIELD_OFFICER | view assets; IN_OPERATION ⇄ UNDER_MAINTENANCE; manage tickets (assign only to themselves); confirm/reject public reports |
 | VIEWER | read-only staff access (dashboards, lists, details) |
 | Public (no login) | view safe asset info; file a problem report; track a report |
 

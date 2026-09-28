@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useSearchParams } from "react-router";
+import { api } from "../../api/client";
 import { closeTicket, listTickets, updateTicket } from "../../api/tickets";
 import type { Ticket } from "../../api/types";
 import Icon from "../../components/Icon";
@@ -17,6 +18,12 @@ export default function Tickets() {
   const toast = useToast();
   const { user } = useAuth();
   const canAct = user?.role === "ADMIN" || user?.role === "FIELD_OFFICER";
+  const isAdmin = user?.role === "ADMIN";
+  // Admins assign repairs to field officers; officers take tickets themselves.
+  const officers = useApi(
+    () => (isAdmin ? api<{ items: { id: string; name: string }[] }>("/api/users", { query: { role: "FIELD_OFFICER" } }) : Promise.resolve({ items: [] })),
+    [isAdmin],
+  );
   const [params, setParams] = useSearchParams();
   const filters = {
     status: params.get("status") ?? "ACTIVE",
@@ -137,11 +144,31 @@ export default function Tickets() {
               )}
               <p className="text-sm text-gray-700">{tk.assignedTo ? t("tickets.assignedTo", { name: tk.assignedTo.name }) : t("tickets.unassigned")}</p>
               {canAct && tk.status !== "CLOSED" && (
-                <div className="flex flex-wrap gap-2">
-                  {tk.assignedTo?.id !== user?.id && (
-                    <BigButton variant="secondary" icon="user" onClick={() => quick(tk, { assignedToId: user!.id })}>
-                      {t("tickets.assignToMe")}
-                    </BigButton>
+                <div className="flex flex-wrap items-end gap-2">
+                  {isAdmin ? (
+                    <Field label={t("tickets.assignTo")}>
+                      {(id) => (
+                        <select
+                          id={id}
+                          value={tk.assignedTo?.id ?? ""}
+                          onChange={(e) => quick(tk, { assignedToId: e.target.value || null })}
+                          className={`${inputClass} sm:w-64`}
+                        >
+                          <option value="">{t("tickets.chooseOfficer")}</option>
+                          {officers.data?.items.map((o) => (
+                            <option key={o.id} value={o.id}>
+                              {o.name}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </Field>
+                  ) : (
+                    tk.assignedTo?.id !== user?.id && (
+                      <BigButton variant="secondary" icon="user" onClick={() => quick(tk, { assignedToId: user!.id })}>
+                        {t("tickets.assignToMe")}
+                      </BigButton>
+                    )
                   )}
                   {tk.status === "OPEN" && (
                     <BigButton variant="secondary" icon="wrench" onClick={() => quick(tk, { status: "IN_PROGRESS" })}>

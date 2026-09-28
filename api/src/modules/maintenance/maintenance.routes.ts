@@ -21,7 +21,7 @@ maintenanceRouter.get("/", validate({ query: listTicketsQuery }), async (req, re
 });
 
 maintenanceRouter.post("/", canAct, validate({ body: createTicketBody }), async (req, res) => {
-  res.status(201).json(await service.createTicket(req.body, currentUser(req).id));
+  res.status(201).json(await service.createTicket(req.body, currentUser(req)));
 });
 
 // Before "/:id" routes so "service" is not read as an id.
@@ -30,7 +30,7 @@ maintenanceRouter.post("/service", canAct, validate({ body: logServiceBody }), a
 });
 
 maintenanceRouter.patch("/:id", canAct, validate({ params: idParams, body: updateTicketBody }), async (req, res) => {
-  res.json(await service.updateTicket(req.params.id as string, req.body, currentUser(req).id));
+  res.json(await service.updateTicket(req.params.id as string, req.body, currentUser(req)));
 });
 
 maintenanceRouter.post("/:id/close", canAct, validate({ params: idParams, body: closeTicketBody }), async (req, res) => {

@@ -15,6 +15,7 @@ import { maintenanceRouter } from "./modules/maintenance/maintenance.routes";
 import { publicRouter } from "./modules/public/public.routes";
 import { qrRouter } from "./modules/qr/qr.routes";
 import { reportsRouter } from "./modules/reports/reports.routes";
+import { usersRouter } from "./modules/users/users.routes";
 
 export const app = express();
 
@@ -43,6 +44,7 @@ app.use("/api/assets", requireAuth, qrRouter);
 app.use("/api/tickets", requireAuth, maintenanceRouter);
 app.use("/api/imports", requireAuth, importsRouter);
 app.use("/api/reports", requireAuth, reportsRouter);
+app.use("/api/users", requireAuth, usersRouter);
 app.use("/api/dashboard", requireAuth, dashboardRouter);
 
 // Must be last: unknown routes, then errors.

@@ -154,7 +154,8 @@
     "INVALID_CSV": "The file could not be read. Download the template and try again.",
     "FIELDS_IN_USE": "Assets already use these fields, so they can't be removed or changed.",
     "USE_TRANSITION_ENDPOINT": "Use the stage buttons to change the status.",
-    "LOCATION_DENIED": "Location is turned off. Allow location for this site and try again."
+    "LOCATION_DENIED": "Location is turned off. Allow location for this site and try again.",
+    "INVALID_ASSIGNEE": "Repairs can only be assigned to a field officer."
   },
   "login": {
     "title": "Staff login",
@@ -254,7 +255,9 @@
     "assignedTo": "Assigned to {{name}}",
     "unassigned": "Not assigned",
     "opened": "Opened {{when}}",
-    "none": "No repairs here."
+    "none": "No repairs here.",
+    "assignTo": "Assign to",
+    "chooseOfficer": "Choose a field officer"
   },
   "reports": {
     "title": "Public reports",

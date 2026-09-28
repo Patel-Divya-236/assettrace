@@ -45,6 +45,8 @@ async function inBatches<T>(rows: T[], insert: (chunk: T[]) => Promise<unknown>)
 const users: { name: string; email: string; role: Role }[] = [
   { name: "Admin User", email: "admin@demo.in", role: Role.ADMIN },
   { name: "Field Officer", email: "officer@demo.in", role: Role.FIELD_OFFICER },
+  { name: "Ramesh Patel", email: "officer2@demo.in", role: Role.FIELD_OFFICER },
+  { name: "Sunita Desai", email: "officer3@demo.in", role: Role.FIELD_OFFICER },
   { name: "Viewer", email: "viewer@demo.in", role: Role.VIEWER },
 ];
 
@@ -160,7 +162,7 @@ async function seedUsers() {
       update: { name: user.name, role: user.role, passwordHash },
       create: { ...user, passwordHash },
     });
-    result[user.role] = u.id;
+    if (!result[user.role]) result[user.role] = u.id; // first user of each role
   }
   console.log(`Users: ${users.map((u) => u.email).join(", ")} (password from SEED_PASSWORD)`);
   return result;
