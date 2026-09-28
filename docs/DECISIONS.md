@@ -178,3 +178,9 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** The map only needs enough to draw a dot and open a popup. Fetching one extra row is the cheapest way to know whether to tell the user "zoom in to see all assets" without a separate count query.
 **Alternatives considered:** A `count(*)` for the same box (a second query on every pan); returning everything (crashes cheap phones).
 **Trade-off / what we'd change at scale:** Which 2,000 are shown in a dense area is arbitrary. At scale: server-side clustering or vector tiles (D-16).
+
+## D-32 · Allowed transitions include the ticket guards; first operation starts the service schedule
+**Decision:** `allowedTransitions` hides moves that the open-ticket guards would reject (repair-done and decommission while tickets are open). Moving COMMISSIONED → IN_OPERATION sets `nextMaintenanceDate = now + type.maintenanceIntervalDays`.
+**Why:** The UI renders only what the backend allows (D-05), so a button must never appear that is guaranteed to fail. Without a first `nextMaintenanceDate`, a new asset would never show up as overdue for service.
+**Alternatives considered:** Show every structurally valid move and let the request fail (confusing for users); leave the schedule empty until the first service is logged.
+**Trade-off / what we'd change at scale:** One extra count query per detail request, already needed for `openTicketCount`.

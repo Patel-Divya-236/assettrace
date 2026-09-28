@@ -1,13 +1,14 @@
-import type { AssetStatus, Prisma, Role } from "@prisma/client";
+import type { Prisma, Role } from "@prisma/client";
 import { prisma } from "../../db/prisma";
 import { reserveAssetCodes } from "../../lib/assetCode";
 import { AppError, notFound } from "../../lib/AppError";
 import { type FieldDef, validateAttributes } from "../../lib/attributes";
 import { type Db, writeAudit } from "../../lib/audit";
+import { getAllowedTransitions } from "../lifecycle/lifecycle.rules";
 import type { CreateAssetBody, ListAssetsQuery, MapQuery, UpdateAssetBody } from "./assets.schema";
 
 export const MAP_LIMIT = 2000;
-const OPEN_TICKET = { status: { in: ["OPEN", "IN_PROGRESS"] } } satisfies Prisma.MaintenanceTicketWhereInput;
+export const OPEN_TICKET = { status: { in: ["OPEN", "IN_PROGRESS"] } } satisfies Prisma.MaintenanceTicketWhereInput;
 
 async function checkParent(db: Db, parentId: string | null | undefined, selfId?: string) {
   if (!parentId) return;
@@ -101,7 +102,7 @@ export async function mapAssets(q: MapQuery) {
   return { items: rows.slice(0, MAP_LIMIT), capped: rows.length > MAP_LIMIT, limit: MAP_LIMIT };
 }
 
-export async function getAsset(id: string, _role: Role) {
+export async function getAsset(id: string, role: Role) {
   const asset = await prisma.asset.findUnique({
     where: { id },
     include: {
@@ -116,7 +117,8 @@ export async function getAsset(id: string, _role: Role) {
     ...rest,
     openTicketCount: _count.tickets,
     childCount: _count.children,
-    allowedTransitions: [] as AssetStatus[], // filled by the lifecycle engine in P7
+    // Computed by the backend so the UI never decides lifecycle rules (D-05).
+    allowedTransitions: getAllowedTransitions(asset.status, role, _count.tickets),
   };
 }
 
