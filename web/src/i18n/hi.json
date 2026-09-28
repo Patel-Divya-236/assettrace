@@ -1,0 +1,419 @@
+{
+  "_TODO": "TODO: NATIVE REVIEW NEEDED. Every string in this file was drafted without a native Hindi speaker. Please check all of them (P18).",
+  "app": {
+    "name": "AssetTrace",
+    "tagline": "सरकारी संपत्ति, योजना से निपटान तक"
+  },
+  "lang": {
+    "en": "English",
+    "hi": "हिंदी",
+    "gu": "ગુજરાતી",
+    "choose": "अपनी भाषा चुनें",
+    "label": "भाषा"
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "assets": "संपत्तियाँ",
+    "map": "नक्शा",
+    "tickets": "मरम्मत",
+    "reports": "जनता की शिकायतें",
+    "assetTypes": "संपत्ति के प्रकार",
+    "import": "इम्पोर्ट",
+    "logout": "लॉग आउट",
+    "main": "मुख्य मेनू",
+    "publicSite": "जनता साइट"
+  },
+  "common": {
+    "save": "सेव करें",
+    "cancel": "रद्द करें",
+    "confirm": "पक्का करें",
+    "back": "पीछे",
+    "next": "आगे",
+    "close": "बंद करें",
+    "search": "खोजें",
+    "loading": "लोड हो रहा है…",
+    "retry": "फिर कोशिश करें",
+    "moreFilters": "और फ़िल्टर",
+    "fewerFilters": "कम फ़िल्टर",
+    "open": "खोलें",
+    "download": "डाउनलोड",
+    "print": "प्रिंट",
+    "all": "सभी",
+    "required": "ज़रूरी",
+    "optional": "वैकल्पिक",
+    "pageOf": "पेज {{page}} / {{pages}}",
+    "previous": "पिछला",
+    "nextPage": "अगला पेज",
+    "nothingHere": "अभी यहाँ कुछ नहीं है",
+    "somethingWrong": "कुछ गलत हो गया",
+    "notRecorded": "दर्ज नहीं",
+    "done": "हो गया",
+    "edit": "बदलें",
+    "view": "देखें",
+    "skip": "मुख्य सामग्री पर जाएँ"
+  },
+  "roles": {
+    "ADMIN": "एडमिन",
+    "FIELD_OFFICER": "फील्ड अधिकारी",
+    "VIEWER": "दर्शक"
+  },
+  "status": {
+    "PLANNED": {
+      "label": "योजना में",
+      "desc": "मंज़ूर, अभी खरीदा नहीं"
+    },
+    "ACQUIRED": {
+      "label": "खरीदा गया",
+      "desc": "खरीदा, अभी लगाया नहीं"
+    },
+    "COMMISSIONED": {
+      "label": "लगाया गया",
+      "desc": "लगाया और जाँचा गया"
+    },
+    "IN_OPERATION": {
+      "label": "चालू",
+      "desc": "काम कर रहा है"
+    },
+    "UNDER_MAINTENANCE": {
+      "label": "मरम्मत में",
+      "desc": "मरम्मत या सर्विस हो रही है"
+    },
+    "DECOMMISSIONED": {
+      "label": "सेवा से बाहर",
+      "desc": "सेवा से हटाया गया"
+    },
+    "DISPOSED": {
+      "label": "निपटाया गया",
+      "desc": "बेचा, कबाड़ या हटाया गया। अंतिम चरण"
+    }
+  },
+  "publicStatus": {
+    "WORKING": "चालू है",
+    "BEING_REPAIRED": "मरम्मत हो रही है",
+    "NOT_IN_SERVICE": "सेवा में नहीं"
+  },
+  "reportStatus": {
+    "RECEIVED": "मिली",
+    "ASSIGNED": "कर्मचारी तय",
+    "FIXED": "ठीक हो गया",
+    "REJECTED": "स्वीकार नहीं"
+  },
+  "category": {
+    "NOT_WORKING": "काम नहीं कर रहा",
+    "BROKEN": "टूटा हुआ",
+    "LEAKING": "रिसाव",
+    "OTHER": "दूसरी समस्या"
+  },
+  "moves": {
+    "ACQUIRED": "खरीदा गया चिह्नित करें",
+    "COMMISSIONED": "लगाया गया चिह्नित करें",
+    "IN_OPERATION": "चालू चिह्नित करें",
+    "UNDER_MAINTENANCE": "मरम्मत में चिह्नित करें",
+    "DECOMMISSIONED": "सेवा से हटाएँ",
+    "DISPOSED": "निपटाया गया चिह्नित करें",
+    "PLANNED": "योजना में चिह्नित करें"
+  },
+  "confirmMove": {
+    "title": "{{code}} को {{status}} चिह्नित करें?",
+    "final": "यह वापस नहीं किया जा सकता।",
+    "repairTicket": "एक मरम्मत टिकट बनेगा।"
+  },
+  "stage": {
+    "acquiredDate": "खरीद की तारीख",
+    "cost": "कीमत (₹)",
+    "vendor": "सप्लायर",
+    "commissionedDate": "लगाने की तारीख",
+    "warrantyEnd": "वारंटी खत्म",
+    "disposalMethod": "कैसे निपटाया गया?",
+    "disposalValue": "मिली रकम (₹)",
+    "note": "नोट"
+  },
+  "errors": {
+    "NETWORK_ERROR": "सर्वर से संपर्क नहीं हो पाया। इंटरनेट जाँचें और फिर कोशिश करें।",
+    "INTERNAL_ERROR": "सर्वर पर कुछ गलत हो गया। फिर कोशिश करें।",
+    "UNAUTHENTICATED": "आगे बढ़ने के लिए लॉग इन करें।",
+    "SESSION_EXPIRED": "आपका सत्र खत्म हो गया। फिर से लॉग इन करें।",
+    "INVALID_CREDENTIALS": "ईमेल या पासवर्ड गलत है।",
+    "FORBIDDEN": "आपको यह करने की अनुमति नहीं है।",
+    "VALIDATION_ERROR": "कुछ जानकारी छूटी या गलत है। कृपया जाँचें।",
+    "INVALID_ATTRIBUTES": "कुछ विवरण छूटे या गलत हैं। कृपया जाँचें।",
+    "NOT_FOUND": "यह नहीं मिला।",
+    "ALREADY_EXISTS": "यह पहले से मौजूद है। दूसरा नाम या कोड दें।",
+    "INVALID_TRANSITION": "इस चरण में यह बदलाव नहीं हो सकता।",
+    "FORBIDDEN_TRANSITION": "आपकी भूमिका यह बदलाव नहीं कर सकती। एडमिन से कहें।",
+    "OPEN_TICKETS": "पहले खुले मरम्मत टिकट बंद करें।",
+    "STAGE_DATA_REQUIRED": "ज़रूरी जानकारी भरें।",
+    "CONFLICT": "किसी और ने अभी इसे बदला है। रीफ़्रेश करके फिर कोशिश करें।",
+    "TICKET_CLOSED": "यह मरम्मत टिकट पहले ही बंद है।",
+    "ASSET_NOT_IN_SERVICE": "यह संपत्ति सेवा में नहीं है।",
+    "ASSET_NOT_FOUND": "यह संपत्ति नहीं मिली। प्लेट पर लिखा नंबर जाँचें।",
+    "REPORT_NOT_FOUND": "इस नंबर की कोई शिकायत नहीं मिली। 6 अंक जाँचें।",
+    "REPORT_ALREADY_HANDLED": "इस शिकायत पर पहले ही कार्रवाई हो चुकी है।",
+    "RATE_LIMITED": "बहुत ज़्यादा कोशिशें। कुछ मिनट रुकें।",
+    "INVALID_PHOTO": "फ़ोटो एक तस्वीर होनी चाहिए (JPEG, PNG या WebP)।",
+    "FILE_TOO_LARGE": "फ़ाइल बहुत बड़ी है।",
+    "INVALID_CSV": "फ़ाइल पढ़ी नहीं जा सकी। टेम्पलेट डाउनलोड करके फिर कोशिश करें।",
+    "FIELDS_IN_USE": "संपत्तियाँ इन विवरणों का उपयोग कर रही हैं, इसलिए इन्हें हटाया या बदला नहीं जा सकता।",
+    "USE_TRANSITION_ENDPOINT": "स्थिति बदलने के लिए चरण वाले बटन का उपयोग करें।",
+    "LOCATION_DENIED": "लोकेशन बंद है। इस साइट के लिए लोकेशन की अनुमति दें और फिर कोशिश करें।"
+  },
+  "login": {
+    "title": "स्टाफ लॉग इन",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "submit": "लॉग इन",
+    "demo": "डेमो: admin@demo.in, officer@demo.in या viewer@demo.in, पासवर्ड demo1234"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "total": "कुल संपत्तियाँ",
+    "working": "चालू",
+    "underRepair": "मरम्मत में",
+    "overdue": "सर्विस बाकी",
+    "stages": "चरण के अनुसार संपत्तियाँ",
+    "byType": "प्रकार के अनुसार संपत्तियाँ",
+    "overdueList": "सर्विस बाकी",
+    "newReports": "जनता की नई शिकायतें",
+    "noOverdue": "कोई सर्विस बाकी नहीं।",
+    "noReports": "कोई नई शिकायत नहीं।",
+    "openTickets": "खुली मरम्मत",
+    "dueSince": "{{date}} से बाकी",
+    "seeAll": "सभी देखें"
+  },
+  "assets": {
+    "title": "संपत्तियाँ",
+    "add": "संपत्ति जोड़ें",
+    "searchLabel": "नंबर, नाम या जगह से खोजें",
+    "searchPlaceholder": "जैसे SL-000142 या सेक्टर 21",
+    "type": "प्रकार",
+    "status": "चरण",
+    "ward": "वार्ड",
+    "overdueOnly": "सिर्फ़ सर्विस बाकी वाली",
+    "code": "नंबर",
+    "name": "नाम",
+    "location": "जगह",
+    "nextService": "अगली सर्विस",
+    "noResults": "कोई संपत्ति नहीं मिली। दूसरी खोज करें या फ़िल्टर हटाएँ।",
+    "count": "{{count}} संपत्तियाँ",
+    "clear": "फ़िल्टर हटाएँ"
+  },
+  "asset": {
+    "lifecycle": "जीवन चरण",
+    "actions": "अब आप क्या कर सकते हैं?",
+    "noActions": "इस चरण में आपकी भूमिका के लिए कोई बदलाव उपलब्ध नहीं है।",
+    "details": "विवरण",
+    "customFields": "संपत्ति का विवरण",
+    "dates": "तारीखें और रकम",
+    "history": "इतिहास",
+    "qr": "QR कोड",
+    "qrHelp": "इसे प्रिंट करके संपत्ति पर लगाएँ। लोग इसे स्कैन करके स्थिति देखते हैं और शिकायत करते हैं।",
+    "openTickets": "खुली मरम्मत",
+    "noOpenTickets": "कोई खुली मरम्मत नहीं।",
+    "logService": "सर्विस दर्ज करें",
+    "logServiceHelp": "आज हुई नियमित सर्विस दर्ज करें। चरण नहीं बदलेगा।",
+    "whatWasDone": "क्या किया गया?",
+    "lastService": "पिछली सर्विस",
+    "nextService": "अगली सर्विस",
+    "condition": "हालत",
+    "conditionValue": "5 में से {{value}}",
+    "created": "बनाया गया",
+    "by": "{{name}} द्वारा",
+    "system": "सिस्टम",
+    "moved": "बदला गया",
+    "createdEvent": "जोड़ा गया",
+    "coordinates": "नक्शे पर जगह",
+    "parent": "इसका हिस्सा",
+    "saved": "सेव हो गया",
+    "backToList": "संपत्तियों पर वापस"
+  },
+  "tickets": {
+    "title": "मरम्मत",
+    "kind": {
+      "PREVENTIVE": "नियमित सर्विस",
+      "CORRECTIVE": "मरम्मत"
+    },
+    "priority": {
+      "LOW": "कम",
+      "MEDIUM": "मध्यम",
+      "HIGH": "ज़्यादा"
+    },
+    "priorityLabel": "प्राथमिकता",
+    "state": {
+      "OPEN": "खुला",
+      "IN_PROGRESS": "काम चालू",
+      "CLOSED": "बंद"
+    },
+    "stateLabel": "स्थिति",
+    "kindLabel": "प्रकार",
+    "assignToMe": "मुझे सौंपें",
+    "markInProgress": "काम शुरू करें",
+    "close": "मरम्मत पूरी",
+    "resolution": "क्या किया गया?",
+    "cost": "खर्च (₹)",
+    "backInOperation": "{{code}} फिर से चालू है।",
+    "closed": "मरम्मत बंद हुई।",
+    "assignedTo": "{{name}} को सौंपा",
+    "unassigned": "किसी को नहीं सौंपा",
+    "opened": "{{when}} खोला",
+    "none": "यहाँ कोई मरम्मत नहीं।"
+  },
+  "reports": {
+    "title": "जनता की शिकायतें",
+    "tab": {
+      "RECEIVED": "नई",
+      "ASSIGNED": "सौंपी गई",
+      "FIXED": "ठीक हुई",
+      "REJECTED": "स्वीकार नहीं"
+    },
+    "confirm": "पक्का करें और मरम्मत बनाएँ",
+    "reject": "स्वीकार न करें",
+    "reason": "कारण (नागरिक इसे देखेगा)",
+    "ticketCreated": "मरम्मत टिकट बन गया।",
+    "openTicket": "मरम्मत खोलें",
+    "rejected": "शिकायत स्वीकार नहीं की गई।",
+    "photo": "नागरिक की फ़ोटो",
+    "noPhoto": "कोई फ़ोटो नहीं",
+    "tracking": "शिकायत नं. {{code}}",
+    "none": "यहाँ कोई शिकायत नहीं।"
+  },
+  "types": {
+    "title": "संपत्ति के प्रकार",
+    "new": "नया प्रकार",
+    "name": "नाम",
+    "namePlaceholder": "जैसे हैंड पंप",
+    "prefix": "कोड की शुरुआत (2-4 बड़े अक्षर)",
+    "interval": "हर कितने दिन में सर्विस",
+    "life": "अनुमानित उम्र (साल)",
+    "icon": "आइकन",
+    "fields": "जुटाने वाली जानकारी",
+    "addField": "जानकारी जोड़ें",
+    "fieldLabel": "सवाल",
+    "fieldKey": "की",
+    "fieldType": "जवाब का प्रकार",
+    "fieldTypes": {
+      "text": "लिखित",
+      "number": "संख्या",
+      "date": "तारीख",
+      "select": "सूची से चुनें"
+    },
+    "requiredField": "भरना ज़रूरी",
+    "options": "विकल्प (कॉमा से अलग)",
+    "remove": "हटाएँ",
+    "moveUp": "ऊपर करें",
+    "moveDown": "नीचे करें",
+    "preview": "फ़ॉर्म का प्रीव्यू",
+    "saved": "प्रकार सेव हो गया।",
+    "assetCount": "{{count}} संपत्तियाँ",
+    "noFields": "अभी कोई अतिरिक्त जानकारी नहीं।"
+  },
+  "wizard": {
+    "title": "संपत्ति जोड़ें",
+    "editTitle": "संपत्ति बदलें",
+    "steps": {
+      "type": "प्रकार",
+      "details": "विवरण",
+      "location": "जगह",
+      "confirm": "जाँचें"
+    },
+    "chooseType": "आप क्या जोड़ रहे हैं?",
+    "name": "नाम",
+    "namePlaceholder": "जैसे सेक्टर 21 बस स्टैंड के पास स्ट्रीटलाइट",
+    "condition": "हालत (1 खराब – 5 बहुत अच्छी)",
+    "useMyLocation": "मेरी मौजूदा लोकेशन लें",
+    "tapMap": "संपत्ति रखने के लिए नक्शे पर टैप करें",
+    "lat": "अक्षांश",
+    "lng": "देशांतर",
+    "locationText": "यह कहाँ है? (लोगों को समझ आने वाले शब्द)",
+    "locationPlaceholder": "जैसे सेक्टर 21, बस स्टैंड के पास",
+    "ward": "वार्ड",
+    "create": "संपत्ति जोड़ें",
+    "created": "संपत्ति {{code}} जोड़ी गई।",
+    "needLocation": "नक्शे पर जगह चुनें या अपनी लोकेशन लें।"
+  },
+  "import": {
+    "title": "CSV से इम्पोर्ट",
+    "chooseType": "1. संपत्ति का प्रकार चुनें",
+    "template": "2. टेम्पलेट डाउनलोड करें और Excel में भरें",
+    "downloadTemplate": "टेम्पलेट डाउनलोड करें",
+    "upload": "3. भरी हुई फ़ाइल अपलोड करें",
+    "chooseFile": "CSV फ़ाइल चुनें",
+    "start": "इम्पोर्ट करें",
+    "working": "इम्पोर्ट हो रहा है… रुकें",
+    "result": "{{ok}} जोड़ी गईं, {{failed}} में समस्या",
+    "rowErrors": "समस्या वाली पंक्तियाँ",
+    "row": "पंक्ति",
+    "problem": "समस्या",
+    "help": "Excel में CSV UTF-8 के रूप में सेव करें। ज़रूरी कॉलम: name, lat, lng, locationText। वैकल्पिक: ward, status, condition।"
+  },
+  "map": {
+    "title": "नक्शा",
+    "capped": "पहली {{limit}} दिख रही हैं। सभी देखने के लिए ज़ूम करें।",
+    "legend": "संकेत",
+    "loading": "संपत्तियाँ लोड हो रही हैं…"
+  },
+  "public": {
+    "homeTitle": "सरकारी संपत्ति की समस्या बताएँ",
+    "homeHelp": "स्ट्रीटलाइट, पानी के पंप, ट्रांसफ़ॉर्मर और भी बहुत कुछ।",
+    "scan": "QR कोड स्कैन करें",
+    "scanHelp": "फ़ोन का कैमरा खोलें और खंभे या पंप पर लगे कोड की ओर करें।",
+    "nearby": "मेरे पास की संपत्तियाँ",
+    "track": "मेरी शिकायत देखें",
+    "enterCode": "या प्लेट पर लिखा नंबर लिखें",
+    "codePlaceholder": "जैसे SL-000142",
+    "go": "खोलें",
+    "staffLogin": "स्टाफ लॉग इन",
+    "type": "प्रकार",
+    "location": "जगह",
+    "lastRepaired": "पिछली मरम्मत",
+    "never": "अभी नहीं",
+    "assetNumber": "संपत्ति नंबर",
+    "reportProblem": "समस्या बताएँ",
+    "notInServiceHelp": "यह संपत्ति अभी सेवा में नहीं है, इसलिए शिकायत नहीं की जा सकती।",
+    "notFoundTitle": "संपत्ति नहीं मिली",
+    "notFoundHelp": "प्लेट पर लिखा नंबर जाँचें और फिर कोशिश करें।",
+    "home": "होम"
+  },
+  "report": {
+    "title": "क्या समस्या है?",
+    "photo": "फ़ोटो जोड़ें",
+    "photoOptional": "फ़ोटो (वैकल्पिक)",
+    "changePhoto": "फ़ोटो बदलें",
+    "removePhoto": "फ़ोटो हटाएँ",
+    "phone": "मोबाइल नंबर (वैकल्पिक)",
+    "phoneHelp": "सिर्फ़ तब, जब टीम को आपसे बात करनी हो।",
+    "note": "और कुछ? (वैकल्पिक)",
+    "send": "भेजें",
+    "sending": "भेज रहे हैं…",
+    "chooseProblem": "ऊपर एक तस्वीर पर टैप करें।"
+  },
+  "done": {
+    "title": "धन्यवाद! आपकी शिकायत दर्ज हो गई।",
+    "number": "आपका शिकायत नंबर",
+    "writeDown": "यह नंबर लिख लें। प्रगति देखने के लिए इसकी ज़रूरत होगी।",
+    "track": "प्रगति देखें",
+    "home": "होम पर जाएँ"
+  },
+  "track": {
+    "title": "मेरी शिकायत देखें",
+    "enter": "अपना 6 अंकों का शिकायत नंबर लिखें",
+    "find": "देखें",
+    "for": "{{code}} के लिए",
+    "rejectedReason": "कारण: {{reason}}",
+    "updated": "आखिरी अपडेट: {{when}}"
+  },
+  "nearby": {
+    "title": "मेरे पास की संपत्तियाँ",
+    "ask": "अपने पास की संपत्तियाँ खोजें",
+    "askHelp": "हम आपकी लोकेशन सिर्फ़ पास की संपत्तियाँ खोजने के लिए लेते हैं। यह सेव नहीं होती।",
+    "finding": "आपकी लोकेशन खोज रहे हैं…",
+    "none": "1 किमी में कोई संपत्ति नहीं।",
+    "away": "{{meters}} मी. दूर",
+    "awayKm": "{{km}} किमी दूर"
+  },
+  "time": {
+    "justNow": "अभी",
+    "minutes": "{{count}} मिनट पहले",
+    "hours": "{{count}} घंटे पहले",
+    "days": "{{count}} दिन पहले"
+  }
+}

@@ -1,6 +1,36 @@
 @import "tailwindcss";
 
-/* rem-based sizes everywhere so text follows the phone's font-size setting. */
+/*
+ * rem-based sizes everywhere so text follows the phone's font-size setting.
+ * Staff pages: 16px body. Public pages add text-lg (18px) in PublicLayout.
+ */
 html {
   font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Gujarati", "Noto Sans Devanagari", sans-serif;
+  color: #111827;
+  line-height: 1.5;
+}
+
+/* Visible focus for keyboard users on every interactive element. */
+:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@media print {
+  header,
+  nav,
+  aside,
+  .no-print {
+    display: none !important;
+  }
 }

@@ -1,0 +1,419 @@
+{
+  "_TODO": "TODO: NATIVE REVIEW NEEDED. Every string in this file was drafted without a native Gujarati speaker. Please check all of them (P18).",
+  "app": {
+    "name": "AssetTrace",
+    "tagline": "જાહેર મિલકત, આયોજનથી નિકાલ સુધી"
+  },
+  "lang": {
+    "en": "English",
+    "hi": "हिंदी",
+    "gu": "ગુજરાતી",
+    "choose": "તમારી ભાષા પસંદ કરો",
+    "label": "ભાષા"
+  },
+  "nav": {
+    "dashboard": "ડેશબોર્ડ",
+    "assets": "મિલકતો",
+    "map": "નકશો",
+    "tickets": "સમારકામ",
+    "reports": "જાહેર ફરિયાદો",
+    "assetTypes": "મિલકતના પ્રકાર",
+    "import": "ઇમ્પોર્ટ",
+    "logout": "લૉગ આઉટ",
+    "main": "મુખ્ય મેનૂ",
+    "publicSite": "જાહેર સાઇટ"
+  },
+  "common": {
+    "save": "સેવ કરો",
+    "cancel": "રદ કરો",
+    "confirm": "પાકું કરો",
+    "back": "પાછળ",
+    "next": "આગળ",
+    "close": "બંધ કરો",
+    "search": "શોધો",
+    "loading": "લોડ થાય છે…",
+    "retry": "ફરી પ્રયત્ન કરો",
+    "moreFilters": "વધુ ફિલ્ટર",
+    "fewerFilters": "ઓછા ફિલ્ટર",
+    "open": "ખોલો",
+    "download": "ડાઉનલોડ",
+    "print": "પ્રિન્ટ",
+    "all": "બધા",
+    "required": "જરૂરી",
+    "optional": "વૈકલ્પિક",
+    "pageOf": "પાનું {{page}} / {{pages}}",
+    "previous": "પાછલું",
+    "nextPage": "આગલું પાનું",
+    "nothingHere": "અહીં હજી કંઈ નથી",
+    "somethingWrong": "કંઈક ખોટું થયું",
+    "notRecorded": "નોંધાયેલ નથી",
+    "done": "થઈ ગયું",
+    "edit": "ફેરફાર કરો",
+    "view": "જુઓ",
+    "skip": "મુખ્ય સામગ્રી પર જાઓ"
+  },
+  "roles": {
+    "ADMIN": "એડમિન",
+    "FIELD_OFFICER": "ફિલ્ડ અધિકારી",
+    "VIEWER": "દર્શક"
+  },
+  "status": {
+    "PLANNED": {
+      "label": "આયોજનમાં",
+      "desc": "મંજૂર, હજી ખરીદ્યું નથી"
+    },
+    "ACQUIRED": {
+      "label": "ખરીદાયું",
+      "desc": "ખરીદ્યું, હજી લગાવ્યું નથી"
+    },
+    "COMMISSIONED": {
+      "label": "લગાવાયું",
+      "desc": "લગાવ્યું અને ચકાસ્યું"
+    },
+    "IN_OPERATION": {
+      "label": "ચાલુ",
+      "desc": "કામ કરે છે"
+    },
+    "UNDER_MAINTENANCE": {
+      "label": "સમારકામમાં",
+      "desc": "સમારકામ અથવા સર્વિસ ચાલુ છે"
+    },
+    "DECOMMISSIONED": {
+      "label": "સેવામાંથી બહાર",
+      "desc": "સેવામાંથી દૂર કર્યું"
+    },
+    "DISPOSED": {
+      "label": "નિકાલ થયો",
+      "desc": "વેચાયું, ભંગાર અથવા હટાવ્યું. છેલ્લો તબક્કો"
+    }
+  },
+  "publicStatus": {
+    "WORKING": "ચાલુ છે",
+    "BEING_REPAIRED": "સમારકામ ચાલુ છે",
+    "NOT_IN_SERVICE": "સેવામાં નથી"
+  },
+  "reportStatus": {
+    "RECEIVED": "મળી",
+    "ASSIGNED": "કર્મચારી નક્કી",
+    "FIXED": "ઠીક થઈ ગયું",
+    "REJECTED": "સ્વીકારાઈ નથી"
+  },
+  "category": {
+    "NOT_WORKING": "કામ નથી કરતું",
+    "BROKEN": "તૂટેલું",
+    "LEAKING": "લીકેજ",
+    "OTHER": "બીજી સમસ્યા"
+  },
+  "moves": {
+    "ACQUIRED": "ખરીદાયું તરીકે નોંધો",
+    "COMMISSIONED": "લગાવાયું તરીકે નોંધો",
+    "IN_OPERATION": "ચાલુ તરીકે નોંધો",
+    "UNDER_MAINTENANCE": "સમારકામમાં તરીકે નોંધો",
+    "DECOMMISSIONED": "સેવામાંથી દૂર કરો",
+    "DISPOSED": "નિકાલ થયો તરીકે નોંધો",
+    "PLANNED": "આયોજનમાં તરીકે નોંધો"
+  },
+  "confirmMove": {
+    "title": "{{code}} ને {{status}} તરીકે નોંધવું છે?",
+    "final": "આ પાછું ફેરવી શકાશે નહીં.",
+    "repairTicket": "એક સમારકામ ટિકિટ બનશે."
+  },
+  "stage": {
+    "acquiredDate": "ખરીદીની તારીખ",
+    "cost": "કિંમત (₹)",
+    "vendor": "સપ્લાયર",
+    "commissionedDate": "લગાવ્યાની તારીખ",
+    "warrantyEnd": "વોરંટી પૂરી",
+    "disposalMethod": "નિકાલ કેવી રીતે થયો?",
+    "disposalValue": "મળેલી રકમ (₹)",
+    "note": "નોંધ"
+  },
+  "errors": {
+    "NETWORK_ERROR": "સર્વર સાથે સંપર્ક થયો નહીં. ઇન્ટરનેટ તપાસો અને ફરી પ્રયત્ન કરો.",
+    "INTERNAL_ERROR": "સર્વર પર કંઈક ખોટું થયું. ફરી પ્રયત્ન કરો.",
+    "UNAUTHENTICATED": "આગળ વધવા લૉગ ઇન કરો.",
+    "SESSION_EXPIRED": "તમારું સત્ર પૂરું થયું. ફરી લૉગ ઇન કરો.",
+    "INVALID_CREDENTIALS": "ઇમેઇલ અથવા પાસવર્ડ ખોટો છે.",
+    "FORBIDDEN": "તમને આ કરવાની પરવાનગી નથી.",
+    "VALIDATION_ERROR": "કેટલીક માહિતી ખૂટે છે અથવા ખોટી છે. કૃપા કરીને તપાસો.",
+    "INVALID_ATTRIBUTES": "કેટલીક વિગતો ખૂટે છે અથવા ખોટી છે. કૃપા કરીને તપાસો.",
+    "NOT_FOUND": "આ મળ્યું નથી.",
+    "ALREADY_EXISTS": "આ પહેલેથી છે. બીજું નામ અથવા કોડ આપો.",
+    "INVALID_TRANSITION": "આ તબક્કે આ ફેરફાર થઈ શકે નહીં.",
+    "FORBIDDEN_TRANSITION": "તમારી ભૂમિકા આ ફેરફાર કરી શકતી નથી. એડમિનને કહો.",
+    "OPEN_TICKETS": "પહેલાં ખુલ્લી સમારકામ ટિકિટો બંધ કરો.",
+    "STAGE_DATA_REQUIRED": "જરૂરી માહિતી ભરો.",
+    "CONFLICT": "કોઈએ હમણાં જ આ બદલ્યું છે. રિફ્રેશ કરીને ફરી પ્રયત્ન કરો.",
+    "TICKET_CLOSED": "આ સમારકામ ટિકિટ પહેલેથી બંધ છે.",
+    "ASSET_NOT_IN_SERVICE": "આ મિલકત સેવામાં નથી.",
+    "ASSET_NOT_FOUND": "આ મિલકત મળી નથી. પ્લેટ પર લખેલો નંબર તપાસો.",
+    "REPORT_NOT_FOUND": "આ નંબરની કોઈ ફરિયાદ મળી નથી. 6 અંક તપાસો.",
+    "REPORT_ALREADY_HANDLED": "આ ફરિયાદ પર પહેલેથી કાર્યવાહી થઈ ગઈ છે.",
+    "RATE_LIMITED": "ઘણા બધા પ્રયત્નો. થોડી મિનિટ રાહ જુઓ.",
+    "INVALID_PHOTO": "ફોટો એક ચિત્ર હોવો જોઈએ (JPEG, PNG અથવા WebP).",
+    "FILE_TOO_LARGE": "ફાઇલ ખૂબ મોટી છે.",
+    "INVALID_CSV": "ફાઇલ વાંચી શકાઈ નહીં. ટેમ્પલેટ ડાઉનલોડ કરીને ફરી પ્રયત્ન કરો.",
+    "FIELDS_IN_USE": "મિલકતો આ વિગતો વાપરે છે, તેથી તેને દૂર કે બદલી શકાશે નહીં.",
+    "USE_TRANSITION_ENDPOINT": "સ્થિતિ બદલવા તબક્કાના બટન વાપરો.",
+    "LOCATION_DENIED": "લોકેશન બંધ છે. આ સાઇટ માટે લોકેશનની પરવાનગી આપો અને ફરી પ્રયત્ન કરો."
+  },
+  "login": {
+    "title": "સ્ટાફ લૉગ ઇન",
+    "email": "ઇમેઇલ",
+    "password": "પાસવર્ડ",
+    "submit": "લૉગ ઇન",
+    "demo": "ડેમો: admin@demo.in, officer@demo.in અથવા viewer@demo.in, પાસવર્ડ demo1234"
+  },
+  "dashboard": {
+    "title": "ડેશબોર્ડ",
+    "total": "કુલ મિલકતો",
+    "working": "ચાલુ",
+    "underRepair": "સમારકામમાં",
+    "overdue": "સર્વિસ બાકી",
+    "stages": "તબક્કા પ્રમાણે મિલકતો",
+    "byType": "પ્રકાર પ્રમાણે મિલકતો",
+    "overdueList": "સર્વિસ બાકી",
+    "newReports": "નવી જાહેર ફરિયાદો",
+    "noOverdue": "કોઈ સર્વિસ બાકી નથી.",
+    "noReports": "કોઈ નવી ફરિયાદ નથી.",
+    "openTickets": "ખુલ્લાં સમારકામ",
+    "dueSince": "{{date}} થી બાકી",
+    "seeAll": "બધું જુઓ"
+  },
+  "assets": {
+    "title": "મિલકતો",
+    "add": "મિલકત ઉમેરો",
+    "searchLabel": "નંબર, નામ અથવા જગ્યાથી શોધો",
+    "searchPlaceholder": "દા.ત. SL-000142 અથવા સેક્ટર 21",
+    "type": "પ્રકાર",
+    "status": "તબક્કો",
+    "ward": "વોર્ડ",
+    "overdueOnly": "ફક્ત સર્વિસ બાકી હોય તે",
+    "code": "નંબર",
+    "name": "નામ",
+    "location": "જગ્યા",
+    "nextService": "આગલી સર્વિસ",
+    "noResults": "કોઈ મિલકત મળી નથી. બીજી શોધ કરો અથવા ફિલ્ટર દૂર કરો.",
+    "count": "{{count}} મિલકતો",
+    "clear": "ફિલ્ટર દૂર કરો"
+  },
+  "asset": {
+    "lifecycle": "જીવન તબક્કો",
+    "actions": "હવે તમે શું કરી શકો?",
+    "noActions": "આ તબક્કે તમારી ભૂમિકા માટે કોઈ ફેરફાર ઉપલબ્ધ નથી.",
+    "details": "વિગતો",
+    "customFields": "મિલકતની વિગતો",
+    "dates": "તારીખો અને રકમ",
+    "history": "ઇતિહાસ",
+    "qr": "QR કોડ",
+    "qrHelp": "આને પ્રિન્ટ કરીને મિલકત પર લગાવો. લોકો સ્કેન કરીને સ્થિતિ જુએ છે અને ફરિયાદ કરે છે.",
+    "openTickets": "ખુલ્લાં સમારકામ",
+    "noOpenTickets": "કોઈ ખુલ્લું સમારકામ નથી.",
+    "logService": "સર્વિસ નોંધો",
+    "logServiceHelp": "આજે થયેલી નિયમિત સર્વિસ નોંધો. તબક્કો બદલાશે નહીં.",
+    "whatWasDone": "શું કરવામાં આવ્યું?",
+    "lastService": "છેલ્લી સર્વિસ",
+    "nextService": "આગલી સર્વિસ",
+    "condition": "હાલત",
+    "conditionValue": "5 માંથી {{value}}",
+    "created": "બનાવ્યું",
+    "by": "{{name}} દ્વારા",
+    "system": "સિસ્ટમ",
+    "moved": "બદલ્યું",
+    "createdEvent": "ઉમેર્યું",
+    "coordinates": "નકશા પર જગ્યા",
+    "parent": "આનો ભાગ",
+    "saved": "સેવ થયું",
+    "backToList": "મિલકતો પર પાછા"
+  },
+  "tickets": {
+    "title": "સમારકામ",
+    "kind": {
+      "PREVENTIVE": "નિયમિત સર્વિસ",
+      "CORRECTIVE": "સમારકામ"
+    },
+    "priority": {
+      "LOW": "ઓછી",
+      "MEDIUM": "મધ્યમ",
+      "HIGH": "વધુ"
+    },
+    "priorityLabel": "પ્રાથમિકતા",
+    "state": {
+      "OPEN": "ખુલ્લું",
+      "IN_PROGRESS": "કામ ચાલુ",
+      "CLOSED": "બંધ"
+    },
+    "stateLabel": "સ્થિતિ",
+    "kindLabel": "પ્રકાર",
+    "assignToMe": "મને સોંપો",
+    "markInProgress": "કામ શરૂ કરો",
+    "close": "સમારકામ પૂરું",
+    "resolution": "શું કરવામાં આવ્યું?",
+    "cost": "ખર્ચ (₹)",
+    "backInOperation": "{{code}} ફરી ચાલુ છે.",
+    "closed": "સમારકામ બંધ થયું.",
+    "assignedTo": "{{name}} ને સોંપ્યું",
+    "unassigned": "કોઈને સોંપ્યું નથી",
+    "opened": "{{when}} ખોલ્યું",
+    "none": "અહીં કોઈ સમારકામ નથી."
+  },
+  "reports": {
+    "title": "જાહેર ફરિયાદો",
+    "tab": {
+      "RECEIVED": "નવી",
+      "ASSIGNED": "સોંપેલી",
+      "FIXED": "ઠીક થઈ",
+      "REJECTED": "સ્વીકારાઈ નથી"
+    },
+    "confirm": "પાકું કરો અને સમારકામ બનાવો",
+    "reject": "સ્વીકારશો નહીં",
+    "reason": "કારણ (નાગરિક આ જોશે)",
+    "ticketCreated": "સમારકામ ટિકિટ બની.",
+    "openTicket": "સમારકામ ખોલો",
+    "rejected": "ફરિયાદ સ્વીકારાઈ નથી.",
+    "photo": "નાગરિકનો ફોટો",
+    "noPhoto": "ફોટો નથી",
+    "tracking": "ફરિયાદ નં. {{code}}",
+    "none": "અહીં કોઈ ફરિયાદ નથી."
+  },
+  "types": {
+    "title": "મિલકતના પ્રકાર",
+    "new": "નવો પ્રકાર",
+    "name": "નામ",
+    "namePlaceholder": "દા.ત. હેન્ડ પંપ",
+    "prefix": "કોડની શરૂઆત (2-4 મોટા અક્ષર)",
+    "interval": "દર કેટલા દિવસે સર્વિસ",
+    "life": "અંદાજિત આયુષ્ય (વર્ષ)",
+    "icon": "આઇકન",
+    "fields": "એકત્ર કરવાની માહિતી",
+    "addField": "માહિતી ઉમેરો",
+    "fieldLabel": "પ્રશ્ન",
+    "fieldKey": "કી",
+    "fieldType": "જવાબનો પ્રકાર",
+    "fieldTypes": {
+      "text": "લખાણ",
+      "number": "સંખ્યા",
+      "date": "તારીખ",
+      "select": "યાદીમાંથી પસંદ કરો"
+    },
+    "requiredField": "ભરવું જરૂરી",
+    "options": "વિકલ્પો (અલ્પવિરામથી અલગ)",
+    "remove": "દૂર કરો",
+    "moveUp": "ઉપર ખસેડો",
+    "moveDown": "નીચે ખસેડો",
+    "preview": "ફોર્મનું પૂર્વાવલોકન",
+    "saved": "પ્રકાર સેવ થયો.",
+    "assetCount": "{{count}} મિલકતો",
+    "noFields": "હજી કોઈ વધારાની માહિતી નથી."
+  },
+  "wizard": {
+    "title": "મિલકત ઉમેરો",
+    "editTitle": "મિલકતમાં ફેરફાર",
+    "steps": {
+      "type": "પ્રકાર",
+      "details": "વિગતો",
+      "location": "જગ્યા",
+      "confirm": "તપાસો"
+    },
+    "chooseType": "તમે શું ઉમેરો છો?",
+    "name": "નામ",
+    "namePlaceholder": "દા.ત. સેક્ટર 21 બસ સ્ટેન્ડ પાસે સ્ટ્રીટલાઇટ",
+    "condition": "હાલત (1 ખરાબ – 5 ઉત્તમ)",
+    "useMyLocation": "મારું હાલનું લોકેશન લો",
+    "tapMap": "મિલકત મૂકવા નકશા પર ટેપ કરો",
+    "lat": "અક્ષાંશ",
+    "lng": "રેખાંશ",
+    "locationText": "તે ક્યાં છે? (લોકોને સમજાય તેવા શબ્દો)",
+    "locationPlaceholder": "દા.ત. સેક્ટર 21, બસ સ્ટેન્ડ પાસે",
+    "ward": "વોર્ડ",
+    "create": "મિલકત ઉમેરો",
+    "created": "મિલકત {{code}} ઉમેરાઈ.",
+    "needLocation": "નકશા પર જગ્યા પસંદ કરો અથવા તમારું લોકેશન લો."
+  },
+  "import": {
+    "title": "CSV માંથી ઇમ્પોર્ટ",
+    "chooseType": "1. મિલકતનો પ્રકાર પસંદ કરો",
+    "template": "2. ટેમ્પલેટ ડાઉનલોડ કરો અને Excel માં ભરો",
+    "downloadTemplate": "ટેમ્પલેટ ડાઉનલોડ કરો",
+    "upload": "3. ભરેલી ફાઇલ અપલોડ કરો",
+    "chooseFile": "CSV ફાઇલ પસંદ કરો",
+    "start": "ઇમ્પોર્ટ કરો",
+    "working": "ઇમ્પોર્ટ થાય છે… રાહ જુઓ",
+    "result": "{{ok}} ઉમેરાઈ, {{failed}} માં સમસ્યા",
+    "rowErrors": "સમસ્યાવાળી હરોળો",
+    "row": "હરોળ",
+    "problem": "સમસ્યા",
+    "help": "Excel માં CSV UTF-8 તરીકે સેવ કરો. જરૂરી કૉલમ: name, lat, lng, locationText. વૈકલ્પિક: ward, status, condition."
+  },
+  "map": {
+    "title": "નકશો",
+    "capped": "પહેલી {{limit}} દેખાય છે. બધી જોવા ઝૂમ કરો.",
+    "legend": "સંકેત",
+    "loading": "મિલકતો લોડ થાય છે…"
+  },
+  "public": {
+    "homeTitle": "જાહેર મિલકતની સમસ્યા જણાવો",
+    "homeHelp": "સ્ટ્રીટલાઇટ, પાણીના પંપ, ટ્રાન્સફોર્મર અને ઘણું બધું.",
+    "scan": "QR કોડ સ્કેન કરો",
+    "scanHelp": "ફોનનો કેમેરા ખોલો અને થાંભલા કે પંપ પર લગાવેલા કોડ તરફ રાખો.",
+    "nearby": "મારી નજીકની મિલકતો",
+    "track": "મારી ફરિયાદ જુઓ",
+    "enterCode": "અથવા પ્લેટ પર લખેલો નંબર લખો",
+    "codePlaceholder": "દા.ત. SL-000142",
+    "go": "ખોલો",
+    "staffLogin": "સ્ટાફ લૉગ ઇન",
+    "type": "પ્રકાર",
+    "location": "જગ્યા",
+    "lastRepaired": "છેલ્લું સમારકામ",
+    "never": "હજી નહીં",
+    "assetNumber": "મિલકત નંબર",
+    "reportProblem": "સમસ્યા જણાવો",
+    "notInServiceHelp": "આ મિલકત હમણાં સેવામાં નથી, તેથી ફરિયાદ કરી શકાશે નહીં.",
+    "notFoundTitle": "મિલકત મળી નથી",
+    "notFoundHelp": "પ્લેટ પર લખેલો નંબર તપાસો અને ફરી પ્રયત્ન કરો.",
+    "home": "હોમ"
+  },
+  "report": {
+    "title": "શું સમસ્યા છે?",
+    "photo": "ફોટો ઉમેરો",
+    "photoOptional": "ફોટો (વૈકલ્પિક)",
+    "changePhoto": "ફોટો બદલો",
+    "removePhoto": "ફોટો દૂર કરો",
+    "phone": "મોબાઇલ નંબર (વૈકલ્પિક)",
+    "phoneHelp": "ફક્ત ટીમને તમારી સાથે વાત કરવી હોય ત્યારે.",
+    "note": "બીજું કંઈ? (વૈકલ્પિક)",
+    "send": "મોકલો",
+    "sending": "મોકલાય છે…",
+    "chooseProblem": "ઉપર એક ચિત્ર પર ટેપ કરો."
+  },
+  "done": {
+    "title": "આભાર! તમારી ફરિયાદ નોંધાઈ ગઈ છે.",
+    "number": "તમારો ફરિયાદ નંબર",
+    "writeDown": "આ નંબર લખી લો. પ્રગતિ જોવા માટે તેની જરૂર પડશે.",
+    "track": "પ્રગતિ જુઓ",
+    "home": "હોમ પર જાઓ"
+  },
+  "track": {
+    "title": "મારી ફરિયાદ જુઓ",
+    "enter": "તમારો 6 અંકનો ફરિયાદ નંબર લખો",
+    "find": "જુઓ",
+    "for": "{{code}} માટે",
+    "rejectedReason": "કારણ: {{reason}}",
+    "updated": "છેલ્લો ફેરફાર: {{when}}"
+  },
+  "nearby": {
+    "title": "મારી નજીકની મિલકતો",
+    "ask": "તમારી નજીકની મિલકતો શોધો",
+    "askHelp": "અમે તમારું લોકેશન ફક્ત નજીકની મિલકતો શોધવા વાપરીએ છીએ. તે સેવ થતું નથી.",
+    "finding": "તમારું લોકેશન શોધીએ છીએ…",
+    "none": "1 કિમીમાં કોઈ મિલકત નથી.",
+    "away": "{{meters}} મી. દૂર",
+    "awayKm": "{{km}} કિમી દૂર"
+  },
+  "time": {
+    "justNow": "હમણાં",
+    "minutes": "{{count}} મિનિટ પહેલાં",
+    "hours": "{{count}} કલાક પહેલાં",
+    "days": "{{count}} દિવસ પહેલાં"
+  }
+}

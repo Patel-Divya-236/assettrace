@@ -207,3 +207,9 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** Anyone on the internet can call these routes, so every field is chosen on purpose and the only write goes into a queue staff review. Random codes cannot be walked in order; the rate limit makes guessing 900,000 codes impractical, and a guessed code reveals only a status.
 **Alternatives considered:** Returning the full asset and hiding fields in the UI (leaks cost and vendor to anyone with devtools).
 **Trade-off / what we'd change at scale:** In-memory rate limits are per API instance. At scale: a shared Redis store, OTP-verified reporting, duplicate-report detection per asset.
+
+## D-37 · Frontend foundation: inline SVG icons, English fallback, one error translator
+**Decision:** Icons are ~40 inline SVG paths in one `Icon` component (no icon library, no emoji). i18next falls back to English for any missing Hindi/Gujarati string. The first language is the saved choice, then the phone's language, then English. `errorMessage(err)` translates every API error by `code`, falling back to the backend's plain English message. Hindi and Gujarati files carry a top-level `_TODO` flag because JSON has no comments; every string in them needs native review.
+**Why:** SVG looks identical on a ₹6,000 Android and an iPhone, while emoji differ and may be missing. A fallback means a missed translation shows readable English instead of a key like `asset.logService`. One translator means no page invents its own error text.
+**Alternatives considered:** An icon package (new dependency, larger bundle); `i18next-browser-languagedetector` (not in the stack; 10 lines do the same).
+**Trade-off / what we'd change at scale:** Translation keys are checked only at runtime. At scale: a typed key list and a CI check that all three files have the same keys.

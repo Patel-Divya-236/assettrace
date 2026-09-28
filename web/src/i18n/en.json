@@ -1,0 +1,418 @@
+{
+  "app": {
+    "name": "AssetTrace",
+    "tagline": "Public assets, tracked from planning to disposal"
+  },
+  "lang": {
+    "en": "English",
+    "hi": "हिंदी",
+    "gu": "ગુજરાતી",
+    "choose": "Choose your language",
+    "label": "Language"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "assets": "Assets",
+    "map": "Map",
+    "tickets": "Repairs",
+    "reports": "Public reports",
+    "assetTypes": "Asset types",
+    "import": "Import",
+    "logout": "Log out",
+    "main": "Main menu",
+    "publicSite": "Public site"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "search": "Search",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "moreFilters": "More filters",
+    "fewerFilters": "Fewer filters",
+    "open": "Open",
+    "download": "Download",
+    "print": "Print",
+    "all": "All",
+    "required": "Required",
+    "optional": "optional",
+    "pageOf": "Page {{page}} of {{pages}}",
+    "previous": "Previous",
+    "nextPage": "Next page",
+    "nothingHere": "Nothing here yet",
+    "somethingWrong": "Something went wrong",
+    "notRecorded": "Not recorded",
+    "done": "Done",
+    "edit": "Edit",
+    "view": "View",
+    "skip": "Skip to main content"
+  },
+  "roles": {
+    "ADMIN": "Admin",
+    "FIELD_OFFICER": "Field officer",
+    "VIEWER": "Viewer"
+  },
+  "status": {
+    "PLANNED": {
+      "label": "Planned",
+      "desc": "Approved, not bought yet"
+    },
+    "ACQUIRED": {
+      "label": "Acquired",
+      "desc": "Bought, not installed yet"
+    },
+    "COMMISSIONED": {
+      "label": "Commissioned",
+      "desc": "Installed and tested"
+    },
+    "IN_OPERATION": {
+      "label": "In operation",
+      "desc": "Working and serving people"
+    },
+    "UNDER_MAINTENANCE": {
+      "label": "Under repair",
+      "desc": "Being repaired or serviced"
+    },
+    "DECOMMISSIONED": {
+      "label": "Decommissioned",
+      "desc": "Taken out of service"
+    },
+    "DISPOSED": {
+      "label": "Disposed",
+      "desc": "Sold, scrapped or removed. Final stage"
+    }
+  },
+  "publicStatus": {
+    "WORKING": "Working",
+    "BEING_REPAIRED": "Being repaired",
+    "NOT_IN_SERVICE": "Not in service"
+  },
+  "reportStatus": {
+    "RECEIVED": "Received",
+    "ASSIGNED": "Worker assigned",
+    "FIXED": "Fixed",
+    "REJECTED": "Not accepted"
+  },
+  "category": {
+    "NOT_WORKING": "Not working",
+    "BROKEN": "Broken",
+    "LEAKING": "Leaking",
+    "OTHER": "Other problem"
+  },
+  "moves": {
+    "ACQUIRED": "Mark as bought",
+    "COMMISSIONED": "Mark as installed",
+    "IN_OPERATION": "Mark as working",
+    "UNDER_MAINTENANCE": "Mark as under repair",
+    "DECOMMISSIONED": "Take out of service",
+    "DISPOSED": "Mark as disposed",
+    "PLANNED": "Mark as planned"
+  },
+  "confirmMove": {
+    "title": "Mark {{code}} as {{status}}?",
+    "final": "This cannot be undone.",
+    "repairTicket": "A repair ticket will be created."
+  },
+  "stage": {
+    "acquiredDate": "Date bought",
+    "cost": "Cost (₹)",
+    "vendor": "Supplier",
+    "commissionedDate": "Date installed",
+    "warrantyEnd": "Warranty ends",
+    "disposalMethod": "How was it disposed?",
+    "disposalValue": "Amount received (₹)",
+    "note": "Note"
+  },
+  "errors": {
+    "NETWORK_ERROR": "Could not reach the server. Check your internet and try again.",
+    "INTERNAL_ERROR": "Something went wrong on the server. Please try again.",
+    "UNAUTHENTICATED": "Please log in to continue.",
+    "SESSION_EXPIRED": "Your session has ended. Please log in again.",
+    "INVALID_CREDENTIALS": "Email or password is incorrect.",
+    "FORBIDDEN": "You don't have permission to do this.",
+    "VALIDATION_ERROR": "Some fields are missing or wrong. Please check them.",
+    "INVALID_ATTRIBUTES": "Some details are missing or wrong. Please check them.",
+    "NOT_FOUND": "We couldn't find that.",
+    "ALREADY_EXISTS": "This already exists. Use a different name or code.",
+    "INVALID_TRANSITION": "This change isn't allowed at this stage.",
+    "FORBIDDEN_TRANSITION": "Your role can't make this change. Ask an admin.",
+    "OPEN_TICKETS": "Close the open repair tickets first.",
+    "STAGE_DATA_REQUIRED": "Please fill in the required details.",
+    "CONFLICT": "Someone else changed this just now. Refresh and try again.",
+    "TICKET_CLOSED": "This repair ticket is already closed.",
+    "ASSET_NOT_IN_SERVICE": "This asset is not in service.",
+    "ASSET_NOT_FOUND": "We couldn't find this asset. Check the number printed on the plate.",
+    "REPORT_NOT_FOUND": "No complaint found with this number. Check the 6 digits.",
+    "REPORT_ALREADY_HANDLED": "This report was already handled.",
+    "RATE_LIMITED": "Too many tries. Please wait a few minutes.",
+    "INVALID_PHOTO": "The photo must be a picture (JPEG, PNG or WebP).",
+    "FILE_TOO_LARGE": "The file is too large.",
+    "INVALID_CSV": "The file could not be read. Download the template and try again.",
+    "FIELDS_IN_USE": "Assets already use these fields, so they can't be removed or changed.",
+    "USE_TRANSITION_ENDPOINT": "Use the stage buttons to change the status.",
+    "LOCATION_DENIED": "Location is turned off. Allow location for this site and try again."
+  },
+  "login": {
+    "title": "Staff login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "demo": "Demo: admin@demo.in, officer@demo.in or viewer@demo.in with password demo1234"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "total": "Total assets",
+    "working": "Working",
+    "underRepair": "Under repair",
+    "overdue": "Service overdue",
+    "stages": "Assets by stage",
+    "byType": "Assets by type",
+    "overdueList": "Service overdue",
+    "newReports": "New public reports",
+    "noOverdue": "No service is overdue.",
+    "noReports": "No new reports.",
+    "openTickets": "Open repairs",
+    "dueSince": "Due {{date}}",
+    "seeAll": "See all"
+  },
+  "assets": {
+    "title": "Assets",
+    "add": "Add asset",
+    "searchLabel": "Search by number, name or place",
+    "searchPlaceholder": "e.g. SL-000142 or Sector 21",
+    "type": "Type",
+    "status": "Stage",
+    "ward": "Ward",
+    "overdueOnly": "Service overdue only",
+    "code": "Number",
+    "name": "Name",
+    "location": "Location",
+    "nextService": "Next service",
+    "noResults": "No assets match. Try a different search or clear the filters.",
+    "count": "{{count}} assets",
+    "clear": "Clear filters"
+  },
+  "asset": {
+    "lifecycle": "Life stage",
+    "actions": "What can you do now?",
+    "noActions": "No changes are available for your role at this stage.",
+    "details": "Details",
+    "customFields": "Asset details",
+    "dates": "Dates and money",
+    "history": "History",
+    "qr": "QR code",
+    "qrHelp": "Print and fix this on the asset. People scan it to see status and report problems.",
+    "openTickets": "Open repairs",
+    "noOpenTickets": "No open repairs.",
+    "logService": "Log a service",
+    "logServiceHelp": "Record routine service that was done today. The stage does not change.",
+    "whatWasDone": "What was done?",
+    "lastService": "Last service",
+    "nextService": "Next service",
+    "condition": "Condition",
+    "conditionValue": "{{value}} of 5",
+    "created": "Created",
+    "by": "by {{name}}",
+    "system": "system",
+    "moved": "Moved to",
+    "createdEvent": "Added as",
+    "coordinates": "Map position",
+    "parent": "Part of",
+    "saved": "Saved",
+    "backToList": "Back to assets"
+  },
+  "tickets": {
+    "title": "Repairs",
+    "kind": {
+      "PREVENTIVE": "Routine service",
+      "CORRECTIVE": "Repair"
+    },
+    "priority": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High"
+    },
+    "priorityLabel": "Priority",
+    "state": {
+      "OPEN": "Open",
+      "IN_PROGRESS": "In progress",
+      "CLOSED": "Closed"
+    },
+    "stateLabel": "Status",
+    "kindLabel": "Kind",
+    "assignToMe": "Assign to me",
+    "markInProgress": "Start work",
+    "close": "Mark repair done",
+    "resolution": "What was done?",
+    "cost": "Cost (₹)",
+    "backInOperation": "{{code}} is working again.",
+    "closed": "Repair closed.",
+    "assignedTo": "Assigned to {{name}}",
+    "unassigned": "Not assigned",
+    "opened": "Opened {{when}}",
+    "none": "No repairs here."
+  },
+  "reports": {
+    "title": "Public reports",
+    "tab": {
+      "RECEIVED": "New",
+      "ASSIGNED": "Assigned",
+      "FIXED": "Fixed",
+      "REJECTED": "Not accepted"
+    },
+    "confirm": "Confirm and create repair",
+    "reject": "Not accept",
+    "reason": "Reason (the citizen will see this)",
+    "ticketCreated": "Repair ticket created.",
+    "openTicket": "Open repair",
+    "rejected": "Report not accepted.",
+    "photo": "Photo from citizen",
+    "noPhoto": "No photo",
+    "tracking": "Complaint no. {{code}}",
+    "none": "No reports here."
+  },
+  "types": {
+    "title": "Asset types",
+    "new": "New asset type",
+    "name": "Name",
+    "namePlaceholder": "e.g. Hand pump",
+    "prefix": "Code prefix (2-4 capital letters)",
+    "interval": "Service every (days)",
+    "life": "Expected life (years)",
+    "icon": "Icon",
+    "fields": "Details to collect",
+    "addField": "Add a detail",
+    "fieldLabel": "Question",
+    "fieldKey": "Key",
+    "fieldType": "Answer type",
+    "fieldTypes": {
+      "text": "Text",
+      "number": "Number",
+      "date": "Date",
+      "select": "Choose from list"
+    },
+    "requiredField": "Must be filled",
+    "options": "Choices (comma separated)",
+    "remove": "Remove",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "preview": "Preview of the form",
+    "saved": "Asset type saved.",
+    "assetCount": "{{count}} assets",
+    "noFields": "No extra details yet."
+  },
+  "wizard": {
+    "title": "Add asset",
+    "editTitle": "Edit asset",
+    "steps": {
+      "type": "Type",
+      "details": "Details",
+      "location": "Location",
+      "confirm": "Check"
+    },
+    "chooseType": "What are you adding?",
+    "name": "Name",
+    "namePlaceholder": "e.g. Streetlight near Sector 21 bus stand",
+    "condition": "Condition (1 poor – 5 excellent)",
+    "useMyLocation": "Use my current location",
+    "tapMap": "Tap the map to place the asset",
+    "lat": "Latitude",
+    "lng": "Longitude",
+    "locationText": "Where is it? (words people understand)",
+    "locationPlaceholder": "e.g. Sector 21, near bus stand",
+    "ward": "Ward",
+    "create": "Add asset",
+    "created": "Asset {{code}} added.",
+    "needLocation": "Place the asset on the map or use your location."
+  },
+  "import": {
+    "title": "Import from CSV",
+    "chooseType": "1. Choose the asset type",
+    "template": "2. Download the template and fill it in Excel",
+    "downloadTemplate": "Download template",
+    "upload": "3. Upload the filled file",
+    "chooseFile": "Choose CSV file",
+    "start": "Import",
+    "working": "Importing… please wait",
+    "result": "{{ok}} added, {{failed}} with problems",
+    "rowErrors": "Rows with problems",
+    "row": "Row",
+    "problem": "Problem",
+    "help": "Save as CSV UTF-8 in Excel. Required columns: name, lat, lng, locationText. Optional: ward, status, condition."
+  },
+  "map": {
+    "title": "Map",
+    "capped": "Showing the first {{limit}}. Zoom in to see all assets.",
+    "legend": "Legend",
+    "loading": "Loading assets…"
+  },
+  "public": {
+    "homeTitle": "Report a problem with a public asset",
+    "homeHelp": "Streetlights, water pumps, transformers and more.",
+    "scan": "Scan QR code",
+    "scanHelp": "Open your phone camera and point it at the code on the pole or pump.",
+    "nearby": "Assets near me",
+    "track": "Track my complaint",
+    "enterCode": "Or type the number on the plate",
+    "codePlaceholder": "e.g. SL-000142",
+    "go": "Open",
+    "staffLogin": "Staff login",
+    "type": "Type",
+    "location": "Location",
+    "lastRepaired": "Last repaired",
+    "never": "Not yet",
+    "assetNumber": "Asset number",
+    "reportProblem": "Report a problem",
+    "notInServiceHelp": "This asset is not in service right now, so problems can't be reported.",
+    "notFoundTitle": "Asset not found",
+    "notFoundHelp": "Check the number printed on the plate and try again.",
+    "home": "Home"
+  },
+  "report": {
+    "title": "What is the problem?",
+    "photo": "Add a photo",
+    "photoOptional": "Photo (optional)",
+    "changePhoto": "Change photo",
+    "removePhoto": "Remove photo",
+    "phone": "Mobile number (optional)",
+    "phoneHelp": "Only used if the team needs to call you.",
+    "note": "Anything else? (optional)",
+    "send": "Send",
+    "sending": "Sending…",
+    "chooseProblem": "Tap one picture above."
+  },
+  "done": {
+    "title": "Thank you! Your complaint is registered.",
+    "number": "Your complaint number",
+    "writeDown": "Write this number down. You need it to check progress.",
+    "track": "Check progress",
+    "home": "Go home"
+  },
+  "track": {
+    "title": "Track my complaint",
+    "enter": "Enter your 6-digit complaint number",
+    "find": "Check",
+    "for": "For {{code}}",
+    "rejectedReason": "Reason: {{reason}}",
+    "updated": "Last update: {{when}}"
+  },
+  "nearby": {
+    "title": "Assets near me",
+    "ask": "Find assets near you",
+    "askHelp": "We use your location only to find assets near you. It is not saved.",
+    "finding": "Finding your location…",
+    "none": "No assets within 1 km.",
+    "away": "{{meters}} m away",
+    "awayKm": "{{km}} km away"
+  },
+  "time": {
+    "justNow": "just now",
+    "minutes": "{{count}} min ago",
+    "hours": "{{count}} h ago",
+    "days": "{{count}} days ago"
+  }
+}
