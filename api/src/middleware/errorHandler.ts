@@ -1,4 +1,8 @@
+import { Prisma } from "@prisma/client";
 import type { ErrorRequestHandler, RequestHandler } from "express";
+import { ZodError } from "zod";
+import { AppError } from "../lib/AppError";
+import { zodDetails } from "./validate";
 
 // Every error response has the same shape (CLAUDE.md section 7):
 // { error: { code, message, details? } }
@@ -14,6 +18,45 @@ export const notFoundHandler: RequestHandler = (req, res) => {
 };
 
 export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+  if (err instanceof AppError) {
+    res.status(err.httpStatus).json({
+      error: { code: err.code, message: err.message, details: err.details },
+    });
+    return;
+  }
+
+  if (err instanceof ZodError) {
+    res.status(400).json({
+      error: {
+        code: "VALIDATION_ERROR",
+        message: "Some fields are missing or invalid. Please check and try again.",
+        details: zodDetails(err),
+      },
+    });
+    return;
+  }
+
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    // Unique constraint, e.g. a second asset type with the same name.
+    if (err.code === "P2002") {
+      res.status(409).json({
+        error: {
+          code: "ALREADY_EXISTS",
+          message: "A record with this value already exists. Use a different value.",
+          details: { fields: err.meta?.target },
+        },
+      });
+      return;
+    }
+    // Record to update/delete does not exist.
+    if (err.code === "P2025") {
+      res.status(404).json({
+        error: { code: "NOT_FOUND", message: "The record was not found." },
+      });
+      return;
+    }
+  }
+
   // Errors thrown by express.json() when the body is not valid JSON.
   if (err?.type === "entity.parse.failed") {
     res.status(400).json({

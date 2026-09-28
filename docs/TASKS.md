@@ -38,10 +38,10 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [ ] P3 CORS + env vars working in production
 
 ## Phase 2 · Backend core
-- [ ] P4 Login + `/me`, JWT middleware, `requireRole`
-- [ ] P4 zod `validate` middleware, `AppError`, audit helper
-- [ ] P5 Asset types CRUD with field definition validation
-- [ ] P5 `validateAttributes` + unit tests passing
+- [x] P4 Login + `/me`, JWT middleware, `requireRole`
+- [x] P4 zod `validate` middleware, `AppError`, audit helper
+- [x] P5 Asset types CRUD with field definition validation
+- [x] P5 `validateAttributes` + unit tests passing
 - [ ] P6 Asset code generator (transaction-safe)
 - [ ] P6 Assets create / list (filters, search, pagination) / get / update
 - [ ] P6 Map bbox endpoint
@@ -107,3 +107,5 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:09 | P1 | Scaffold: docker-compose (Postgres 16), api (Express 5 + TS, zod env validation, helmet, cors, trust proxy, /health, 404 + error handler), web (React 19 + Vite 8 + Tailwind 4 + react-router 7 placeholder) | — | TypeScript pinned to 5 and react-router to 7 (newest majors 7 and 8 are unfamiliar); Docker not on PATH in already-open terminals until they are reopened |
 | 13:23 | P2 | Prisma 6 schema: 6 enums + TicketPriority, 8 models, all indexes, GIN on attributes (migration SQL + declared in schema to avoid drift), seed of 3 users via SEED_PASSWORD | — | `prisma migrate dev` hung in the non-interactive shell after applying; used `migrate deploy` + `generate` + `db seed` |
 | 13:25 | P3 (prep) | render.yaml Blueprint (API + free Postgres 16, JWT_SECRET generated, NODE_VERSION 22), web/vercel.json SPA rewrite; Render build + start commands simulated locally, /health ok | — | Waiting on user: Render + Vercel dashboard clicks. P3 boxes stay unticked until the live URLs work |
+| 13:28 | P4 | Login + /me (JWT sub+role), requireAuth, requireRole (+3 vitest), validate middleware with field-level details, AppError, writeAudit(tx), error handler maps AppError / Zod / Prisma P2002 + P2025 | — | Tested all 3 logins, wrong password, invalid body, missing + bad token with curl |
+| 13:31 | P5 | Asset types CRUD (list paginated, get, ADMIN create/patch), field definition validation (snake_case keys, unique, select needs options), field-lock rule when assets exist, validateAttributes + 8 vitest cases, audit rows | — | Tested via curl: create Water Pump, viewer 403, field errors, duplicate name 409, patch adds optional field |

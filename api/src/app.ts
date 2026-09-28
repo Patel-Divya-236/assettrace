@@ -3,6 +3,9 @@ import express from "express";
 import helmet from "helmet";
 import { env } from "./config/env";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
+import { requireAuth } from "./middleware/auth";
+import { assetTypesRouter } from "./modules/assetTypes/assetTypes.routes";
+import { authRouter } from "./modules/auth/auth.routes";
 
 export const app = express();
 
@@ -17,6 +20,11 @@ app.use(express.json({ limit: "1mb" }));
 app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
+
+app.use("/api/auth", authRouter);
+
+// Staff routes: every request needs a valid token; routers add role checks.
+app.use("/api/asset-types", requireAuth, assetTypesRouter);
 
 // Must be last: unknown routes, then errors.
 app.use(notFoundHandler);
