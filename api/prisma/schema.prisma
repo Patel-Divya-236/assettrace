@@ -1,0 +1,225 @@
+// AssetTrace database schema. See docs/ARCHITECTURE.md (ERD) and CLAUDE.md section 6.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  FIELD_OFFICER
+  VIEWER
+}
+
+enum AssetStatus {
+  PLANNED
+  ACQUIRED
+  COMMISSIONED
+  IN_OPERATION
+  UNDER_MAINTENANCE
+  DECOMMISSIONED
+  DISPOSED
+}
+
+enum TicketKind {
+  PREVENTIVE
+  CORRECTIVE
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ReportStatus {
+  RECEIVED
+  ASSIGNED
+  FIXED
+  REJECTED
+}
+
+enum ImportStatus {
+  PENDING
+  RUNNING
+  DONE
+  FAILED
+}
+
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         Role
+  createdAt    DateTime @default(now())
+
+  lifecycleEvents LifecycleEvent[]
+  auditLogs       AuditLog[]
+  createdTickets  MaintenanceTicket[] @relation("TicketCreatedBy")
+  assignedTickets MaintenanceTicket[] @relation("TicketAssignedTo")
+  importJobs      ImportJob[]
+}
+
+model AssetType {
+  id                      String   @id @default(uuid()) @db.Uuid
+  name                    String   @unique
+  codePrefix              String   @unique // 2-4 uppercase letters, e.g. "WP"
+  icon                    String?
+  fields                  Json     @default("[]") // custom field definitions
+  expectedLifeYears       Int?
+  maintenanceIntervalDays Int?
+  nextSeq                 Int      @default(1) // next number for asset codes
+  createdAt               DateTime @default(now())
+
+  assets     Asset[]
+  importJobs ImportJob[]
+}
+
+model Asset {
+  id           String      @id @default(uuid()) @db.Uuid
+  assetCode    String      @unique // e.g. "WP-000123"
+  typeId       String      @db.Uuid
+  name         String
+  status       AssetStatus @default(PLANNED)
+  condition    Int? // 1 (poor) - 5 (excellent)
+  lat          Float
+  lng          Float
+  locationText String
+  ward         String?
+  parentId     String?     @db.Uuid
+  attributes   Json        @default("{}") // validated against AssetType.fields, GIN indexed
+
+  // stage data
+  acquiredDate        DateTime?
+  cost                Decimal?  @db.Decimal(14, 2)
+  vendor              String?
+  commissionedDate    DateTime?
+  warrantyEnd         DateTime?
+  lastMaintenanceDate DateTime?
+  nextMaintenanceDate DateTime?
+  disposalMethod      String?
+  disposalValue       Decimal?  @db.Decimal(14, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type            AssetType           @relation(fields: [typeId], references: [id])
+  parent          Asset?              @relation("AssetHierarchy", fields: [parentId], references: [id])
+  children        Asset[]             @relation("AssetHierarchy")
+  lifecycleEvents LifecycleEvent[]
+  tickets         MaintenanceTicket[]
+  reports         CitizenReport[]
+
+  @@index([typeId])
+  @@index([status])
+  @@index([ward])
+  @@index([nextMaintenanceDate])
+  @@index([parentId])
+  @@index([lat, lng])
+  @@index([updatedAt])
+  // GIN index for JSONB searches like attributes @> {"lamp_type":"LED"}; created in the init migration SQL
+  @@index([attributes(ops: JsonbPathOps)], type: Gin, map: "asset_attributes_gin")
+}
+
+// Insert-only: no update or delete routes.
+model LifecycleEvent {
+  id         String       @id @default(uuid()) @db.Uuid
+  assetId    String       @db.Uuid
+  fromStatus AssetStatus? // null for the first event (creation)
+  toStatus   AssetStatus
+  userId     String?      @db.Uuid
+  note       String?
+  createdAt  DateTime     @default(now())
+
+  asset Asset @relation(fields: [assetId], references: [id])
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@index([assetId, createdAt])
+}
+
+model MaintenanceTicket {
+  id             String         @id @default(uuid()) @db.Uuid
+  assetId        String         @db.Uuid
+  kind           TicketKind
+  status         TicketStatus   @default(OPEN)
+  priority       TicketPriority @default(MEDIUM)
+  description    String?
+  createdById    String?        @db.Uuid
+  assignedToId   String?        @db.Uuid
+  sourceReportId String?        @unique @db.Uuid
+  openedAt       DateTime       @default(now())
+  closedAt       DateTime?
+  cost           Decimal?       @db.Decimal(14, 2)
+  resolutionNote String?
+
+  asset        Asset          @relation(fields: [assetId], references: [id])
+  createdBy    User?          @relation("TicketCreatedBy", fields: [createdById], references: [id])
+  assignedTo   User?          @relation("TicketAssignedTo", fields: [assignedToId], references: [id])
+  sourceReport CitizenReport? @relation(fields: [sourceReportId], references: [id])
+
+  @@index([assetId, status])
+  @@index([status])
+}
+
+model CitizenReport {
+  id           String       @id @default(uuid()) @db.Uuid
+  assetId      String       @db.Uuid
+  category     String // NOT_WORKING | BROKEN | LEAKING | OTHER
+  note         String?
+  photo        Bytes?
+  photoMime    String?
+  phone        String?
+  language     String       @default("en")
+  trackingCode String       @unique
+  status       ReportStatus @default(RECEIVED)
+  rejectReason String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  asset  Asset              @relation(fields: [assetId], references: [id])
+  ticket MaintenanceTicket?
+
+  @@index([status])
+}
+
+// Insert-only: no update or delete routes.
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  entity    String
+  entityId  String
+  action    String
+  userId    String?  @db.Uuid
+  changes   Json     @default("{}")
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([entity, entityId])
+}
+
+model ImportJob {
+  id          String       @id @default(uuid()) @db.Uuid
+  typeId      String       @db.Uuid
+  status      ImportStatus @default(PENDING)
+  total       Int          @default(0)
+  succeeded   Int          @default(0)
+  failed      Int          @default(0)
+  errors      Json         @default("[]")
+  createdById String       @db.Uuid
+  createdAt   DateTime     @default(now())
+  finishedAt  DateTime?
+
+  type      AssetType @relation(fields: [typeId], references: [id])
+  createdBy User      @relation(fields: [createdById], references: [id])
+}

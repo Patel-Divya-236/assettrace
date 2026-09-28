@@ -30,9 +30,9 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 ## Phase 1 · Foundation
 - [x] P1 Monorepo scaffold, Docker Postgres, API `/health`, web placeholder
 - [x] P1 env validation with zod, central error handler
-- [ ] P2 Prisma schema, all models and enums
-- [ ] P2 Indexes + GIN index on `attributes`
-- [ ] P2 Seed users (admin / officer / viewer)
+- [x] P2 Prisma schema, all models and enums
+- [x] P2 Indexes + GIN index on `attributes`
+- [x] P2 Seed users (admin / officer / viewer)
 - [ ] P3 API deployed on Render with Postgres
 - [ ] P3 Web deployed on Vercel with SPA rewrite
 - [ ] P3 CORS + env vars working in production
@@ -105,3 +105,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 |---|---|---|---|---|
 | — | P0 | Reviewed all docs; recorded decisions D-19 to D-24; updated CLAUDE.md (Prisma 6 pin, lifecycle guards, error `details`, public report rule, trust proxy, SEED_PASSWORD) | — | No Docker or local Postgres on the dev machine yet; project is not a git repo yet |
 | 13:09 | P1 | Scaffold: docker-compose (Postgres 16), api (Express 5 + TS, zod env validation, helmet, cors, trust proxy, /health, 404 + error handler), web (React 19 + Vite 8 + Tailwind 4 + react-router 7 placeholder) | — | TypeScript pinned to 5 and react-router to 7 (newest majors 7 and 8 are unfamiliar); Docker not on PATH in already-open terminals until they are reopened |
+| 13:23 | P2 | Prisma 6 schema: 6 enums + TicketPriority, 8 models, all indexes, GIN on attributes (migration SQL + declared in schema to avoid drift), seed of 3 users via SEED_PASSWORD | — | `prisma migrate dev` hung in the non-interactive shell after applying; used `migrate deploy` + `generate` + `db seed` |

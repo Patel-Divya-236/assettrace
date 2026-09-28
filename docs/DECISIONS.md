@@ -148,3 +148,9 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** No extra library. Locally the values come from `api/.env`; on Render there is no file and the values come from the dashboard, so the same code works in both places. Failing fast at startup is better than failing on the first request that needs a missing value.
 **Alternatives considered:** `dotenv` (extra dependency), `node --env-file` (fails when the file is missing, which it is in production).
 **Trade-off / what we'd change at scale:** None significant; secrets would move to a secret manager, still read through `process.env`.
+
+## D-27 · UUID keys, Decimal money, priority as an enum
+**Decision:** All ids are UUIDs; `cost` and `disposalValue` are `Decimal(14,2)`; ticket priority is an enum (LOW, MEDIUM, HIGH).
+**Why:** UUIDs can be generated anywhere (seed, import) without a round trip and do not reveal how many records exist. Floats round money wrongly (0.1 + 0.2), Decimal does not. An enum rejects typos like "hgih" at the database level.
+**Alternatives considered:** Auto-increment integers (smaller, but guessable and leak counts); priority as free text.
+**Trade-off / what we'd change at scale:** UUID indexes are larger than integer indexes. Prisma returns Decimal as a string in JSON, so the frontend formats it.
