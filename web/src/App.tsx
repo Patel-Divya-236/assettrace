@@ -18,6 +18,9 @@ function Todo({ titleKey }: { titleKey: string }) {
 const Dashboard = lazy(() => import("./pages/staff/Dashboard"));
 const AssetList = lazy(() => import("./pages/staff/AssetList"));
 const AssetDetail = lazy(() => import("./pages/staff/AssetDetail"));
+const AssetForm = lazy(() => import("./pages/staff/AssetForm"));
+const AssetTypes = lazy(() => import("./pages/staff/AssetTypes"));
+const Import = lazy(() => import("./pages/staff/Import"));
 const MapPage = lazy(() => Promise.resolve({ default: () => <Todo titleKey="map.title" /> }));
 
 const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
@@ -48,7 +51,9 @@ export default function App() {
       >
         <Route index element={page(<Dashboard />)} />
         <Route path="assets" element={page(<AssetList />)} />
+        <Route path="assets/new" element={<RequireRole roles={["ADMIN"]}>{page(<AssetForm />)}</RequireRole>} />
         <Route path="assets/:id" element={page(<AssetDetail />)} />
+        <Route path="assets/:id/edit" element={<RequireRole roles={["ADMIN"]}>{page(<AssetForm />)}</RequireRole>} />
         <Route
           path="map"
           element={page(<MapPage />)}
@@ -66,7 +71,7 @@ export default function App() {
           path="asset-types"
           element={
             <RequireRole roles={["ADMIN"]}>
-              <Todo titleKey="types.title" />
+              {page(<AssetTypes />)}
             </RequireRole>
           }
         />
@@ -74,7 +79,7 @@ export default function App() {
           path="import"
           element={
             <RequireRole roles={["ADMIN"]}>
-              <Todo titleKey="import.title" />
+              {page(<Import />)}
             </RequireRole>
           }
         />
