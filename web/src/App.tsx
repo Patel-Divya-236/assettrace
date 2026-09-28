@@ -5,6 +5,11 @@ import { PublicLayout, StaffLayout } from "./components/Layout";
 import { Loading, PageHeader } from "./components/ui";
 import { RequireRole } from "./lib/auth";
 import Home from "./pages/public/Home";
+import Nearby from "./pages/public/Nearby";
+import PublicAsset from "./pages/public/PublicAsset";
+import ReportDone from "./pages/public/ReportDone";
+import ReportProblem from "./pages/public/ReportProblem";
+import TrackReport from "./pages/public/TrackReport";
 import Login from "./pages/staff/Login";
 
 // Placeholder until each page is built (P12-P17).
@@ -31,11 +36,11 @@ export default function App() {
       {/* Public: no login */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/a/:assetCode" element={<Todo titleKey="public.assetNumber" />} />
-        <Route path="/a/:assetCode/report" element={<Todo titleKey="report.title" />} />
-        <Route path="/done/:trackingCode" element={<Todo titleKey="done.title" />} />
-        <Route path="/track" element={<Todo titleKey="track.title" />} />
-        <Route path="/nearby" element={<Todo titleKey="nearby.title" />} />
+        <Route path="/a/:assetCode" element={<PublicAsset />} />
+        <Route path="/a/:assetCode/report" element={<ReportProblem />} />
+        <Route path="/done/:trackingCode" element={<ReportDone />} />
+        <Route path="/track" element={<TrackReport />} />
+        <Route path="/nearby" element={<Nearby />} />
       </Route>
 
       <Route path="/login" element={<Login />} />
