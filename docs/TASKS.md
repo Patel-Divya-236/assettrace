@@ -63,8 +63,8 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P11 i18n (gu / hi / en) + LanguageSwitch
 - [x] P11 StatusBadge, BigButton, ConfirmDialog, Layout (desktop + mobile)
 - [x] P12 Dashboard page
-- [ ] P13 Asset list (filters in URL, mobile cards)
-- [ ] P13 Asset detail: lifecycle bar, allowed actions, stage-data dialogs, timeline, QR
+- [x] P13 Asset list (filters in URL, mobile cards)
+- [x] P13 Asset detail: lifecycle bar, allowed actions, stage-data dialogs, timeline, QR
 - [ ] P14 Asset type builder with preview
 - [ ] P14 Add-asset wizard (type → details → location → confirm)
 - [ ] P14 CSV import screen with template download
@@ -116,3 +116,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:45 | P10 | statusMap (3 public states), rate limits (public reads, reports, login), public asset/nearby (bbox + haversine)/report (multipart photo 2 MB, 6-digit code)/track; staff queue list (no bytes), photo, confirm (ticket + ASSIGNED + lifecycle to UNDER_MAINTENANCE in one tx), reject with reason | — | Full loop via curl: report -> RECEIVED -> confirm -> BEING_REPAIRED + 1 ticket -> close -> FIXED + WORKING. 6th report in 10 min -> 429. Backend phase done 13:45 (target was 13:30) |
 | 13:53 | P11 | api client (JWT, JSON/multipart, typed ApiError, blob URLs), AuthContext + RequireRole, i18n en/hi/gu (all app strings, hi/gu flagged for native review), status config + StatusBadge (icon+colour+word), BigButton, ConfirmDialog (native dialog), Field/labels, Pagination, Toast, Staff layout (sidebar/bottom nav), Public layout, Login, routes with placeholders | — | Build 117 KB gzip. Could not click-test in a browser from here: login/language/360px need a manual check |
 | 13:54 | P12 | Dashboard: 4 metric cards (link to filtered lists), stacked stage bar + badge legend with counts, assets-by-type bar chart, top-5 overdue list, new public reports list; useApi hook; staff pages lazy-loaded (recharts in its own 105 KB chunk) | — | Data verified via /api/dashboard/summary; visual check at 360px still manual |
+| 13:57 | P13 | Asset list: debounced search, type + stage filters, ward/overdue behind More, filters in URL, table on desktop, cards on phone, pagination. Detail: 7-stage bar with tap-to-explain, action buttons only from allowedTransitions, confirm dialog with stage-data fields and backend error, attributes, dates/money, open tickets, timeline, QR download/print; Log a service dialog (from P16) built here since it lives on this page | — | Built and type-checked; lifecycle walk verified via API in P7, UI walk still manual |

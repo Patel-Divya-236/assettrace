@@ -16,6 +16,8 @@ function Todo({ titleKey }: { titleKey: string }) {
 // Staff pages are split out of the public bundle, so a citizen scanning a QR code
 // on a slow phone never downloads charts, maps or admin screens (CLAUDE.md 8.10).
 const Dashboard = lazy(() => import("./pages/staff/Dashboard"));
+const AssetList = lazy(() => import("./pages/staff/AssetList"));
+const AssetDetail = lazy(() => import("./pages/staff/AssetDetail"));
 const MapPage = lazy(() => Promise.resolve({ default: () => <Todo titleKey="map.title" /> }));
 
 const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
@@ -45,7 +47,8 @@ export default function App() {
         }
       >
         <Route index element={page(<Dashboard />)} />
-        <Route path="assets" element={<Todo titleKey="assets.title" />} />
+        <Route path="assets" element={page(<AssetList />)} />
+        <Route path="assets/:id" element={page(<AssetDetail />)} />
         <Route
           path="map"
           element={page(<MapPage />)}
