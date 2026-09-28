@@ -4,7 +4,7 @@
 
 Built for the Pravi Research "Build for Billions" hackathon.
 
-🔗 Live app: `<vercel-url>` · API: `<render-url>` · API docs: `<render-url>/api/docs`
+🔗 Live app: `<vercel-url>` · API: `<render-url>` (health: `<render-url>/health`)
 
 ---
 
@@ -40,6 +40,10 @@ Government departments own thousands of assets — streetlights, water pumps, tr
 
 Full details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Design decisions: [docs/DECISIONS.md](docs/DECISIONS.md)
 
+## Scale proof
+
+See [docs/PERFORMANCE.md](docs/PERFORMANCE.md) for the 100k-asset benchmark and [docs/USABILITY.md](docs/USABILITY.md) for the accessibility checklist.
+
 ## Tech stack
 
 | Layer | Technology |
@@ -53,7 +57,7 @@ Full details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · Design decisions: 
 
 ```bash
 git clone <repo-url> && cd assettrace
-docker compose up -d                      # Postgres
+docker compose up -d                      # Postgres 16 (needs Docker Desktop)
 
 cd api
 cp .env.example .env
@@ -84,6 +88,7 @@ npm run dev                               # http://localhost:5173
 | Reports (staff) | `GET /api/reports`, `POST /api/reports/:id/confirm`, `POST /api/reports/:id/reject` |
 | Import | `POST /api/imports`, `GET /api/imports/:id` |
 | Dashboard | `GET /api/dashboard/summary` |
+| Tickets (preventive) | `POST /api/tickets/service` (log a service) |
 | Public | `GET /api/public/assets/:code`, `GET /api/public/assets/nearby`, `POST /api/public/reports`, `GET /api/public/reports/:trackingCode` |
 
 ## Performance
@@ -92,17 +97,20 @@ Measured on 100,000 assets — see [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 
 | Query | Without index | With index |
 |---|---|---|
-| Filter by status + type (page 1) | `__ ms` | `__ ms` |
-| Overdue maintenance | `__ ms` | `__ ms` |
-| Search custom field (JSONB) | `__ ms` | `__ ms` |
+| Filter by stage + type (page 1) | 12.1 ms (Seq Scan) | 0.13 ms (Index Scan) |
+| Overdue maintenance | 13.8 ms (Seq Scan) | 0.09 ms (Index Scan) |
+| Search custom field (JSONB) | 18.9 ms (Seq Scan) | 4.3 ms (GIN Bitmap Scan) |
 
 ## Known limitations
+
+- No interactive API docs (cut for time); endpoints are listed above and every error has the shape `{ error: { code, message, details? } }`.
+- CSV import runs synchronously (streamed, batches of 500); very large files keep one request open.
 
 - Free hosting: the API sleeps after inactivity (first request takes ~1 minute).
 - Photos are stored in the database (object storage in production).
 - Bulk imports run in-process (job queue in production).
 - One shared lifecycle for all asset types (per-type lifecycles are future scope).
-- Gujarati/Hindi translations: `<checked by … / needs review>`.
+- Gujarati/Hindi translations: drafted without a native speaker; **needs review** (see `_TODO` in `web/src/i18n/gu.json`, `hi.json`).
 
 ## Future scope
 
@@ -110,7 +118,7 @@ Load balancer + multiple API instances, Redis caching, read replicas, history ta
 
 ## How we used AI
 
-We used Claude Code as a coding assistant, working step by step from a written plan (`CLAUDE.md`, `docs/PROMPTS.md`). We designed the problem framing, architecture, data model, lifecycle rules and UI principles, reviewed and tested every step, and recorded each step in [docs/TASKS.md](docs/TASKS.md). Design decisions and their trade-offs are in [docs/DECISIONS.md](docs/DECISIONS.md). `<Add honestly: what you changed, what you debugged yourselves, what you would do differently.>`
+We used Claude Code as a coding assistant, working step by step from a written plan (`CLAUDE.md`, `docs/PROMPTS.md`). We designed the problem framing, architecture, data model, lifecycle rules and UI principles, reviewed and tested every step, and recorded each step in [docs/TASKS.md](docs/TASKS.md). Design decisions and their trade-offs are in [docs/DECISIONS.md](docs/DECISIONS.md). Claude Code wrote most of the code, one numbered step at a time (P0–P22), and ran each step (unit tests, curl scripts for every endpoint, headless-Chrome screenshots at 360 px) before committing. Human decisions made at kickoff (P0) and recorded in DECISIONS.md: pinning Prisma 6, the ticket guards on the lifecycle, the `details` field in errors, allowing CSV imports with a status. Scope cuts made under time pressure: interactive API docs and background import polling. What we would do differently: native-speaker translation from the start, and a real device test earlier.
 
 ## Team
 
