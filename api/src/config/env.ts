@@ -25,6 +25,9 @@ const envSchema = z.object({
         .filter(Boolean),
     ),
   PORT: z.coerce.number().int().positive().default(4000),
+  // Per-IP limits for the public API. Raise them for a demo where many people share one Wi-Fi.
+  RATE_LIMIT_PUBLIC_READS_PER_MIN: z.coerce.number().int().positive().default(60),
+  RATE_LIMIT_REPORTS_PER_10_MIN: z.coerce.number().int().positive().default(5),
 });
 
 const parsed = envSchema.safeParse(process.env);

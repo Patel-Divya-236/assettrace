@@ -230,6 +230,8 @@ JWT_EXPIRES_IN=8h
 FRONTEND_URL=http://localhost:5173
 CORS_ORIGINS=http://localhost:5173
 PORT=4000
+RATE_LIMIT_PUBLIC_READS_PER_MIN=60
+RATE_LIMIT_REPORTS_PER_10_MIN=5
 # password for seeded users; use a strong value when seeding production
 SEED_PASSWORD=demo1234
 ```

@@ -55,8 +55,8 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P9 CSV import (streaming, batches, job progress, row errors)
 - [x] P9 Seed: 3 types, N assets in Gandhinagar, events, tickets, reports
 - [x] P9 `docs/sample-import.csv`
-- [ ] P10 Public endpoints (asset, nearby, report, track) + rate limits
-- [ ] P10 Staff reports queue: confirm / reject / photo
+- [x] P10 Public endpoints (asset, nearby, report, track) + rate limits
+- [x] P10 Staff reports queue: confirm / reject / photo
 
 ## Phase 3 · Frontend
 - [ ] P11 API client, auth context, route guards
@@ -113,3 +113,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:36 | P7 | lifecycle.rules.ts (ALLOWED/ROLE/REQUIRED maps, pure functions, 22 vitest cases), transitionAsset in one transaction with optional tx, conditional update, event + audit + auto corrective ticket, POST /:id/transition, GET /:id/timeline, allowedTransitions on detail | — | Walked WP-000001 PLANNED to UNDER_MAINTENANCE via curl; invalid move, missing stage data, officer commission, viewer, open-ticket guards all rejected with plain messages |
 | 13:38 | P8 | Tickets list/create/patch/close; closing last open ticket calls lifecycle engine (tx) to return asset to IN_OPERATION, sets last/next maintenance dates, marks source report FIXED; POST /tickets/service (preventive create+close); GET /dashboard/summary with count/groupBy only | — | Verified: first close keeps asset under maintenance, last close returns it, timeline shows why; log service keeps status |
 | 13:41 | P9 | QR endpoint (level H, JSON data URL -> FRONTEND_URL/a/CODE); CSV import (multer memory 10 MB, csv-parse stream, batches of 500 with one nextSeq reservation, row errors max 100, optional status column); seed: 3 types, SEED_ASSET_COUNT across 6 Gandhinagar wards, matching events, tickets, 20 reports; docs/sample-import.csv | — | 5000 assets seeded in 3.3 s; sample CSV imported 20/20; empty cells now mean not provided. CUT: import progress polling (synchronous), P19 API docs |
+| 13:45 | P10 | statusMap (3 public states), rate limits (public reads, reports, login), public asset/nearby (bbox + haversine)/report (multipart photo 2 MB, 6-digit code)/track; staff queue list (no bytes), photo, confirm (ticket + ASSIGNED + lifecycle to UNDER_MAINTENANCE in one tx), reject with reason | — | Full loop via curl: report -> RECEIVED -> confirm -> BEING_REPAIRED + 1 ticket -> close -> FIXED + WORKING. 6th report in 10 min -> 429. Backend phase done 13:48 (target was 13:30) |
