@@ -26,6 +26,8 @@ const AssetDetail = lazy(() => import("./pages/staff/AssetDetail"));
 const AssetForm = lazy(() => import("./pages/staff/AssetForm"));
 const AssetTypes = lazy(() => import("./pages/staff/AssetTypes"));
 const Import = lazy(() => import("./pages/staff/Import"));
+const Reports = lazy(() => import("./pages/staff/Reports"));
+const Tickets = lazy(() => import("./pages/staff/Tickets"));
 const MapPage = lazy(() => Promise.resolve({ default: () => <Todo titleKey="map.title" /> }));
 
 const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
@@ -63,12 +65,12 @@ export default function App() {
           path="map"
           element={page(<MapPage />)}
         />
-        <Route path="tickets" element={<Todo titleKey="tickets.title" />} />
+        <Route path="tickets" element={page(<Tickets />)} />
         <Route
           path="reports"
           element={
             <RequireRole roles={["ADMIN", "FIELD_OFFICER"]}>
-              <Todo titleKey="reports.title" />
+              {page(<Reports />)}
             </RequireRole>
           }
         />
