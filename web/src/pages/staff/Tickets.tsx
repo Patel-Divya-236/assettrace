@@ -10,6 +10,7 @@ import { BigButton, ConfirmDialog, EmptyState, ErrorBox, Field, inputClass, Load
 import { useAuth } from "../../lib/auth";
 import { errorMessage, timeAgo } from "../../lib/format";
 import { useApi } from "../../lib/useApi";
+import TicketWork from "./TicketWork";
 
 const PRIORITY_CLASS = { HIGH: "bg-red-100 text-red-900", MEDIUM: "bg-amber-100 text-amber-900", LOW: "bg-gray-100 text-gray-800" };
 
@@ -33,6 +34,7 @@ export default function Tickets() {
     page: Number(params.get("page") ?? 1),
   };
   const list = useApi(() => listTickets(filters), [params.toString()]);
+  const contractors = useApi(() => api<{ items: { id: string; name: string; firm: string | null; phone: string }[] }>("/api/contractors"), []);
   const [closing, setClosing] = useState<Ticket | null>(null);
   const [note, setNote] = useState("");
   const [cost, setCost] = useState("");
@@ -144,6 +146,7 @@ export default function Tickets() {
                 </p>
               )}
               <p className="text-sm text-gray-700">{tk.assignedTo ? t("tickets.assignedTo", { name: tk.assignedTo.name }) : t("tickets.unassigned")}</p>
+              <TicketWork ticket={tk} contractors={contractors.data?.items ?? []} onChange={list.reload} />
               {canAct && tk.status !== "CLOSED" && (
                 <div className="flex flex-wrap items-end gap-2">
                   {isAdmin ? (

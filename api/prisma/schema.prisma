@@ -165,8 +165,23 @@ model MaintenanceTicket {
   sourceReportId String?        @unique @db.Uuid
   openedAt       DateTime       @default(now())
   closedAt       DateTime?
-  cost           Decimal?       @db.Decimal(14, 2)
+  cost           Decimal?       @db.Decimal(14, 2) // actual cost, entered when closing
   resolutionNote String?
+
+  // Site inspection by the field officer (C2)
+  inspectionNote String?
+  inspectedAt    DateTime?
+  inspectedById  String?   @db.Uuid
+  estimatedCost  Decimal?  @db.Decimal(14, 2) // committed against the ward budget until closed
+  // Officer approval when the estimate is above the limit or over the ward budget (C3)
+  needsApproval  Boolean   @default(false)
+  approvalReason String?
+  approvedById   String?   @db.Uuid
+  approvedAt     DateTime?
+  // Contractor doing the work (a record, not a login)
+  contractorId   String?   @db.Uuid
+  contractor     Contractor? @relation(fields: [contractorId], references: [id])
+  updates        TicketUpdate[]
 
   asset        Asset          @relation(fields: [assetId], references: [id])
   createdBy    User?          @relation("TicketCreatedBy", fields: [createdById], references: [id])
@@ -230,4 +245,47 @@ model ImportJob {
 
   type      AssetType @relation(fields: [typeId], references: [id])
   createdBy User      @relation(fields: [createdById], references: [id])
+}
+
+// A contractor firm or worker. Has no login: the field officer records their progress.
+model Contractor {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  firm      String?
+  phone     String
+  workType  String? // e.g. Electrical, Plumbing, Civil
+  createdAt DateTime @default(now())
+
+  tickets MaintenanceTicket[]
+}
+
+// Progress reported by the contractor, logged by the field officer. Insert-only.
+model TicketUpdate {
+  id          String   @id @default(uuid()) @db.Uuid
+  ticketId    String   @db.Uuid
+  note        String
+  progress    Int? // 0-100 %
+  createdById String   @db.Uuid
+  createdAt   DateTime @default(now())
+
+  ticket MaintenanceTicket @relation(fields: [ticketId], references: [id])
+
+  @@index([ticketId, createdAt])
+}
+
+// Money allocated to a ward for one financial year (April-March; year = start year).
+model Budget {
+  id        String   @id @default(uuid()) @db.Uuid
+  ward      String
+  year      Int
+  amount    Decimal  @db.Decimal(14, 2)
+  updatedAt DateTime @updatedAt
+
+  @@unique([ward, year])
+}
+
+// Small admin-editable settings, e.g. the approval limit.
+model Setting {
+  key   String @id
+  value String
 }

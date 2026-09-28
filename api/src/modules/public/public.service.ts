@@ -151,11 +151,20 @@ export async function trackReport(trackingCode: string) {
       createdAt: true,
       updatedAt: true,
       asset: { select: { assetCode: true, type: { select: { name: true, icon: true } } } },
+      ticket: { select: { inspectedAt: true, contractorId: true, updates: { orderBy: { createdAt: "desc" }, take: 1, select: { progress: true } } } },
     },
   });
   if (!report) {
     throw new AppError(404, "REPORT_NOT_FOUND", "No complaint found with this number. Check the 6 digits and try again.");
   }
-  const { asset, ...rest } = report;
-  return { ...rest, assetCode: asset.assetCode, assetType: asset.type };
+  const { asset, ticket, ...rest } = report;
+  // Only yes/no steps and % done: no contractor name, cost or staff details in public.
+  return {
+    ...rest,
+    assetCode: asset.assetCode,
+    assetType: asset.type,
+    inspected: !!ticket?.inspectedAt,
+    contractorWorking: !!ticket?.contractorId,
+    progress: ticket?.updates[0]?.progress ?? null,
+  };
 }

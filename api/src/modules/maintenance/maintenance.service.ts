@@ -20,6 +20,8 @@ const ticketInclude = {
   asset: { select: { id: true, assetCode: true, name: true, status: true, locationText: true } },
   assignedTo: { select: { id: true, name: true } },
   createdBy: { select: { id: true, name: true } },
+  contractor: { select: { id: true, name: true, firm: true, phone: true } },
+  updates: { orderBy: { createdAt: "desc" }, take: 5 },
 } satisfies Prisma.MaintenanceTicketInclude;
 
 export async function listTickets(q: ListTicketsQuery) {
@@ -123,6 +125,9 @@ async function runClose(tx: Db, id: string, data: CloseTicketBody, user: AuthUse
   const ticket = await tx.maintenanceTicket.findUnique({ where: { id } });
   if (!ticket) throw notFound("Ticket");
   if (ticket.status === "CLOSED") throw new AppError(409, "TICKET_CLOSED", "This ticket is already closed.");
+  if (ticket.needsApproval && !ticket.approvedAt) {
+    throw new AppError(409, "APPROVAL_REQUIRED", "An officer must approve this cost before the repair can be closed.");
+  }
 
   const closed = await tx.maintenanceTicket.update({
     where: { id },

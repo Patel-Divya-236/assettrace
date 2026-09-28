@@ -27,7 +27,7 @@ export const setUnauthorizedHandler = (fn: () => void) => {
 };
 
 type Options = {
-  method?: "GET" | "POST" | "PATCH";
+  method?: "GET" | "POST" | "PATCH" | "PUT";
   body?: unknown; // sent as JSON
   form?: FormData; // sent as multipart (browser sets the boundary)
   query?: Record<string, string | number | boolean | undefined | null>;

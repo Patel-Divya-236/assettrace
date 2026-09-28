@@ -114,6 +114,14 @@ export type Ticket = {
   cost: string | null;
   resolutionNote: string | null;
   sourceReportId: string | null;
+  inspectionNote: string | null;
+  inspectedAt: string | null;
+  estimatedCost: string | null;
+  needsApproval: boolean;
+  approvalReason: string | null;
+  approvedAt: string | null;
+  contractor: { id: string; name: string; firm: string | null; phone: string } | null;
+  updates: { id: string; note: string; progress: number | null; createdAt: string }[];
   asset: { id: string; assetCode: string; name: string; status: AssetStatus; locationText: string };
   assignedTo: { id: string; name: string } | null;
   createdBy: { id: string; name: string } | null;
@@ -165,6 +173,9 @@ export type TrackedReport = {
   updatedAt: string;
   assetCode: string;
   assetType: { name: string; icon: string | null };
+  inspected: boolean;
+  contractorWorking: boolean;
+  progress: number | null;
 };
 
 export type DashboardSummary = {

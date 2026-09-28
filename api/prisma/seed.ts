@@ -173,6 +173,7 @@ async function seedUsers() {
 
 async function resetAssetData() {
   // Children first. History tables are insert-only in the app; only the seed wipes them.
+  await prisma.ticketUpdate.deleteMany();
   await prisma.maintenanceTicket.deleteMany();
   await prisma.citizenReport.deleteMany();
   await prisma.lifecycleEvent.deleteMany();
@@ -205,6 +206,26 @@ async function main() {
     typeRows.push(await prisma.assetType.upsert({ where: { codePrefix: t.codePrefix }, update: data, create: { ...data, codePrefix: t.codePrefix } }));
   }
   console.log(`Asset types: ${types.map((t) => t.name).join(", ")}`);
+
+  // Contractors (records, no login), ward budgets for this financial year, approval limit.
+  if ((await prisma.contractor.count()) === 0) {
+    await prisma.contractor.createMany({
+      data: [
+        { name: "Mahesh Parmar", firm: "Shree Electricals", phone: "9824012345", workType: "Electrical" },
+        { name: "Imran Shaikh", firm: "Gujarat Pump Services", phone: "9898023456", workType: "Plumbing" },
+        { name: "Jignesh Rathod", firm: "Rathod Civil Works", phone: "9727034567", workType: "Civil" },
+      ],
+    });
+  }
+  const fy = new Date().getMonth() >= 3 ? new Date().getFullYear() : new Date().getFullYear() - 1;
+  // Budget sized to each ward: ~₹350 per asset per year, rounded to the lakh.
+  for (const w of wards) {
+    const count = await prisma.asset.count({ where: { ward: w.name } });
+    const amount = Math.max(1, Math.round((count * 350) / 100_000)) * 100_000;
+    await prisma.budget.upsert({ where: { ward_year: { ward: w.name, year: fy } }, update: { amount }, create: { ward: w.name, year: fy, amount } });
+  }
+  await prisma.setting.upsert({ where: { key: "approvalLimit" }, update: {}, create: { key: "approvalLimit", value: "50000" } });
+  console.log(`Contractors, ward budgets for FY ${fy}-${String(fy + 1).slice(2)} (sized per ward), approval limit ₹50,000`);
 
   await prisma.citizenReport.updateMany({ where: { reporterId: null }, data: { reporterId: citizenId, phone: "9876543210" } });
 

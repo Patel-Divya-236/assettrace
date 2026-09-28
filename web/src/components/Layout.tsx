@@ -13,6 +13,7 @@ const NAV: NavItem[] = [
   { to: "/app/map", key: "nav.map", icon: "map" },
   { to: "/app/tickets", key: "nav.tickets", icon: "wrench" },
   { to: "/app/reports", key: "nav.reports", icon: "message", roles: ["ADMIN", "OFFICER", "FIELD_OFFICER"] },
+  { to: "/app/budget", key: "nav.budget", icon: "clipboard", roles: ["ADMIN", "OFFICER", "FIELD_OFFICER"] },
   { to: "/app/asset-types", key: "nav.assetTypes", icon: "layers", roles: ["ADMIN"] },
   { to: "/app/import", key: "nav.import", icon: "upload", roles: ["ADMIN"] },
 ];

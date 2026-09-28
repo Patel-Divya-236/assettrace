@@ -7,7 +7,8 @@ import Icon from "../../components/Icon";
 import { BigButton, ErrorBox, Field, inputClass } from "../../components/ui";
 import { errorMessage, formatDateTime } from "../../lib/format";
 
-const STEPS = ["RECEIVED", "ASSIGNED", "FIXED"] as const;
+// Received -> Inspected -> Contractor working -> Fixed (only yes/no facts are public).
+const STEP_KEYS = ["reportStatus.RECEIVED", "track.inspected", "track.contractorWorking", "reportStatus.FIXED"] as const;
 
 export default function TrackReport() {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ export default function TrackReport() {
     e.preventDefault();
     void find(code);
   };
-  const reached = report ? (report.status === "REJECTED" ? 0 : STEPS.indexOf(report.status as (typeof STEPS)[number])) : -1;
+  const reached = !report ? -1 : report.status === "FIXED" ? 3 : report.contractorWorking ? 2 : report.inspected ? 1 : 0;
 
   return (
     <div className="flex flex-col gap-5">
@@ -82,12 +83,13 @@ export default function TrackReport() {
             </div>
           ) : (
             <ol className="flex flex-col gap-3">
-              {STEPS.map((s, i) => {
+              {STEP_KEYS.map((s, i) => {
                 const done = i <= reached;
                 return (
                   <li key={s} className={`flex min-h-14 items-center gap-3 rounded-xl px-4 text-xl font-bold ${done ? "bg-green-50 text-green-900 ring-2 ring-green-600" : "bg-gray-50 text-gray-500 ring-1 ring-gray-200"}`} aria-current={i === reached ? "step" : undefined}>
                     <Icon name={done ? "checkCircle" : "clock"} className="h-8 w-8" />
-                    {t(`reportStatus.${s}`)}
+                    {t(s)}
+                    {i === 2 && i === reached && report.progress !== null && ` · ${report.progress}%`}
                   </li>
                 );
               })}

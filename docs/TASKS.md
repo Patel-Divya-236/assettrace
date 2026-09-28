@@ -78,8 +78,8 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 
 ## Change requests after evaluator feedback (17:00)
 - [x] C1 Citizen sign-up/login (mobile + password); complaints only after login; reporter recorded; My complaints; OFFICER role added
-- [ ] C2 Field officer inspection on site, contractor records (no login), progress updates logged by the field officer
-- [ ] C3 Budget per ward: allocated / committed / spent; officer approval above the admin-set limit
+- [x] C2 Field officer inspection on site, contractor records (no login), progress updates logged by the field officer
+- [x] C3 Budget per ward: allocated / committed / spent; officer approval above the admin-set limit
 - [ ] P19 API docs — **CUT at 13:12** (cut order #1); README lists endpoints, curl examples instead
 - [x] P20 100k-row EXPLAIN results in `docs/PERFORMANCE.md`
 - [x] P21 Final deploy, 20k seed on production DB, QR works on live site
@@ -131,3 +131,5 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 15:40 | P22 | README filled from the real code: performance numbers, extra endpoint, known limitations (cuts, translations), honest How-we-used-AI | — | Live URLs, screenshots and architecture PNG still placeholders until deploy |
 | 16:57 | Change | Admin sees 'Assign to' list of field officers (new GET /api/users, admin only); officers keep 'Assign to me'; API rejects assigning to non-officers (400 INVALID_ASSIGNEE) and officers assigning others (403); seed adds 2 more field officers | — | Asked by user: admin should not self-assign. Verified all 4 rules with curl |
 | 17:44 | C1 | CITIZEN + OFFICER roles (migration), signup/login by mobile, /api/citizen/reports with reporterId, My complaints page, staff routes refuse citizen tokens, staff queue shows reporter, seed adds supervisor + demo citizen (9876543210) | — | Evaluator feedback. C2 (contractors/inspection) and C3 (budget) still to do |
+| 17:53 | Docs | Simple architecture diagram: docs/architecture.svg (source, hand-written SVG) rendered to docs/architecture.png with headless Chrome; fills the README placeholder | — | Detailed Mermaid diagrams in ARCHITECTURE.md unchanged |
+| 17:55 | C2+C3 | Migration (Contractor, TicketUpdate, Budget, Setting, ticket inspection/approval fields); inspect/approve/contractor/updates endpoints with enforced order; budget summary in SQL + approval limit; Budget & contractors page; ticket workflow panel; tracking shows Inspected / Contractor working % | — | Verified via curl: contractor before inspection blocked, approval needed at 80k, field officer cannot approve, supervisor can; screenshots OK |

@@ -23,7 +23,8 @@
     "publicSite": "Public site",
     "myComplaints": "My complaints",
     "login": "Log in",
-    "staffArea": "Staff area"
+    "staffArea": "Staff area",
+    "budget": "Budget & contractors"
   },
   "common": {
     "save": "Save",
@@ -161,7 +162,11 @@
     "USE_TRANSITION_ENDPOINT": "Use the stage buttons to change the status.",
     "LOCATION_DENIED": "Location is turned off. Allow location for this site and try again.",
     "INVALID_ASSIGNEE": "Repairs can only be assigned to a field officer.",
-    "PHONE_TAKEN": "This mobile number is already registered. Please log in."
+    "PHONE_TAKEN": "This mobile number is already registered. Please log in.",
+    "INSPECTION_REQUIRED": "Inspect the site and record an estimate first.",
+    "APPROVAL_REQUIRED": "An officer must approve this cost first.",
+    "CONTRACTOR_REQUIRED": "Assign a contractor first.",
+    "NO_APPROVAL_NEEDED": "This ticket does not need approval."
   },
   "login": {
     "title": "Log in",
@@ -413,7 +418,9 @@
     "find": "Check",
     "for": "For {{code}}",
     "rejectedReason": "Reason: {{reason}}",
-    "updated": "Last update: {{when}}"
+    "updated": "Last update: {{when}}",
+    "inspected": "Inspected on site",
+    "contractorWorking": "Contractor working"
   },
   "nearby": {
     "title": "Assets near me",
@@ -444,5 +451,40 @@
     "title": "My complaints",
     "none": "You have not filed any complaints yet.",
     "filed": "Filed {{when}}"
+  },
+  "work": {
+    "inspect": "Record site inspection",
+    "inspection": "Inspection",
+    "findings": "What did you find on site?",
+    "estimate": "Estimated cost (₹)",
+    "needsApproval": "Needs officer approval",
+    "approve": "Approve cost",
+    "approved": "Cost approved",
+    "assignContractor": "Assign contractor",
+    "contractor": "Contractor",
+    "chooseContractor": "Choose a contractor",
+    "addUpdate": "Add progress update",
+    "update": "What did the contractor report?",
+    "progress": "Work done (%)",
+    "saved": "Saved.",
+    "estimateShort": "Estimate {{amount}}"
+  },
+  "budget": {
+    "title": "Budget & contractors",
+    "year": "Financial year {{year}}",
+    "ward": "Ward",
+    "allocated": "Allocated",
+    "committed": "Committed",
+    "spent": "Spent",
+    "remaining": "Remaining",
+    "limit": "Approval limit",
+    "limitHelp": "Estimates above this amount need an officer's approval.",
+    "contractors": "Contractors",
+    "addContractor": "Add contractor",
+    "name": "Name",
+    "firm": "Firm",
+    "phone": "Mobile",
+    "workType": "Work type",
+    "over": "Over budget"
   }
 }

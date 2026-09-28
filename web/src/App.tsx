@@ -30,6 +30,7 @@ const AssetTypes = lazy(() => import("./pages/staff/AssetTypes"));
 const Import = lazy(() => import("./pages/staff/Import"));
 const Reports = lazy(() => import("./pages/staff/Reports"));
 const Tickets = lazy(() => import("./pages/staff/Tickets"));
+const Budget = lazy(() => import("./pages/staff/Budget"));
 const MapPage = lazy(() => import("./pages/staff/MapPage"));
 
 const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
@@ -77,6 +78,7 @@ export default function App() {
           element={page(<MapPage />)}
         />
         <Route path="tickets" element={page(<Tickets />)} />
+        <Route path="budget" element={<RequireRole roles={["ADMIN", "OFFICER", "FIELD_OFFICER"]}>{page(<Budget />)}</RequireRole>} />
         <Route
           path="reports"
           element={

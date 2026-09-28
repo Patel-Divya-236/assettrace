@@ -145,7 +145,7 @@ Side effects:
 |---|---|
 | ADMIN | everything: asset types, assets, all transitions, import, reports, tickets; assigns repairs to field officers |
 | FIELD_OFFICER | view assets; IN_OPERATION ⇄ UNDER_MAINTENANCE; manage tickets (assign only to themselves); confirm/reject public reports |
-| OFFICER | supervises field officers: assigns repairs, acts on reports and tickets (cost approval and budget: planned, see TASKS.md) |
+| OFFICER | supervises field officers: assigns repairs, approves costs above the limit or over budget, adds contractors, acts on reports and tickets |
 | VIEWER | read-only staff access (dashboards, lists, details) |
 | CITIZEN | signs up with mobile + password; files complaints (recorded against the account); sees "My complaints"; never reaches staff routes |
 | Public (no login) | view safe asset info; track a report by its number |
