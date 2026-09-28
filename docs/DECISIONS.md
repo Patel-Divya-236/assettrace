@@ -190,3 +190,14 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** The dashboard count, the "overdue only" list filter and the top-5 list must agree, and a decommissioned pump is not "overdue for service". A ticket on a planned or disposed asset could never be resolved by the lifecycle.
 **Alternatives considered:** Overdue = any date in the past (inflates the number with dead assets).
 **Trade-off / what we'd change at scale:** The overdue query uses the `nextMaintenanceDate` index plus a status filter; a composite index `(status, nextMaintenanceDate)` if this becomes hot.
+
+## D-34 · CSV import runs synchronously (cut from D-14)
+**Decision:** `POST /api/imports` stream-parses the CSV and inserts valid rows in batches of 500 before responding with the finished job (total, succeeded, failed, first 100 row errors). There is no background processing or progress polling.
+**Why:** Cut at 13:12 to protect the backend deadline (TASKS.md cut order, item 3). Streaming + batching still keeps memory flat and yields the event loop between batches; a 10 MB CSV (~50k rows) finishes in seconds. It also removes the risk of a job stuck in RUNNING after a restart.
+**Alternatives considered:** Respond first and process in the background with polling (D-14, original plan).
+**Trade-off / what we'd change at scale:** Very large files hold one HTTP request open. At scale: the original background design with a job queue (BullMQ + Redis) and retries.
+
+## D-35 · Seed data is realistic and consistent with the rules
+**Decision:** The seed generates assets whose lifecycle events follow the real path to their status, gives every UNDER_MAINTENANCE asset an open ticket, links ASSIGNED/FIXED reports to tickets, and continues `nextSeq` after the generated codes. It only generates assets when none exist, unless `SEED_RESET=true`.
+**Why:** Demo data that breaks the rules (an asset under repair with no ticket) would make the lifecycle engine reject actions during the demo. Re-running the seed must never wipe production data by accident.
+**Trade-off / what we'd change at scale:** The seed writes directly with `createMany` and bypasses the lifecycle engine for speed (5,000 assets in ~3 s). That is acceptable only because it produces the same rows the engine would.

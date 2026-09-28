@@ -1,0 +1,21 @@
+name,lat,lng,locationText,ward,status,lamp_type,wattage,pole_height_m
+Streetlight Sector 21-1,23.21610,72.63630,"Sector 21, near school",Ward 2,IN_OPERATION,LED,40,8
+Streetlight Sector 22-2,23.21720,72.63760,"Sector 22, near garden",Ward 3,IN_OPERATION,LED,60,9
+Streetlight Sector 23-3,23.21830,72.63890,"Sector 23, near market",Ward 4,IN_OPERATION,Sodium,90,6
+Streetlight Sector 24-4,23.21940,72.64020,"Sector 24, near temple",Ward 5,IN_OPERATION,LED,24,8
+Streetlight Sector 25-5,23.22050,72.64150,"Sector 25, near circle",Ward 6,IN_OPERATION,LED,40,9
+Streetlight Sector 26-6,23.22160,72.64280,"Sector 26, near PHC",Ward 1,IN_OPERATION,Sodium,60,6
+Streetlight Sector 27-7,23.22270,72.64410,"Sector 27, near community hall",Ward 2,PLANNED,LED,90,8
+Streetlight Sector 28-8,23.22380,72.64540,"Sector 28, near water tank",Ward 3,IN_OPERATION,LED,24,9
+Streetlight Sector 29-9,23.22490,72.64670,"Sector 29, near library",Ward 4,IN_OPERATION,Sodium,40,6
+Streetlight Sector 20-10,23.22600,72.64800,"Sector 20, near bus stand",Ward 5,IN_OPERATION,LED,60,8
+Streetlight Sector 21-11,23.22710,72.64930,"Sector 21, near school",Ward 6,IN_OPERATION,LED,90,9
+Streetlight Sector 22-12,23.22820,72.65060,"Sector 22, near garden",Ward 1,IN_OPERATION,Sodium,24,6
+Streetlight Sector 23-13,23.22930,72.65190,"Sector 23, near market",Ward 2,IN_OPERATION,LED,40,8
+Streetlight Sector 24-14,23.23040,72.65320,"Sector 24, near temple",Ward 3,PLANNED,LED,60,9
+Streetlight Sector 25-15,23.23150,72.65450,"Sector 25, near circle",Ward 4,IN_OPERATION,Sodium,90,6
+Streetlight Sector 26-16,23.23260,72.65580,"Sector 26, near PHC",Ward 5,IN_OPERATION,LED,24,8
+Streetlight Sector 27-17,23.23370,72.65710,"Sector 27, near community hall",Ward 6,IN_OPERATION,LED,40,9
+Streetlight Sector 28-18,23.23480,72.65840,"Sector 28, near water tank",Ward 1,IN_OPERATION,Sodium,60,6
+Streetlight Sector 29-19,23.23590,72.65970,"Sector 29, near library",Ward 2,IN_OPERATION,LED,90,8
+Streetlight Sector 20-20,23.23700,72.66100,"Sector 20, near bus stand",Ward 3,IN_OPERATION,LED,24,9

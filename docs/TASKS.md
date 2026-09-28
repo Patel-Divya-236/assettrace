@@ -16,9 +16,9 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 | Buffer + demo rehearsal | — | 1:00 | +8:00 | |
 
 **Cut order if running behind** (cut from the top first):
-1. P19 API docs → mention as "future"; show requests in curl/Postman instead
+1. ~~P19 API docs~~ → **CUT at 13:12**: mention as "future"; show requests in curl/Postman instead
 2. P17 Map → the Nearby list covers location
-3. Import progress polling → import synchronously for small files
+3. ~~Import progress polling~~ → **CUT at 13:12**: import runs synchronously (still streamed + batched); `GET /api/imports/:id` kept for the result
 4. Field builder preview in P14
 5. Never cut: lifecycle engine, public report loop, dashboard, deployment
 
@@ -51,10 +51,10 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P8 Tickets CRUD + close → asset back to In operation
 - [x] P8 Preventive "log a service"
 - [x] P8 Dashboard summary (aggregate queries)
-- [ ] P9 QR endpoint (level H, points to FRONTEND_URL)
-- [ ] P9 CSV import (streaming, batches, job progress, row errors)
-- [ ] P9 Seed: 3 types, N assets in Gandhinagar, events, tickets, reports
-- [ ] P9 `docs/sample-import.csv`
+- [x] P9 QR endpoint (level H, points to FRONTEND_URL)
+- [x] P9 CSV import (streaming, batches, job progress, row errors)
+- [x] P9 Seed: 3 types, N assets in Gandhinagar, events, tickets, reports
+- [x] P9 `docs/sample-import.csv`
 - [ ] P10 Public endpoints (asset, nearby, report, track) + rate limits
 - [ ] P10 Staff reports queue: confirm / reject / photo
 
@@ -112,3 +112,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:33 | P6 | Transaction-safe asset codes (atomic nextSeq increment), POST/GET/PATCH assets with attribute validation + initial LifecycleEvent + audit before/after, list filters (type, status, ward, q, overdue) paginated, bbox map endpoint capped at 2000 | — | Parallel creates got SL-000001/000002; PATCH with status returns USE_TRANSITION_ENDPOINT; field lock verified |
 | 13:36 | P7 | lifecycle.rules.ts (ALLOWED/ROLE/REQUIRED maps, pure functions, 22 vitest cases), transitionAsset in one transaction with optional tx, conditional update, event + audit + auto corrective ticket, POST /:id/transition, GET /:id/timeline, allowedTransitions on detail | — | Walked WP-000001 PLANNED to UNDER_MAINTENANCE via curl; invalid move, missing stage data, officer commission, viewer, open-ticket guards all rejected with plain messages |
 | 13:38 | P8 | Tickets list/create/patch/close; closing last open ticket calls lifecycle engine (tx) to return asset to IN_OPERATION, sets last/next maintenance dates, marks source report FIXED; POST /tickets/service (preventive create+close); GET /dashboard/summary with count/groupBy only | — | Verified: first close keeps asset under maintenance, last close returns it, timeline shows why; log service keeps status |
+| 13:41 | P9 | QR endpoint (level H, JSON data URL -> FRONTEND_URL/a/CODE); CSV import (multer memory 10 MB, csv-parse stream, batches of 500 with one nextSeq reservation, row errors max 100, optional status column); seed: 3 types, SEED_ASSET_COUNT across 6 Gandhinagar wards, matching events, tickets, 20 reports; docs/sample-import.csv | — | 5000 assets seeded in 3.3 s; sample CSV imported 20/20; empty cells now mean not provided. CUT: import progress polling (synchronous), P19 API docs |

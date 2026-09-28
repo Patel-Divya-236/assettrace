@@ -8,8 +8,10 @@ import { assetsRouter } from "./modules/assets/assets.routes";
 import { assetTypesRouter } from "./modules/assetTypes/assetTypes.routes";
 import { authRouter } from "./modules/auth/auth.routes";
 import { dashboardRouter } from "./modules/dashboard/dashboard.routes";
+import { importsRouter } from "./modules/imports/imports.routes";
 import { lifecycleRouter } from "./modules/lifecycle/lifecycle.routes";
 import { maintenanceRouter } from "./modules/maintenance/maintenance.routes";
+import { qrRouter } from "./modules/qr/qr.routes";
 
 export const app = express();
 
@@ -31,7 +33,9 @@ app.use("/api/auth", authRouter);
 app.use("/api/asset-types", requireAuth, assetTypesRouter);
 app.use("/api/assets", requireAuth, assetsRouter);
 app.use("/api/assets", requireAuth, lifecycleRouter);
+app.use("/api/assets", requireAuth, qrRouter);
 app.use("/api/tickets", requireAuth, maintenanceRouter);
+app.use("/api/imports", requireAuth, importsRouter);
 app.use("/api/dashboard", requireAuth, dashboardRouter);
 
 // Must be last: unknown routes, then errors.

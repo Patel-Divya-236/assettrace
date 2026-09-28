@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import type { ErrorRequestHandler, RequestHandler } from "express";
+import multer from "multer";
 import { ZodError } from "zod";
 import { AppError } from "../lib/AppError";
 import { zodDetails } from "./validate";
@@ -55,6 +56,18 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
       });
       return;
     }
+  }
+
+  // Upload problems (file too big, too many files).
+  if (err instanceof multer.MulterError) {
+    const tooBig = err.code === "LIMIT_FILE_SIZE";
+    res.status(tooBig ? 413 : 400).json({
+      error: {
+        code: tooBig ? "FILE_TOO_LARGE" : "INVALID_UPLOAD",
+        message: tooBig ? "The file is too large. Use a smaller file." : "The upload was not accepted. Send one file.",
+      },
+    });
+    return;
   }
 
   // Errors thrown by express.json() when the body is not valid JSON.
