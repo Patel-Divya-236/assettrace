@@ -28,7 +28,7 @@ const AssetTypes = lazy(() => import("./pages/staff/AssetTypes"));
 const Import = lazy(() => import("./pages/staff/Import"));
 const Reports = lazy(() => import("./pages/staff/Reports"));
 const Tickets = lazy(() => import("./pages/staff/Tickets"));
-const MapPage = lazy(() => Promise.resolve({ default: () => <Todo titleKey="map.title" /> }));
+const MapPage = lazy(() => import("./pages/staff/MapPage"));
 
 const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
 

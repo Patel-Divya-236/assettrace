@@ -70,7 +70,7 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P14 CSV import screen with template download
 - [x] P15 Public home, asset page, report flow, done screen, track, nearby
 - [x] P16 Reports queue + tickets pages + "Log a service"
-- [ ] P17 Map with bbox loading and CircleMarkers
+- [x] P17 Map with bbox loading and CircleMarkers
 
 ## Phase 4 · Polish, prove, ship
 - [ ] P18 Usability + accessibility pass done, checklist recorded
@@ -120,3 +120,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 14:01 | P14 | Type builder (label -> auto snake_case key, type, required, options, reorder/remove, icon picker) with live preview via shared DynamicFields; 4-step wizard (type cards -> generated details form -> Leaflet tap/GPS location, lazy-loaded -> review), edit reuses steps 2-3; import screen with template generated from type fields (UTF-8 BOM for Excel) and row-error table | — | Screenshots at 360px in Gujarati: no horizontal overflow |
 | 14:03 | P15 | Home (first-visit language choice, scan help, big links, type-the-plate-number), public asset page (one large 3-state status block, report button only when in service, friendly not-found), report flow (4 picture buttons, camera photo compressed in browser to ~100 KB, optional phone/note), done screen (huge tracking digits), track (numeric keypad, 3-step progress or rejected + reason), nearby (geolocation, distance, denied message); all in the main bundle, no staff code | — | Headless 360px screenshots in Gujarati OK, no overflow. Real-phone test pending user (needs HTTPS deploy) |
 | 14:05 | P16 | Reports queue: tabs New/Assigned/Fixed/Rejected, category icon, time ago, photo fetched as blob only when tapped, confirm (priority) + link to created ticket, reject (reason required). Repairs: status/kind filters in URL, priority chip, assign to me, start work, close with note + cost, toast when asset returns to operation | — | 360px Hindi screenshots OK; loop logic verified via API in P10 |
+| 15:33 | P17 | Map page (lazy chunk): OSM tiles centred on Gandhinagar, bbox fetch 300 ms after move, canvas CircleMarkers coloured by stage, popup with code/type/badge/Open, type + stage filters, cap notice, legend with icon + word | — | 5,021 seeded assets: cap notice shown at city zoom. Frontend phase done 14:07 (target 16:30) |
