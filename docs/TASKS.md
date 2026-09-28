@@ -78,7 +78,7 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [ ] P19 API docs — **CUT at 13:12** (cut order #1); README lists endpoints, curl examples instead
 - [x] P20 100k-row EXPLAIN results in `docs/PERFORMANCE.md`
 - [ ] P21 Final deploy, 20k seed on production DB, QR works on live site
-- [ ] P22 README complete, architecture doc updated
+- [x] P22 README complete, architecture doc updated
 - [ ] Architecture diagram exported as PNG (mermaid.live) and added to README
 - [ ] Demo rehearsed twice on a real phone
 
@@ -123,3 +123,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 15:33 | P17 | Map page (lazy chunk): OSM tiles centred on Gandhinagar, bbox fetch 300 ms after move, canvas CircleMarkers coloured by stage, popup with code/type/badge/Open, type + stage filters, cap notice, legend with icon + word | — | 5,021 seeded assets: cap notice shown at city zoom. Frontend phase done 15:33 (target 16:30; code finished 14:07, then paused waiting for user) |
 | 15:37 | P18 | Scanned for hardcoded strings, colour-only status, small targets, labels, 360px overflow, technical words, bundle size; raised 11 links from 40 to 48 px; checklist in docs/USABILITY.md | — | Native Gujarati/Hindi review still open (user) |
 | 15:40 | P20 | scripts/explain.ts: EXPLAIN ANALYZE on 3 queries, drop indexes, re-measure, recreate; results + how-to-read in docs/PERFORMANCE.md | — | 100k seed in 66 s. Stage+type 12.1 -> 0.13 ms, overdue 13.8 -> 0.09 ms, JSONB 18.9 -> 4.3 ms. P19 skipped (cut) |
+| 15:40 | P22 | README filled from the real code: performance numbers, extra endpoint, known limitations (cuts, translations), honest How-we-used-AI | — | Live URLs, screenshots and architecture PNG still placeholders until deploy |
