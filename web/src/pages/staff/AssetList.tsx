@@ -161,7 +161,7 @@ export default function AssetList() {
                 {result.data.items.map((a) => (
                   <tr key={a.id} className="hover:bg-blue-50">
                     <td className="p-3 font-mono font-semibold">
-                      <Link to={`/app/assets/${a.id}`} className="inline-flex min-h-10 items-center gap-2 text-blue-900 underline">
+                      <Link to={`/app/assets/${a.id}`} className="inline-flex min-h-12 items-center gap-2 text-blue-900 underline">
                         <Icon name={typeIcon(a.type.icon)} /> {a.assetCode}
                       </Link>
                     </td>

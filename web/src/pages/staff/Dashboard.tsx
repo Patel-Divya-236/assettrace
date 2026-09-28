@@ -69,7 +69,7 @@ export default function Dashboard() {
           <ul className="mt-3 flex flex-col gap-2">
             {ASSET_STATUSES.map((s) => (
               <li key={s} className="flex items-center justify-between gap-2">
-                <Link to={`/app/assets?status=${s}`} className="flex min-h-10 items-center gap-2">
+                <Link to={`/app/assets?status=${s}`} className="flex min-h-12 items-center gap-2">
                   <span className="h-3 w-3 rounded-sm" style={{ background: STATUS_HEX[s] }} aria-hidden="true" />
                   <StatusBadge status={s} />
                 </Link>
@@ -99,7 +99,7 @@ export default function Dashboard() {
           <ul className="mt-2 flex flex-wrap gap-3 text-base">
             {d.byType.map((row) => (
               <li key={row.typeId}>
-                <Link to={`/app/assets?typeId=${row.typeId}`} className="inline-flex min-h-10 items-center gap-1.5 font-semibold text-blue-900 underline">
+                <Link to={`/app/assets?typeId=${row.typeId}`} className="inline-flex min-h-12 items-center gap-1.5 font-semibold text-blue-900 underline">
                   <Icon name={typeIcon(row.icon)} /> {row.name}: {formatNumber(row.count)}
                 </Link>
               </li>
@@ -110,7 +110,7 @@ export default function Dashboard() {
         <Card>
           <div className="mb-3 flex items-center justify-between">
             <h2 className="text-lg font-bold">{t("dashboard.overdueList")}</h2>
-            <Link to="/app/assets?overdue=true" className="min-h-10 content-center font-semibold text-blue-900 underline">
+            <Link to="/app/assets?overdue=true" className="min-h-12 content-center font-semibold text-blue-900 underline">
               {t("dashboard.seeAll")}
             </Link>
           </div>
@@ -142,7 +142,7 @@ export default function Dashboard() {
               <h2 className="text-lg font-bold">
                 {t("dashboard.newReports")} ({formatNumber(d.newPublicReports)})
               </h2>
-              <Link to="/app/reports" className="min-h-10 content-center font-semibold text-blue-900 underline">
+              <Link to="/app/reports" className="min-h-12 content-center font-semibold text-blue-900 underline">
                 {t("dashboard.seeAll")}
               </Link>
             </div>
@@ -171,7 +171,7 @@ export default function Dashboard() {
       </div>
 
       <p className="mt-4 text-base text-gray-700">
-        <Link to="/app/tickets?status=ACTIVE" className="inline-flex min-h-10 items-center gap-2 font-semibold text-blue-900 underline">
+        <Link to="/app/tickets?status=ACTIVE" className="inline-flex min-h-12 items-center gap-2 font-semibold text-blue-900 underline">
           <Icon name="wrench" /> {t("dashboard.openTickets")}: {formatNumber(d.openTickets)}
         </Link>
       </p>

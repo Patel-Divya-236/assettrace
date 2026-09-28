@@ -73,7 +73,7 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P17 Map with bbox loading and CircleMarkers
 
 ## Phase 4 · Polish, prove, ship
-- [ ] P18 Usability + accessibility pass done, checklist recorded
+- [x] P18 Usability + accessibility pass done, checklist recorded
 - [ ] P18 Gujarati / Hindi strings checked by a native reader
 - [ ] P19 API docs at `/api/docs` (or openapi.yaml fallback)
 - [ ] P20 100k-row EXPLAIN results in `docs/PERFORMANCE.md`
@@ -121,3 +121,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 14:03 | P15 | Home (first-visit language choice, scan help, big links, type-the-plate-number), public asset page (one large 3-state status block, report button only when in service, friendly not-found), report flow (4 picture buttons, camera photo compressed in browser to ~100 KB, optional phone/note), done screen (huge tracking digits), track (numeric keypad, 3-step progress or rejected + reason), nearby (geolocation, distance, denied message); all in the main bundle, no staff code | — | Headless 360px screenshots in Gujarati OK, no overflow. Real-phone test pending user (needs HTTPS deploy) |
 | 14:05 | P16 | Reports queue: tabs New/Assigned/Fixed/Rejected, category icon, time ago, photo fetched as blob only when tapped, confirm (priority) + link to created ticket, reject (reason required). Repairs: status/kind filters in URL, priority chip, assign to me, start work, close with note + cost, toast when asset returns to operation | — | 360px Hindi screenshots OK; loop logic verified via API in P10 |
 | 15:33 | P17 | Map page (lazy chunk): OSM tiles centred on Gandhinagar, bbox fetch 300 ms after move, canvas CircleMarkers coloured by stage, popup with code/type/badge/Open, type + stage filters, cap notice, legend with icon + word | — | 5,021 seeded assets: cap notice shown at city zoom. Frontend phase done 15:33 (target 16:30; code finished 14:07, then paused waiting for user) |
+| 15:37 | P18 | Scanned for hardcoded strings, colour-only status, small targets, labels, 360px overflow, technical words, bundle size; raised 11 links from 40 to 48 px; checklist in docs/USABILITY.md | — | Native Gujarati/Hindi review still open (user) |

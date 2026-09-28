@@ -122,7 +122,7 @@ export default function Tickets() {
                 <span className="text-sm text-gray-600">· {t(`tickets.state.${tk.status}`)}</span>
                 <span className="ml-auto text-sm text-gray-600">{t("tickets.opened", { when: timeAgo(tk.openedAt) })}</span>
               </div>
-              <Link to={`/app/assets/${tk.asset.id}`} className="flex min-h-10 flex-wrap items-center gap-2 font-semibold text-blue-900 underline">
+              <Link to={`/app/assets/${tk.asset.id}`} className="flex min-h-12 flex-wrap items-center gap-2 font-semibold text-blue-900 underline">
                 {tk.asset.assetCode} · {tk.asset.name}
               </Link>
               <div className="flex flex-wrap items-center gap-2">

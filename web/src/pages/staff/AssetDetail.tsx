@@ -200,7 +200,7 @@ export default function AssetDetail() {
     <>
       <PageHeader
         back={
-          <Link to="/app/assets" className="mb-1 inline-flex min-h-10 items-center gap-1 font-semibold text-blue-900">
+          <Link to="/app/assets" className="mb-1 inline-flex min-h-12 items-center gap-1 font-semibold text-blue-900">
             <Icon name="arrowLeft" /> {t("asset.backToList")}
           </Link>
         }
@@ -310,7 +310,7 @@ export default function AssetDetail() {
                       {t(`tickets.kind.${tk.kind}`)} · {t(`tickets.priority.${tk.priority}`)}
                     </p>
                     <p className="text-sm text-gray-700">{tk.description}</p>
-                    <Link to={`/app/tickets?assetId=${a.id}`} className="inline-flex min-h-10 items-center font-semibold text-blue-900 underline">
+                    <Link to={`/app/tickets?assetId=${a.id}`} className="inline-flex min-h-12 items-center font-semibold text-blue-900 underline">
                       {t("common.open")}
                     </Link>
                   </li>

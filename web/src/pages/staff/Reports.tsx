@@ -89,7 +89,7 @@ export default function Reports() {
       {lastTicket && (
         <p className="mb-4 flex flex-wrap items-center gap-2 rounded-xl bg-green-50 p-3 text-green-900 ring-1 ring-green-300" role="status">
           <Icon name="checkCircle" /> {t("reports.ticketCreated")}
-          <Link to={`/app/tickets?assetId=${lastTicket.assetId}&status=ACTIVE`} className="min-h-10 content-center font-bold underline">
+          <Link to={`/app/tickets?assetId=${lastTicket.assetId}&status=ACTIVE`} className="min-h-12 content-center font-bold underline">
             {t("reports.openTicket")}
           </Link>
         </p>
@@ -111,7 +111,7 @@ export default function Reports() {
                 <StatusBadge kind="report" status={r.status} />
                 <span className="ml-auto text-sm text-gray-600">{timeAgo(r.createdAt)}</span>
               </div>
-              <Link to={`/app/assets/${r.asset.id}`} className="flex min-h-10 items-center gap-2 font-semibold text-blue-900 underline">
+              <Link to={`/app/assets/${r.asset.id}`} className="flex min-h-12 items-center gap-2 font-semibold text-blue-900 underline">
                 <Icon name={typeIcon(r.asset.type.icon)} /> {r.asset.assetCode} · {r.asset.name}
               </Link>
               <p className="text-gray-700">
