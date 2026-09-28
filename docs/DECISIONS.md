@@ -136,3 +136,15 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** The frontend (Vercel) and API (Render) are on different domains. Cross-site cookies need SameSite=None, CSRF protection and more CORS setup. A Bearer header is simple and stateless.
 **Alternatives considered:** httpOnly cookie with CSRF token.
 **Trade-off / what we'd change at scale:** A script injected through an XSS bug could read the token. Mitigations: React escapes output by default, helmet sets security headers, and tokens expire in 8 hours. At scale: httpOnly cookies on a shared parent domain plus refresh tokens.
+
+## D-25 · Pin TypeScript 5 and react-router 7
+**Decision:** Use `typescript@5` in both apps and `react-router@7` in the web app, not the newest majors (TypeScript 7, react-router 8).
+**Why:** TypeScript 7 is the new native compiler and react-router 8 is a fresh major; both changed recently enough that tooling support and examples may lag. For an 8-hour build, known-stable versions avoid surprises. The code we write is the same either way.
+**Alternatives considered:** Latest majors of both.
+**Trade-off / what we'd change at scale:** Upgrade after the hackathon once the ecosystem has caught up.
+
+## D-26 · Node's built-in `.env` loader instead of dotenv
+**Decision:** `config/env.ts` calls `process.loadEnvFile()` (built into Node 20.12+) and ignores a missing file, then validates every variable with zod and exits with a clear list if any are missing or invalid.
+**Why:** No extra library. Locally the values come from `api/.env`; on Render there is no file and the values come from the dashboard, so the same code works in both places. Failing fast at startup is better than failing on the first request that needs a missing value.
+**Alternatives considered:** `dotenv` (extra dependency), `node --env-file` (fails when the file is missing, which it is in production).
+**Trade-off / what we'd change at scale:** None significant; secrets would move to a secret manager, still read through `process.env`.

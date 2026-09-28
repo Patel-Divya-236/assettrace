@@ -28,8 +28,8 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P0 Claude summarised the plan and open questions are resolved
 
 ## Phase 1 · Foundation
-- [ ] P1 Monorepo scaffold, Docker Postgres, API `/health`, web placeholder
-- [ ] P1 env validation with zod, central error handler
+- [x] P1 Monorepo scaffold, Docker Postgres, API `/health`, web placeholder
+- [x] P1 env validation with zod, central error handler
 - [ ] P2 Prisma schema, all models and enums
 - [ ] P2 Indexes + GIN index on `attributes`
 - [ ] P2 Seed users (admin / officer / viewer)
@@ -104,3 +104,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | Time | Step | What was done | Commit | Notes |
 |---|---|---|---|---|
 | — | P0 | Reviewed all docs; recorded decisions D-19 to D-24; updated CLAUDE.md (Prisma 6 pin, lifecycle guards, error `details`, public report rule, trust proxy, SEED_PASSWORD) | — | No Docker or local Postgres on the dev machine yet; project is not a git repo yet |
+| 13:09 | P1 | Scaffold: docker-compose (Postgres 16), api (Express 5 + TS, zod env validation, helmet, cors, trust proxy, /health, 404 + error handler), web (React 19 + Vite 8 + Tailwind 4 + react-router 7 placeholder) | — | TypeScript pinned to 5 and react-router to 7 (newest majors 7 and 8 are unfamiliar); Docker not on PATH in already-open terminals until they are reopened |

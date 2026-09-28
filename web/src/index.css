@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* rem-based sizes everywhere so text follows the phone's font-size setting. */
+html {
+  font-size: 100%;
+}

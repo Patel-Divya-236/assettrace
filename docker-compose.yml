@@ -1,0 +1,22 @@
+# Local development database only. Production uses Render PostgreSQL.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: assettrace-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: assettrace
+      POSTGRES_PASSWORD: assettrace
+      POSTGRES_DB: assettrace
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U assettrace -d assettrace"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:
