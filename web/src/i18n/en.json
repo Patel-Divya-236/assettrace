@@ -20,7 +20,10 @@
     "import": "Import",
     "logout": "Log out",
     "main": "Main menu",
-    "publicSite": "Public site"
+    "publicSite": "Public site",
+    "myComplaints": "My complaints",
+    "login": "Log in",
+    "staffArea": "Staff area"
   },
   "common": {
     "save": "Save",
@@ -54,7 +57,9 @@
   "roles": {
     "ADMIN": "Admin",
     "FIELD_OFFICER": "Field officer",
-    "VIEWER": "Viewer"
+    "VIEWER": "Viewer",
+    "OFFICER": "Officer",
+    "CITIZEN": "Citizen"
   },
   "status": {
     "PLANNED": {
@@ -132,7 +137,7 @@
     "INTERNAL_ERROR": "Something went wrong on the server. Please try again.",
     "UNAUTHENTICATED": "Please log in to continue.",
     "SESSION_EXPIRED": "Your session has ended. Please log in again.",
-    "INVALID_CREDENTIALS": "Email or password is incorrect.",
+    "INVALID_CREDENTIALS": "Email/mobile number or password is incorrect.",
     "FORBIDDEN": "You don't have permission to do this.",
     "VALIDATION_ERROR": "Some fields are missing or wrong. Please check them.",
     "INVALID_ATTRIBUTES": "Some details are missing or wrong. Please check them.",
@@ -155,14 +160,18 @@
     "FIELDS_IN_USE": "Assets already use these fields, so they can't be removed or changed.",
     "USE_TRANSITION_ENDPOINT": "Use the stage buttons to change the status.",
     "LOCATION_DENIED": "Location is turned off. Allow location for this site and try again.",
-    "INVALID_ASSIGNEE": "Repairs can only be assigned to a field officer."
+    "INVALID_ASSIGNEE": "Repairs can only be assigned to a field officer.",
+    "PHONE_TAKEN": "This mobile number is already registered. Please log in."
   },
   "login": {
-    "title": "Staff login",
+    "title": "Log in",
     "email": "Email",
     "password": "Password",
     "submit": "Log in",
-    "demo": "Demo: admin@demo.in, officer@demo.in or viewer@demo.in with password demo1234"
+    "demo": "Demo: admin@demo.in, officer@demo.in or viewer@demo.in with password demo1234",
+    "identifier": "Email or mobile number",
+    "newHere": "New here?",
+    "createAccount": "Create an account"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -386,7 +395,10 @@
     "note": "Anything else? (optional)",
     "send": "Send",
     "sending": "Sending…",
-    "chooseProblem": "Tap one picture above."
+    "chooseProblem": "Tap one picture above.",
+    "loginNeeded": "Please log in to file a complaint.",
+    "staffCannot": "Staff accounts cannot file complaints. Log in with a citizen account.",
+    "fromAccount": "We will contact you on {{phone}} if needed."
   },
   "done": {
     "title": "Thank you! Your complaint is registered.",
@@ -417,5 +429,20 @@
     "minutes": "{{count}} min ago",
     "hours": "{{count}} h ago",
     "days": "{{count}} days ago"
+  },
+  "signup": {
+    "title": "Create your account",
+    "help": "You need an account to file a complaint, so the team can reach you and you can see all your complaints.",
+    "name": "Your name",
+    "phone": "Mobile number",
+    "password": "Choose a password (at least 6 characters)",
+    "submit": "Create account",
+    "haveAccount": "Already have an account?",
+    "login": "Log in"
+  },
+  "my": {
+    "title": "My complaints",
+    "none": "You have not filed any complaints yet.",
+    "filed": "Filed {{when}}"
   }
 }

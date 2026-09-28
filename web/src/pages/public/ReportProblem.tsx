@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router";
+import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router";
 import { sendReport } from "../../api/public";
 import type { ReportCategory } from "../../api/types";
 import Icon from "../../components/Icon";
 import { BigButton, ErrorBox, Field, inputClass } from "../../components/ui";
 import { compressImage } from "../../lib/compressImage";
+import { isStaff, useAuth } from "../../lib/auth";
 import { errorMessage } from "../../lib/format";
 
 // Picture buttons: no typing needed to report.
@@ -20,10 +21,11 @@ export default function ReportProblem() {
   const { t, i18n } = useTranslation();
   const { assetCode = "" } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, loading } = useAuth();
   const [category, setCategory] = useState<ReportCategory | null>(null);
   const [photo, setPhoto] = useState<Blob | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [phone, setPhone] = useState("");
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
@@ -51,7 +53,6 @@ export default function ReportProblem() {
         assetCode,
         category,
         language: i18n.language,
-        phone: phone.trim() || undefined,
         note: note.trim() || undefined,
         photo: photo ?? undefined,
       });
@@ -62,6 +63,19 @@ export default function ReportProblem() {
       setBusy(false);
     }
   }
+
+  // Complaints are tied to an account, so we know who filed each one.
+  if (loading) return null;
+  if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  if (isStaff(user))
+    return (
+      <div className="flex flex-col gap-4 rounded-2xl bg-amber-50 p-5 text-lg ring-1 ring-amber-300">
+        <p>{t("report.staffCannot")}</p>
+        <Link to="/app" className="min-h-12 content-center font-bold text-blue-900 underline">
+          {t("nav.staffArea")}
+        </Link>
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-5">
@@ -107,9 +121,7 @@ export default function ReportProblem() {
         )}
       </div>
 
-      <Field label={t("report.phone")} hint={t("report.phoneHelp")} error={undefined}>
-        {(id, d) => <input id={id} aria-describedby={d} type="tel" inputMode="numeric" autoComplete="tel" maxLength={10} value={phone} onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))} className={`${inputClass} min-h-14 text-lg`} />}
-      </Field>
+      <p className="text-base text-gray-700">{t("report.fromAccount", { phone: user.phone ?? "" })}</p>
       <Field label={t("report.note")}>
         {(id) => <textarea id={id} rows={2} maxLength={500} value={note} onChange={(e) => setNote(e.target.value)} className={`${inputClass} py-2 text-lg`} />}
       </Field>

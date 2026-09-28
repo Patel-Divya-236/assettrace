@@ -22,7 +22,7 @@ function Metric({ icon, label, value, tone, to }: { icon: string; label: string;
 
 export default function Dashboard() {
   const { t } = useTranslation();
-  const canSeeReports = useCan("ADMIN", "FIELD_OFFICER");
+  const canSeeReports = useCan("ADMIN", "OFFICER", "FIELD_OFFICER");
   const summary = useApi(() => api<DashboardSummary>("/api/dashboard/summary"), []);
   const reports = useApi(
     () =>

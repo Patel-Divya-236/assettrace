@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, Outlet } from "react-router";
 import type { Role } from "../api/types";
-import { useAuth } from "../lib/auth";
+import { isStaff, useAuth } from "../lib/auth";
 import Icon from "./Icon";
 import LanguageSwitch from "./LanguageSwitch";
 
@@ -12,7 +12,7 @@ const NAV: NavItem[] = [
   { to: "/app/assets", key: "nav.assets", icon: "list" },
   { to: "/app/map", key: "nav.map", icon: "map" },
   { to: "/app/tickets", key: "nav.tickets", icon: "wrench" },
-  { to: "/app/reports", key: "nav.reports", icon: "message", roles: ["ADMIN", "FIELD_OFFICER"] },
+  { to: "/app/reports", key: "nav.reports", icon: "message", roles: ["ADMIN", "OFFICER", "FIELD_OFFICER"] },
   { to: "/app/asset-types", key: "nav.assetTypes", icon: "layers", roles: ["ADMIN"] },
   { to: "/app/import", key: "nav.import", icon: "upload", roles: ["ADMIN"] },
 ];
@@ -122,6 +122,8 @@ export function StaffLayout() {
 /** Public layout: big text (>= 18px), language switch at the top of every page. */
 export function PublicLayout() {
   const { t } = useTranslation();
+  const { user, logout } = useAuth();
+  const pill = "flex min-h-12 items-center gap-1.5 rounded-lg px-3 text-base font-semibold text-blue-900 ring-1 ring-inset ring-blue-300 hover:bg-blue-50";
   return (
     <div className="min-h-screen bg-gray-50 text-lg">
       <header className="border-b border-gray-200 bg-white">
@@ -130,6 +132,28 @@ export function PublicLayout() {
             <Icon name="mapPin" className="h-7 w-7" /> {t("app.name")}
           </Link>
           <LanguageSwitch />
+        </div>
+        {/* Account bar: citizens log in to file complaints and see their own list */}
+        <div className="mx-auto flex max-w-xl flex-wrap items-center justify-end gap-2 px-4 pb-2">
+          {!user ? (
+            <Link to="/login" className={pill}>
+              <Icon name="user" /> {t("nav.login")}
+            </Link>
+          ) : isStaff(user) ? (
+            <Link to="/app" className={pill}>
+              <Icon name="grid" /> {t("nav.staffArea")}
+            </Link>
+          ) : (
+            <>
+              <span className="text-base text-gray-700">{user.name}</span>
+              <Link to="/my" className={pill}>
+                <Icon name="message" /> {t("nav.myComplaints")}
+              </Link>
+              <button type="button" onClick={logout} className={pill}>
+                <Icon name="logout" /> {t("nav.logout")}
+              </button>
+            </>
+          )}
         </div>
       </header>
       <main id="main" className="mx-auto max-w-xl px-4 py-6">

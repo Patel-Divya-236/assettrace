@@ -17,8 +17,9 @@ export default function Tickets() {
   const { t } = useTranslation();
   const toast = useToast();
   const { user } = useAuth();
-  const canAct = user?.role === "ADMIN" || user?.role === "FIELD_OFFICER";
-  const isAdmin = user?.role === "ADMIN";
+  const canAct = user?.role === "ADMIN" || user?.role === "OFFICER" || user?.role === "FIELD_OFFICER";
+  // Admins and officers assign repairs to field officers; field officers take tickets themselves.
+  const isAdmin = user?.role === "ADMIN" || user?.role === "OFFICER";
   // Admins assign repairs to field officers; officers take tickets themselves.
   const officers = useApi(
     () => (isAdmin ? api<{ items: { id: string; name: string }[] }>("/api/users", { query: { role: "FIELD_OFFICER" } }) : Promise.resolve({ items: [] })),

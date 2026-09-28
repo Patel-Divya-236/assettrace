@@ -145,8 +145,10 @@ Side effects:
 |---|---|
 | ADMIN | everything: asset types, assets, all transitions, import, reports, tickets; assigns repairs to field officers |
 | FIELD_OFFICER | view assets; IN_OPERATION ⇄ UNDER_MAINTENANCE; manage tickets (assign only to themselves); confirm/reject public reports |
+| OFFICER | supervises field officers: assigns repairs, acts on reports and tickets (cost approval and budget: planned, see TASKS.md) |
 | VIEWER | read-only staff access (dashboards, lists, details) |
-| Public (no login) | view safe asset info; file a problem report; track a report |
+| CITIZEN | signs up with mobile + password; files complaints (recorded against the account); sees "My complaints"; never reaches staff routes |
+| Public (no login) | view safe asset info; track a report by its number |
 
 Roles are enforced in the API with middleware. Hiding buttons in the UI is not security.
 
@@ -155,6 +157,7 @@ Roles are enforced in the API with middleware. Hiding buttons in the UI is not s
 - Public responses include only safe fields: asset code, type name and icon, public status, plain location text, ward, last repaired date. Never cost, vendor, internal notes, or user data.
 - Reports can only be filed for assets that are IN_OPERATION or UNDER_MAINTENANCE. For any other stage the public page says the asset is not in service and hides the report button; the API rejects the report.
 - The API runs behind a proxy (Render), so `app.set('trust proxy', 1)` is required for per-IP rate limits. Limits are configurable through environment variables.
+- Filing a complaint needs a CITIZEN login (`POST /api/citizen/reports`); anonymous reports were removed (D-42). Every staff route requires a staff role, so citizen tokens are refused there.
 - The public can **never** change lifecycle status. A report goes to a queue; a field officer or admin confirms it (creates ticket + moves asset to UNDER_MAINTENANCE if it is IN_OPERATION) or rejects it with a reason.
 - Public status is a simplified 3-state view (see `lib/statusMap.ts`):
   - IN_OPERATION → `WORKING`

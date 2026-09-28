@@ -80,7 +80,8 @@ export async function nearbyAssets(lat: number, lng: number) {
 
 type Photo = { buffer: Buffer; mimetype: string } | undefined;
 
-export async function createReport(data: CreateReportBody, photo: Photo) {
+/** File a complaint for a logged-in citizen; the reporter and their mobile are recorded. */
+export async function createReport(data: CreateReportBody, photo: Photo, reporter: { id: string; phone: string | null }) {
   const asset = await prisma.asset.findUnique({ where: { assetCode: data.assetCode }, select: { id: true, status: true } });
   if (!asset) throw notOnPlate();
   if (!canReport(asset.status)) {
@@ -96,7 +97,8 @@ export async function createReport(data: CreateReportBody, photo: Photo) {
           assetId: asset.id,
           category: data.category,
           note: data.note,
-          phone: data.phone,
+          phone: reporter.phone,
+          reporterId: reporter.id,
           language: data.language,
           trackingCode,
           photo: photo ? new Uint8Array(photo.buffer) : undefined,
@@ -110,6 +112,31 @@ export async function createReport(data: CreateReportBody, photo: Photo) {
     }
   }
   throw new AppError(503, "TRY_AGAIN", "Please try sending the report again.");
+}
+
+/** The logged-in citizen's own complaints, newest first. */
+export async function myReports(reporterId: string, page: number, pageSize: number) {
+  const where = { reporterId };
+  const [items, total] = await prisma.$transaction([
+    prisma.citizenReport.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      select: {
+        trackingCode: true,
+        status: true,
+        category: true,
+        note: true,
+        rejectReason: true,
+        createdAt: true,
+        updatedAt: true,
+        asset: { select: { assetCode: true, locationText: true, type: { select: { name: true, icon: true } } } },
+      },
+    }),
+    prisma.citizenReport.count({ where }),
+  ]);
+  return { items, page, pageSize, total };
 }
 
 export async function trackReport(trackingCode: string) {

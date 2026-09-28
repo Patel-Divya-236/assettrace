@@ -14,7 +14,7 @@ import * as service from "./maintenance.service";
 
 // Mounted at /api/tickets behind requireAuth. Viewers can read; officers and admins act.
 export const maintenanceRouter = Router();
-const canAct = requireRole("ADMIN", "FIELD_OFFICER");
+const canAct = requireRole("ADMIN", "OFFICER", "FIELD_OFFICER");
 
 maintenanceRouter.get("/", validate({ query: listTicketsQuery }), async (req, res) => {
   res.json(await service.listTickets(req.query as unknown as ListTicketsQuery));

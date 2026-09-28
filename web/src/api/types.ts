@@ -1,6 +1,7 @@
 // Shapes returned by the API (kept in one place so pages agree).
 
-export type Role = "ADMIN" | "FIELD_OFFICER" | "VIEWER";
+export type Role = "ADMIN" | "OFFICER" | "FIELD_OFFICER" | "VIEWER" | "CITIZEN";
+export const STAFF_ROLES: Role[] = ["ADMIN", "OFFICER", "FIELD_OFFICER", "VIEWER"];
 
 export type AssetStatus =
   | "PLANNED"
@@ -23,7 +24,7 @@ export const ASSET_STATUSES: AssetStatus[] = [
 
 export type PublicStatus = "WORKING" | "BEING_REPAIRED" | "NOT_IN_SERVICE";
 
-export type User = { id: string; name: string; email: string; role: Role };
+export type User = { id: string; name: string; email: string | null; phone: string | null; role: Role };
 
 export type FieldDef = {
   key: string;
@@ -141,6 +142,7 @@ export type StaffReport = {
     type: { name: string; icon: string | null };
   };
   ticket: { id: string; status: TicketStatus } | null;
+  reporter: { name: string; phone: string | null } | null;
 };
 
 export type PublicAsset = {

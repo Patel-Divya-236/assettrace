@@ -9,6 +9,8 @@ import Nearby from "./pages/public/Nearby";
 import PublicAsset from "./pages/public/PublicAsset";
 import ReportDone from "./pages/public/ReportDone";
 import ReportProblem from "./pages/public/ReportProblem";
+import MyComplaints from "./pages/public/MyComplaints";
+import Signup from "./pages/public/Signup";
 import TrackReport from "./pages/public/TrackReport";
 import Login from "./pages/staff/Login";
 
@@ -43,6 +45,15 @@ export default function App() {
         <Route path="/done/:trackingCode" element={<ReportDone />} />
         <Route path="/track" element={<TrackReport />} />
         <Route path="/nearby" element={<Nearby />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/my"
+          element={
+            <RequireRole roles={["CITIZEN"]}>
+              <MyComplaints />
+            </RequireRole>
+          }
+        />
       </Route>
 
       <Route path="/login" element={<Login />} />
@@ -69,7 +80,7 @@ export default function App() {
         <Route
           path="reports"
           element={
-            <RequireRole roles={["ADMIN", "FIELD_OFFICER"]}>
+            <RequireRole roles={["ADMIN", "OFFICER", "FIELD_OFFICER"]}>
               {page(<Reports />)}
             </RequireRole>
           }

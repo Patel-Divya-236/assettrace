@@ -75,6 +75,11 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 ## Phase 4 · Polish, prove, ship
 - [x] P18 Usability + accessibility pass done, checklist recorded
 - [ ] P18 Gujarati / Hindi strings checked by a native reader
+
+## Change requests after evaluator feedback (17:00)
+- [x] C1 Citizen sign-up/login (mobile + password); complaints only after login; reporter recorded; My complaints; OFFICER role added
+- [ ] C2 Field officer inspection on site, contractor records (no login), progress updates logged by the field officer
+- [ ] C3 Budget per ward: allocated / committed / spent; officer approval above the admin-set limit
 - [ ] P19 API docs — **CUT at 13:12** (cut order #1); README lists endpoints, curl examples instead
 - [x] P20 100k-row EXPLAIN results in `docs/PERFORMANCE.md`
 - [x] P21 Final deploy, 20k seed on production DB, QR works on live site
@@ -125,3 +130,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 15:40 | P20 | scripts/explain.ts: EXPLAIN ANALYZE on 3 queries, drop indexes, re-measure, recreate; results + how-to-read in docs/PERFORMANCE.md | — | 100k seed in 66 s. Stage+type 12.1 -> 0.13 ms, overdue 13.8 -> 0.09 ms, JSONB 18.9 -> 4.3 ms. P19 skipped (cut) |
 | 15:40 | P22 | README filled from the real code: performance numbers, extra endpoint, known limitations (cuts, translations), honest How-we-used-AI | — | Live URLs, screenshots and architecture PNG still placeholders until deploy |
 | 16:57 | Change | Admin sees 'Assign to' list of field officers (new GET /api/users, admin only); officers keep 'Assign to me'; API rejects assigning to non-officers (400 INVALID_ASSIGNEE) and officers assigning others (403); seed adds 2 more field officers | — | Asked by user: admin should not self-assign. Verified all 4 rules with curl |
+| 17:44 | C1 | CITIZEN + OFFICER roles (migration), signup/login by mobile, /api/citizen/reports with reporterId, My complaints page, staff routes refuse citizen tokens, staff queue shows reporter, seed adds supervisor + demo citizen (9876543210) | — | Evaluator feedback. C2 (contractors/inspection) and C3 (budget) still to do |

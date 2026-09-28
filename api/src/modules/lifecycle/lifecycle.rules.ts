@@ -27,8 +27,10 @@ export const ALLOWED_TRANSITIONS: Record<AssetStatus, AssetStatus[]> = {
 type Move = `${AssetStatus}->${AssetStatus}`;
 export const ROLE_TRANSITIONS: Record<Role, Move[] | "*"> = {
   ADMIN: "*",
+  OFFICER: ["IN_OPERATION->UNDER_MAINTENANCE", "UNDER_MAINTENANCE->IN_OPERATION"],
   FIELD_OFFICER: ["IN_OPERATION->UNDER_MAINTENANCE", "UNDER_MAINTENANCE->IN_OPERATION"],
   VIEWER: [],
+  CITIZEN: [],
 };
 
 // Data that must be supplied when entering a stage.

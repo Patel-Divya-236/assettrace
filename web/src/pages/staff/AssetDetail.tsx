@@ -179,7 +179,7 @@ export default function AssetDetail() {
   const { id = "" } = useParams();
   const toast = useToast();
   const isAdmin = useCan("ADMIN");
-  const canAct = useCan("ADMIN", "FIELD_OFFICER");
+  const canAct = useCan("ADMIN", "OFFICER", "FIELD_OFFICER");
   const asset = useApi(() => getAsset(id), [id]);
   const timeline = useApi(() => getTimeline(id), [id]);
   const tickets = useApi(() => getOpenTickets(id), [id]);

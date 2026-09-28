@@ -17,3 +17,7 @@ export function requireRole(...roles: Role[]): RequestHandler {
     next();
   };
 }
+
+// Every staff route: citizens have accounts too, but must never reach staff data.
+export const STAFF_ROLES: Role[] = ["ADMIN", "OFFICER", "FIELD_OFFICER", "VIEWER"];
+export const requireStaff = requireRole(...STAFF_ROLES);

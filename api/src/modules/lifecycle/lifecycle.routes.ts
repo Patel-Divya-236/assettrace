@@ -11,7 +11,7 @@ export const lifecycleRouter = Router();
 
 lifecycleRouter.post(
   "/:id/transition",
-  requireRole("ADMIN", "FIELD_OFFICER"), // finer per-move rules live in lifecycle.rules.ts
+  requireRole("ADMIN", "OFFICER", "FIELD_OFFICER"), // finer per-move rules live in lifecycle.rules.ts
   validate({ params: idParams, body: transitionBody }),
   async (req, res) => {
     const user = currentUser(req);

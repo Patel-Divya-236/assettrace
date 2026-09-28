@@ -10,7 +10,7 @@ export const usersRouter = Router();
 
 const listUsersQuery = z.object({ role: z.enum(Role).optional() });
 
-usersRouter.get("/", requireRole("ADMIN"), validate({ query: listUsersQuery }), async (req, res) => {
+usersRouter.get("/", requireRole("ADMIN", "OFFICER"), validate({ query: listUsersQuery }), async (req, res) => {
   const { role } = req.query as z.infer<typeof listUsersQuery>;
   // Small list (staff accounts), so no pagination; only safe fields.
   const items = await prisma.user.findMany({

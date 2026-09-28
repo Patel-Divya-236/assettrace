@@ -30,6 +30,7 @@ export async function listReports(q: ListReportsQuery) {
         updatedAt: true,
         asset: { select: { id: true, assetCode: true, name: true, status: true, locationText: true, type: { select: { name: true, icon: true } } } },
         ticket: { select: { id: true, status: true } },
+        reporter: { select: { name: true, phone: true } },
       },
     }),
     prisma.citizenReport.count({ where }),

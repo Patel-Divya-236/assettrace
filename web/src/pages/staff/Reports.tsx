@@ -116,7 +116,7 @@ export default function Reports() {
               </Link>
               <p className="text-gray-700">
                 {r.asset.locationText} · {t("reports.tracking", { code: r.trackingCode })}
-                {r.phone && ` · ☎ ${r.phone}`}
+                {r.reporter ? ` · ${r.reporter.name}${r.reporter.phone ? ` ☎ ${r.reporter.phone}` : ""}` : r.phone ? ` · ☎ ${r.phone}` : ""}
               </p>
               {r.note && <p className="rounded-lg bg-gray-50 p-2 text-gray-900">“{r.note}”</p>}
               {r.rejectReason && <p className="text-gray-700">{r.rejectReason}</p>}

@@ -19,7 +19,7 @@ Government departments own thousands of assets — streetlights, water pumps, tr
 - **Complete history:** every change records who, when and why (insert-only).
 - **Maintenance:** preventive schedules, corrective tickets, overdue alerts.
 - **QR on every asset:** scan to open the asset page.
-- **Citizen reporting:** anyone can report a problem in Gujarati, Hindi or English without typing; staff confirm or reject; citizens track progress with a number.
+- **Citizen reporting:** citizens sign up with their mobile number and report a problem in Gujarati, Hindi or English without typing; every complaint is recorded against the citizen's account; staff confirm or reject; citizens see all their complaints and track each by number.
 - **Dashboard and map:** health at a glance, assets on a map.
 - **Bulk import:** upload existing Excel/CSV registers.
 - **Built for Bharat:** one inclusive, mobile-first UI — icon + colour + word for every status, plain language, big touch targets, works on slow networks.

@@ -12,8 +12,10 @@ datasource db {
 
 enum Role {
   ADMIN
+  OFFICER // supervises field officers, approves costs over the limit
   FIELD_OFFICER
   VIEWER
+  CITIZEN // public user: signs up, files complaints, tracks them
 }
 
 enum AssetStatus {
@@ -60,7 +62,8 @@ enum ImportStatus {
 model User {
   id           String   @id @default(uuid()) @db.Uuid
   name         String
-  email        String   @unique
+  email        String?  @unique // staff log in with email
+  phone        String?  @unique // citizens log in with their 10-digit mobile
   passwordHash String
   role         Role
   createdAt    DateTime @default(now())
@@ -70,6 +73,7 @@ model User {
   createdTickets  MaintenanceTicket[] @relation("TicketCreatedBy")
   assignedTickets MaintenanceTicket[] @relation("TicketAssignedTo")
   importJobs      ImportJob[]
+  reports         CitizenReport[]
 }
 
 model AssetType {
@@ -183,15 +187,18 @@ model CitizenReport {
   phone        String?
   language     String       @default("en")
   trackingCode String       @unique
+  reporterId   String?      @db.Uuid // who filed it (required for new reports; old seed rows have none)
   status       ReportStatus @default(RECEIVED)
   rejectReason String?
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
-  asset  Asset              @relation(fields: [assetId], references: [id])
-  ticket MaintenanceTicket?
+  asset    Asset              @relation(fields: [assetId], references: [id])
+  reporter User?              @relation(fields: [reporterId], references: [id])
+  ticket   MaintenanceTicket?
 
   @@index([status])
+  @@index([reporterId])
 }
 
 // Insert-only: no update or delete routes.

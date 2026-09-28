@@ -20,12 +20,7 @@ export const createReportBody = z.object({
   assetCode: assetCodeParams.shape.assetCode,
   category: z.enum(REPORT_CATEGORIES),
   note: z.string().trim().max(500).optional().transform((s) => s || undefined),
-  phone: z
-    .string()
-    .trim()
-    .optional()
-    .transform((s) => s || undefined)
-    .pipe(z.string().regex(/^[6-9]\d{9}$/, "Enter a 10-digit mobile number").optional()),
+  // No phone field: the reporter's mobile comes from their account.
   language: z.enum(["gu", "hi", "en"]).default("en"),
 });
 

@@ -7,7 +7,7 @@ import * as service from "./reports.service";
 
 // Mounted at /api/reports behind requireAuth. The queue is for admins and field officers.
 export const reportsRouter = Router();
-reportsRouter.use(requireRole("ADMIN", "FIELD_OFFICER"));
+reportsRouter.use(requireRole("ADMIN", "OFFICER", "FIELD_OFFICER"));
 
 reportsRouter.get("/", validate({ query: listReportsQuery }), async (req, res) => {
   res.json(await service.listReports(req.query as unknown as ListReportsQuery));

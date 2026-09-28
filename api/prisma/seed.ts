@@ -42,12 +42,15 @@ async function inBatches<T>(rows: T[], insert: (chunk: T[]) => Promise<unknown>)
 }
 
 // ---------- reference data ----------
-const users: { name: string; email: string; role: Role }[] = [
+// Staff log in with email; the demo citizen logs in with a mobile number.
+const users: { name: string; email?: string; phone?: string; role: Role }[] = [
   { name: "Admin User", email: "admin@demo.in", role: Role.ADMIN },
+  { name: "Kavita Shah", email: "supervisor@demo.in", role: Role.OFFICER },
   { name: "Field Officer", email: "officer@demo.in", role: Role.FIELD_OFFICER },
   { name: "Ramesh Patel", email: "officer2@demo.in", role: Role.FIELD_OFFICER },
   { name: "Sunita Desai", email: "officer3@demo.in", role: Role.FIELD_OFFICER },
   { name: "Viewer", email: "viewer@demo.in", role: Role.VIEWER },
+  { name: "Demo Citizen", phone: "9876543210", role: Role.CITIZEN },
 ];
 
 const types = [
@@ -158,13 +161,13 @@ async function seedUsers() {
   const result: Record<string, string> = {};
   for (const user of users) {
     const u = await prisma.user.upsert({
-      where: { email: user.email },
+      where: user.email ? { email: user.email } : { phone: user.phone },
       update: { name: user.name, role: user.role, passwordHash },
       create: { ...user, passwordHash },
     });
     if (!result[user.role]) result[user.role] = u.id; // first user of each role
   }
-  console.log(`Users: ${users.map((u) => u.email).join(", ")} (password from SEED_PASSWORD)`);
+  console.log(`Users: ${users.map((u) => u.email ?? u.phone).join(", ")} (password from SEED_PASSWORD)`);
   return result;
 }
 
@@ -186,6 +189,7 @@ async function main() {
   const userIds = await seedUsers();
   const adminId = userIds.ADMIN;
   const officerId = userIds.FIELD_OFFICER;
+  const citizenId = userIds.CITIZEN;
 
   if (RESET) await resetAssetData();
 
@@ -201,6 +205,8 @@ async function main() {
     typeRows.push(await prisma.assetType.upsert({ where: { codePrefix: t.codePrefix }, update: data, create: { ...data, codePrefix: t.codePrefix } }));
   }
   console.log(`Asset types: ${types.map((t) => t.name).join(", ")}`);
+
+  await prisma.citizenReport.updateMany({ where: { reporterId: null }, data: { reporterId: citizenId, phone: "9876543210" } });
 
   if ((await prisma.asset.count()) > 0) {
     console.log("Assets already exist; skipping asset generation. Use SEED_RESET=true to regenerate.");
@@ -331,6 +337,8 @@ async function main() {
   const openTickets = tickets.filter((tk) => tk.status !== "CLOSED");
   const closedTickets = tickets.filter((tk) => tk.status === "CLOSED");
   const reportBase = () => ({
+    reporterId: citizenId,
+    phone: "9876543210",
     category: weighted([["NOT_WORKING", 50], ["BROKEN", 25], ["LEAKING", 15], ["OTHER", 10]]),
     language: weighted([["gu", 50], ["hi", 30], ["en", 20]]),
     createdAt: daysAgo(randInt(0, 10)),
