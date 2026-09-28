@@ -13,8 +13,12 @@ function Todo({ titleKey }: { titleKey: string }) {
   return <PageHeader title={t(titleKey)} />;
 }
 
-// The map pulls in Leaflet, so it is loaded only when opened (CLAUDE.md 8.10).
+// Staff pages are split out of the public bundle, so a citizen scanning a QR code
+// on a slow phone never downloads charts, maps or admin screens (CLAUDE.md 8.10).
+const Dashboard = lazy(() => import("./pages/staff/Dashboard"));
 const MapPage = lazy(() => Promise.resolve({ default: () => <Todo titleKey="map.title" /> }));
+
+const page = (el: React.ReactNode) => <Suspense fallback={<Loading />}>{el}</Suspense>;
 
 export default function App() {
   return (
@@ -40,15 +44,11 @@ export default function App() {
           </RequireRole>
         }
       >
-        <Route index element={<Todo titleKey="dashboard.title" />} />
+        <Route index element={page(<Dashboard />)} />
         <Route path="assets" element={<Todo titleKey="assets.title" />} />
         <Route
           path="map"
-          element={
-            <Suspense fallback={<Loading />}>
-              <MapPage />
-            </Suspense>
-          }
+          element={page(<MapPage />)}
         />
         <Route path="tickets" element={<Todo titleKey="tickets.title" />} />
         <Route

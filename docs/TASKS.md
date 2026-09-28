@@ -62,7 +62,7 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P11 API client, auth context, route guards
 - [x] P11 i18n (gu / hi / en) + LanguageSwitch
 - [x] P11 StatusBadge, BigButton, ConfirmDialog, Layout (desktop + mobile)
-- [ ] P12 Dashboard page
+- [x] P12 Dashboard page
 - [ ] P13 Asset list (filters in URL, mobile cards)
 - [ ] P13 Asset detail: lifecycle bar, allowed actions, stage-data dialogs, timeline, QR
 - [ ] P14 Asset type builder with preview
@@ -115,3 +115,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:41 | P9 | QR endpoint (level H, JSON data URL -> FRONTEND_URL/a/CODE); CSV import (multer memory 10 MB, csv-parse stream, batches of 500 with one nextSeq reservation, row errors max 100, optional status column); seed: 3 types, SEED_ASSET_COUNT across 6 Gandhinagar wards, matching events, tickets, 20 reports; docs/sample-import.csv | — | 5000 assets seeded in 3.3 s; sample CSV imported 20/20; empty cells now mean not provided. CUT: import progress polling (synchronous), P19 API docs |
 | 13:45 | P10 | statusMap (3 public states), rate limits (public reads, reports, login), public asset/nearby (bbox + haversine)/report (multipart photo 2 MB, 6-digit code)/track; staff queue list (no bytes), photo, confirm (ticket + ASSIGNED + lifecycle to UNDER_MAINTENANCE in one tx), reject with reason | — | Full loop via curl: report -> RECEIVED -> confirm -> BEING_REPAIRED + 1 ticket -> close -> FIXED + WORKING. 6th report in 10 min -> 429. Backend phase done 13:45 (target was 13:30) |
 | 13:53 | P11 | api client (JWT, JSON/multipart, typed ApiError, blob URLs), AuthContext + RequireRole, i18n en/hi/gu (all app strings, hi/gu flagged for native review), status config + StatusBadge (icon+colour+word), BigButton, ConfirmDialog (native dialog), Field/labels, Pagination, Toast, Staff layout (sidebar/bottom nav), Public layout, Login, routes with placeholders | — | Build 117 KB gzip. Could not click-test in a browser from here: login/language/360px need a manual check |
+| 13:54 | P12 | Dashboard: 4 metric cards (link to filtered lists), stacked stage bar + badge legend with counts, assets-by-type bar chart, top-5 overdue list, new public reports list; useApi hook; staff pages lazy-loaded (recharts in its own 105 KB chunk) | — | Data verified via /api/dashboard/summary; visual check at 360px still manual |

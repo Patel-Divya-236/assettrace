@@ -213,3 +213,8 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** SVG looks identical on a ₹6,000 Android and an iPhone, while emoji differ and may be missing. A fallback means a missed translation shows readable English instead of a key like `asset.logService`. One translator means no page invents its own error text.
 **Alternatives considered:** An icon package (new dependency, larger bundle); `i18next-browser-languagedetector` (not in the stack; 10 lines do the same).
 **Trade-off / what we'd change at scale:** Translation keys are checked only at runtime. At scale: a typed key list and a CI check that all three files have the same keys.
+
+## D-38 · Staff pages are lazy-loaded; charts always have a text twin
+**Decision:** Every staff page is loaded with `React.lazy`, so the public bundle (QR scan → asset page → report) never includes recharts, Leaflet or admin screens. Each chart is paired with a list that shows the same numbers as StatusBadge (icon + word) + count, and every number links to the filtered asset list.
+**Why:** Citizens on slow 3G only download what the public pages need (recharts alone is ~105 KB gzipped). A chart is colour-only by nature; the list makes the same information readable for colour-blind users and screen readers, and clickable.
+**Trade-off / what we'd change at scale:** The first visit to the dashboard downloads the chart chunk; it is cached afterwards.
