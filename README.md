@@ -72,7 +72,21 @@ npm install
 npm run dev                               # http://localhost:5173
 ```
 
-**Demo logins** (local password `demo1234`; the live site uses a strong password shared privately): `admin@demo.in` · `officer@demo.in` · `viewer@demo.in`
+**Demo logins**
+
+| Role | What they can do | Login | Password (live site) | Password (local) |
+|---|---|---|---|---|
+| Admin | Everything: asset types, assets, import, budgets, approval limit | `admin@demo.in` | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Officer (supervisor) | Assigns repairs, approves costs over the limit, adds contractors | `supervisor@demo.in` | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Field officer | Inspects on site, assigns contractor, logs progress, closes repairs | `officer@demo.in` | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Field officer | same | `officer2@demo.in` (Ramesh Patel) | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Field officer | same | `officer3@demo.in` (Sunita Desai) | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Viewer | Read-only staff access | `viewer@demo.in` | `At-L_SZrOzUlcdZ` | `demo1234` |
+| Citizen | Files complaints, sees "My complaints" | mobile `9876543210` | `At-L_SZrOzUlcdZ` | `demo1234` |
+
+Staff log in with their email, citizens with their mobile number, all on the same **Log in** page. New citizens can also create their own account with **Create an account**.
+
+> Shared for the hackathon judges only. Change the live password after judging (re-run the seed with a new `SEED_PASSWORD` against the production database).
 **Public view:** open `/` or any `/a/<assetCode>` — no login.
 
 ## API overview

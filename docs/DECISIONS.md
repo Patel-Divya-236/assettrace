@@ -247,3 +247,8 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** Evaluator feedback: real departments work through contractors, spend against a ward budget, and need a supervisor to sign off large costs. Keeping contractors off the portal matches how they actually work (by phone, on site) and avoids giving outsiders access to government data.
 **Alternatives considered:** Contractor logins (more direct, but many contractors will not use a portal and it widens access); budget per asset type (less common in municipal budgeting).
 **Trade-off / what we'd change at scale:** Updates depend on the field officer entering them. At scale: an SMS/WhatsApp link for contractors to post updates without a login, multi-level approvals, and budget heads per scheme.
+
+## D-44 · Live demo passwords published in the README (hackathon only)
+**Decision:** At the team's request, the live site's demo accounts and their shared password are listed in the README so judges can log in.
+**Why:** Judges need working logins without waiting for a private message.
+**Trade-off / what we'd change at scale:** Anyone who can read the repository can log in as admin on the live site. The password must be changed right after judging, and a real deployment would never publish credentials.
