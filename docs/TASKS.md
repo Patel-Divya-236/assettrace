@@ -48,9 +48,9 @@ Claude Code ticks items here after each step and adds a line to the Log. Keep th
 - [x] P7 Lifecycle rules (pure functions) + unit tests passing
 - [x] P7 Transition service (one transaction: status + event + audit + ticket)
 - [x] P7 Timeline endpoint, `allowedTransitions` on asset detail
-- [ ] P8 Tickets CRUD + close → asset back to In operation
-- [ ] P8 Preventive "log a service"
-- [ ] P8 Dashboard summary (aggregate queries)
+- [x] P8 Tickets CRUD + close → asset back to In operation
+- [x] P8 Preventive "log a service"
+- [x] P8 Dashboard summary (aggregate queries)
 - [ ] P9 QR endpoint (level H, points to FRONTEND_URL)
 - [ ] P9 CSV import (streaming, batches, job progress, row errors)
 - [ ] P9 Seed: 3 types, N assets in Gandhinagar, events, tickets, reports
@@ -111,3 +111,4 @@ Claude Code appends one line per step: `HH:MM · Pxx · what was done · commit 
 | 13:31 | P5 | Asset types CRUD (list paginated, get, ADMIN create/patch), field definition validation (snake_case keys, unique, select needs options), field-lock rule when assets exist, validateAttributes + 8 vitest cases, audit rows | — | Tested via curl: create Water Pump, viewer 403, field errors, duplicate name 409, patch adds optional field |
 | 13:33 | P6 | Transaction-safe asset codes (atomic nextSeq increment), POST/GET/PATCH assets with attribute validation + initial LifecycleEvent + audit before/after, list filters (type, status, ward, q, overdue) paginated, bbox map endpoint capped at 2000 | — | Parallel creates got SL-000001/000002; PATCH with status returns USE_TRANSITION_ENDPOINT; field lock verified |
 | 13:36 | P7 | lifecycle.rules.ts (ALLOWED/ROLE/REQUIRED maps, pure functions, 22 vitest cases), transitionAsset in one transaction with optional tx, conditional update, event + audit + auto corrective ticket, POST /:id/transition, GET /:id/timeline, allowedTransitions on detail | — | Walked WP-000001 PLANNED to UNDER_MAINTENANCE via curl; invalid move, missing stage data, officer commission, viewer, open-ticket guards all rejected with plain messages |
+| 13:38 | P8 | Tickets list/create/patch/close; closing last open ticket calls lifecycle engine (tx) to return asset to IN_OPERATION, sets last/next maintenance dates, marks source report FIXED; POST /tickets/service (preventive create+close); GET /dashboard/summary with count/groupBy only | — | Verified: first close keeps asset under maintenance, last close returns it, timeline shows why; log service keeps status |

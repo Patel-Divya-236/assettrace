@@ -184,3 +184,9 @@ Redis cache, job queues, microservices, Kubernetes, PostGIS, OTP login, offline 
 **Why:** The UI renders only what the backend allows (D-05), so a button must never appear that is guaranteed to fail. Without a first `nextMaintenanceDate`, a new asset would never show up as overdue for service.
 **Alternatives considered:** Show every structurally valid move and let the request fail (confusing for users); leave the schedule empty until the first service is logged.
 **Trade-off / what we'd change at scale:** One extra count query per detail request, already needed for `openTicketCount`.
+
+## D-33 · One definition of "overdue"; tickets only for assets in service
+**Decision:** An asset is overdue when `nextMaintenanceDate` has passed and it is IN_OPERATION or UNDER_MAINTENANCE. Decommissioning clears `nextMaintenanceDate`. Tickets (and "Log a service") can only be created for assets that are IN_OPERATION or UNDER_MAINTENANCE. Closing a ticket returns `assetReturnedToOperation` so the UI can say so.
+**Why:** The dashboard count, the "overdue only" list filter and the top-5 list must agree, and a decommissioned pump is not "overdue for service". A ticket on a planned or disposed asset could never be resolved by the lifecycle.
+**Alternatives considered:** Overdue = any date in the past (inflates the number with dead assets).
+**Trade-off / what we'd change at scale:** The overdue query uses the `nextMaintenanceDate` index plus a status filter; a composite index `(status, nextMaintenanceDate)` if this becomes hot.

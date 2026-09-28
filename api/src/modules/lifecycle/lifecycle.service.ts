@@ -81,6 +81,9 @@ async function runTransition(tx: Db, input: TransitionInput) {
     data.nextMaintenanceDate = new Date(Date.now() + asset.type.maintenanceIntervalDays * DAY_MS);
   }
 
+  // Out of service: no more scheduled maintenance.
+  if (toStatus === "DECOMMISSIONED") data.nextMaintenanceDate = null;
+
   // Conditional update (D-23): only succeeds if nobody changed the status since we read it.
   const { count } = await tx.asset.updateMany({ where: { id: assetId, status: from }, data });
   if (count === 0) {

@@ -7,7 +7,9 @@ import { requireAuth } from "./middleware/auth";
 import { assetsRouter } from "./modules/assets/assets.routes";
 import { assetTypesRouter } from "./modules/assetTypes/assetTypes.routes";
 import { authRouter } from "./modules/auth/auth.routes";
+import { dashboardRouter } from "./modules/dashboard/dashboard.routes";
 import { lifecycleRouter } from "./modules/lifecycle/lifecycle.routes";
+import { maintenanceRouter } from "./modules/maintenance/maintenance.routes";
 
 export const app = express();
 
@@ -29,6 +31,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/asset-types", requireAuth, assetTypesRouter);
 app.use("/api/assets", requireAuth, assetsRouter);
 app.use("/api/assets", requireAuth, lifecycleRouter);
+app.use("/api/tickets", requireAuth, maintenanceRouter);
+app.use("/api/dashboard", requireAuth, dashboardRouter);
 
 // Must be last: unknown routes, then errors.
 app.use(notFoundHandler);

@@ -49,7 +49,11 @@ function listWhere(q: ListAssetsQuery): Prisma.AssetWhereInput {
   if (q.typeId) where.typeId = q.typeId;
   if (q.status) where.status = q.status;
   if (q.ward) where.ward = q.ward;
-  if (q.overdue) where.nextMaintenanceDate = { lt: new Date() };
+  if (q.overdue) {
+    // same definition as the dashboard: service date passed on an asset still in service
+    where.nextMaintenanceDate = { lt: new Date() };
+    where.status = q.status ?? { in: ["IN_OPERATION", "UNDER_MAINTENANCE"] };
+  }
   if (q.q) {
     where.OR = [
       { assetCode: { contains: q.q, mode: "insensitive" } },
